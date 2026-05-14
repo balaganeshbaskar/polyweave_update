@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Polyweave · Wireframes (Print)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="wireframe.css" />
+<style>
+  body { margin: 0; background: #ece7dc; font-family: 'Kalam', sans-serif; color: #1a1a1a; }
+  .print-host { display: flex; flex-direction: column; align-items: center; padding: 24px 0; gap: 24px; }
+  .page {
+    background: #f7f4ee;
+    width: 1200px;
+    box-sizing: border-box;
+    padding: 0;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    overflow: hidden;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  .page-label {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #475569;
+    background: rgba(247,244,238,0.85);
+    padding: 4px 8px;
+    border: 1px dashed #cbd5e1;
+    z-index: 50;
+  }
+  .page-cover {
+    width: 1200px;
+    min-height: 760px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 96px;
+    box-sizing: border-box;
+    background: #f7f4ee;
+    color: #0b1f33;
+  }
+  .page-cover .meta { font-family: 'Special Elite', monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; }
+  .page-cover h1 { font-family: 'Caveat', cursive; font-weight: 700; font-size: 96px; line-height: 0.95; margin: 24px 0 16px; max-width: 900px; color: #0b1f33; }
+  .page-cover .sub { font-family: 'Kalam', sans-serif; font-size: 22px; line-height: 1.4; max-width: 760px; color: #1a1a1a; }
+  .page-cover .rule { width: 220px; height: 0; border-top: 2px dashed #0b1f33; margin: 32px 0; }
+  .page-cover ul { font-family: 'Kalam', sans-serif; font-size: 18px; line-height: 1.7; padding-left: 22px; margin: 0; color: #1a1a1a; }
+  .page-cover ul li { margin-bottom: 4px; }
+
+  @page {
+    size: 1200px 2400px;
+    margin: 0;
+  }
+  @media print {
+    html, body { background: #f7f4ee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .print-host { padding: 0; gap: 0; }
+    .page { box-shadow: none; }
+    .page-label { display: none; }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root" class="print-host"></div>
+
+<script type="text/babel" src="wireframe-shared.jsx"></script>
+<script type="text/babel" src="home-a.jsx"></script>
+<script type="text/babel" src="home-b.jsx"></script>
+<script type="text/babel" src="home-c.jsx"></script>
+<script type="text/babel" src="inner-pages.jsx"></script>
+
+<script type="text/babel">
+function PrintPage({ label, width = 1200, height, children }) {
+  return (
+    <div className="page" style={{ width, minHeight: height }}>
+      <div className="page-label">{label}</div>
+      {children}
+    </div>
+  );
+}
+
+function Cover() {
+  return (
+    <div className="page page-cover">
+      <div className="page-label">Cover · 01</div>
+      <div className="meta">Polyweave · Wireframes · v1</div>
+      <h1>Sourcing from India,<br/>made clearer.</h1>
+      <div className="sub">Wireframe set covering the homepage (one editorial direction) plus About, Services, and Contact. Color-blocked, low-fidelity, ready for review before moving to hi-fi.</div>
+      <div className="rule"></div>
+      <ul>
+        <li>Direction A · Home (editorial, color-blocked)</li>
+        <li>About</li>
+        <li>Services</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+  );
+}
+
+function PrintApp() {
+  const homeProps = { showSticky: true, showMap: true, showProof: true };
+  return (
+    <>
+      <Cover />
+      <PrintPage label="02 · Home — Direction A (Editorial)" height={2400}>
+        <HomeA {...homeProps} />
+      </PrintPage>
+      <PrintPage label="03 · About" height={1900}>
+        <AboutPage showSticky={true} showMap={true} />
+      </PrintPage>
+      <PrintPage label="04 · Services" height={1900}>
+        <ServicesPage showSticky={true} />
+      </PrintPage>
+      <PrintPage label="05 · Contact" height={1500}>
+        <ContactPage showSticky={false} />
+      </PrintPage>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<PrintApp />);
+
+// Auto-print after fonts + Babel-rendered children settle
+(async () => {
+  try {
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+  } catch (e) {}
+  // Wait a couple of frames for React to commit, then a safety delay
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  await new Promise(r => setTimeout(r, 800));
+  window.print();
+})();
+</script>
+</body>
+</html>

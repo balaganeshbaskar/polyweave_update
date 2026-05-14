@@ -1,0 +1,7 @@
+# Polyweave Website
+# https://polyweave.net
+
+User-agent: *
+Allow: /
+
+Sitemap: https://polyweave.net/sitemap.xml

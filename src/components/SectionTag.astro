@@ -1,0 +1,54 @@
+---
+interface Props {
+  num?: string;
+  label: string;
+  class?: string;
+}
+
+const { num, label, class: className } = Astro.props;
+---
+
+<div class:list={["section-tag", className]}>
+  {num && <span class="tag-num">{num}</span>}
+  <span class="tag-label">{label}</span>
+  <div class="tag-line"></div>
+</div>
+
+<style>
+  .section-tag {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .tag-num {
+    font-family: var(--font-meta);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--color-ink-faint);
+  }
+
+  .tag-label {
+    font-family: var(--font-meta);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+
+  .tag-line {
+    flex: 1;
+    border-top: 1.25px dashed var(--color-ink-soft);
+    margin-left: 8px;
+  }
+
+  /* Light variant for navy backgrounds */
+  .section-tag-light .tag-label {
+    color: rgba(247,244,238,0.6);
+  }
+
+  .section-tag-light .tag-line {
+    border-color: rgba(247,244,238,0.35);
+  }
+</style>

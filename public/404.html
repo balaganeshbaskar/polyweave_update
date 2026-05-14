@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found · Polyweave</title>
+  <style>
+    :root {
+      --paper: #F7F4EE;
+      --ink: #14233A;
+      --ink-soft: #4A5468;
+      --sea: #2E6F8E;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background-image:
+        linear-gradient(rgba(20,35,58,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,35,58,0.07) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .error-container {
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .error-code {
+      font-size: 120px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .error-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .error-message {
+      font-size: 18px;
+      color: var(--ink-soft);
+      margin-bottom: 32px;
+    }
+
+    .back-link {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--sea);
+      color: var(--paper);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 4px;
+      transition: background 180ms ease;
+    }
+
+    .back-link:hover {
+      background: #23566F;
+    }
+
+    .home-link {
+      font-family: monospace;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--ink);
+      text-decoration: none;
+      margin-top: 24px;
+      display: block;
+    }
+
+    .home-link:hover {
+      color: var(--sea);
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page not found.</h1>
+    <p class="error-message">The page you're looking for doesn't exist or has been moved.</p>
+    <a href="/" class="back-link">Back to home</a>
+    <a href="/" class="home-link">POLYWEAVE</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+---
+interface Props {
+  showBookCall?: boolean;
+}
+
+const { showBookCall = true } = Astro.props;
+---
+
+<!-- Desktop sticky form rail -->
+<div class="sticky-rail" id="sticky-form">
+  <div class="sticky-form sketch-box">
+    <div class="sticky-tag">STICKY · ALWAYS VISIBLE</div>
+    <h3 class="sticky-heading">Send your<br />current price.</h3>
+
+    <form class="sticky-form-fields" id="sticky-form-element">
+      <input
+        type="email"
+        name="email"
+        placeholder="your.email@co.eu"
+        class="sticky-input"
+        required
+      />
+      <input
+        type="text"
+        name="product"
+        placeholder="product / item"
+        class="sticky-input"
+        required
+      />
+      <input
+        type="text"
+        name="price"
+        placeholder="current price (€/kg)"
+        class="sticky-input"
+      />
+
+      <!-- Honeypot spam protection -->
+      <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" />
+
+      <button type="submit" class="btn-primary sticky-submit">
+        SEND PRICE <span class="btn-arrow">→</span>
+      </button>
+    </form>
+
+    {showBookCall && (
+      <div class="sticky-secondary">
+        or <a href="#" class="book-call-link">[ book a call ]</a>
+      </div>
+    )}
+  </div>
+</div>
+
+<!-- Mobile sticky bottom bar -->
+<div class="mobile-sticky-bar">
+  <button class="btn-primary mobile-sticky-btn" id="mobile-sticky-btn">
+    Send your price <span class="btn-arrow">→</span>
+  </button>
+</div>
+
+<script>
+  const stickyForm = document.getElementById('sticky-form');
+  const mobileBtn = document.getElementById('mobile-sticky-btn');
+  const formElement = document.getElementById('sticky-form-element');
+
+  // Fade in sticky form when scrolling past hero
+  let scrolledPastHero = false;
+
+  function handleScroll() {
+    const scrollY = window.scrollY;
+    const heroHeight = window.innerHeight * 0.8;
+
+    if (scrollY > heroHeight && !scrolledPastHero) {
+      scrolledPastHero = true;
+      stickyForm?.classList.add('visible');
+    } else if (scrollY <= heroHeight && scrolledPastHero) {
+      scrolledPastHero = false;
+      stickyForm?.classList.remove('visible');
+    }
+
+    // Fade out before footer
+    const footer = document.querySelector('footer');
+    if (footer) {
+      const footerRect = footer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (footerRect.top < windowHeight + 200) {
+        stickyForm?.classList.add('fading-out');
+      } else {
+        stickyForm?.classList.remove('fading-out');
+      }
+    }
+  }
+
+  // Mobile: open form/modal
+  function openMobileForm() {
+    // Scroll to contact form or open modal
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/contact';
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  mobileBtn?.addEventListener('click', openMobileForm);
+
+  // Form submission
+  formElement?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    const honeypot = form.querySelector('.honeypot') as HTMLInputElement;
+
+    // Check honeypot
+    if (honeypot.value) {
+      console.log('Bot detected');
+      return;
+    }
+
+    const formData = new FormData(form);
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'SENDING...';
+    }
+
+    try {
+      const response = await fetch('/submit-form.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        if (typeof window.trackFormSuccess === 'function') {
+          window.trackFormSuccess('sticky-form');
+        }
+        alert('Thanks! We\'ll respond within 1–2 business days.');
+        form.reset();
+      } else {
+        if (typeof window.trackFormError === 'function') {
+          window.trackFormError('sticky-form', 'Server error');
+        }
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      if (typeof window.trackFormError === 'function') {
+        window.trackFormError('sticky-form', error?.message || 'Network error');
+      }
+      alert('Something went wrong. Please try again.');
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'SEND PRICE <span class="btn-arrow">→</span>';
+      }
+    }
+  });
+</script>
+
+<style>
+  .sticky-rail {
+    position: fixed;
+    top: 90px;
+    right: 24px;
+    width: 308px;
+    z-index: 40;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 180ms cubic-bezier(.2,.6,.2,1),
+                transform 180ms cubic-bezier(.2,.6,.2,1);
+    pointer-events: none;
+  }
+
+  .sticky-rail.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .sticky-rail.fading-out {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  @media (max-width: 1199px) {
+    .sticky-rail {
+      display: none;
+    }
+  }
+
+  .sticky-form {
+    width: 100%;
+    height: 298px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sticky-tag {
+    font-family: var(--font-meta);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--color-ink-faint);
+    margin-bottom: 8px;
+  }
+
+  .sticky-heading {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1;
+    margin: 0 0 12px;
+  }
+
+  .sticky-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .sticky-input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1.5px solid var(--color-ink);
+    border-radius: var(--radius-sketch);
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: rgba(255,255,255,0.8);
+  }
+
+  .sticky-input:focus {
+    outline: 2px solid rgba(46,111,142,0.25);
+    outline-offset: 1px;
+  }
+
+  .sticky-input::placeholder {
+    color: var(--color-ink-faint);
+  }
+
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sticky-submit {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .sticky-secondary {
+    font-family: var(--font-meta);
+    font-size: 9px;
+    color: var(--color-ink-faint);
+    text-align: center;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .book-call-link {
+    color: var(--color-ink-soft);
+    text-decoration: none;
+  }
+
+  .book-call-link:hover {
+    color: var(--color-sea);
+  }
+
+  /* Mobile sticky bar */
+  .mobile-sticky-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-paper);
+    border-top: 1.5px solid var(--color-ink);
+    padding: 12px 20px;
+    z-index: 50;
+  }
+
+  @media (max-width: 1199px) {
+    .mobile-sticky-bar {
+      display: block;
+    }
+  }
+
+  .mobile-sticky-btn {
+    width: 100%;
+  }
+</style>

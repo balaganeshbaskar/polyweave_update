@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Polyweave · Developer Handoff</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f7f4ee;
+    --paper-2: #efece4;
+    --ink: #14233a;
+    --ink-soft: #4a5468;
+    --ink-faint: #8a91a0;
+    --sea: #2e6f8e;
+    --sea-soft: #b9d3df;
+    --line: #14233a;
+  }
+  html, body { margin: 0; padding: 0; background: var(--paper-2); }
+  body {
+    font-family: 'Kalam', system-ui, sans-serif;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .doc {
+    max-width: 1080px;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 80px 88px 120px;
+    box-shadow: 0 0 0 1px rgba(20,35,58,0.06), 0 30px 80px -30px rgba(20,35,58,0.18);
+    position: relative;
+  }
+  .doc::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(20,35,58,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,35,58,0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none; opacity: 0.5; z-index: 0;
+  }
+  .doc > * { position: relative; z-index: 1; }
+
+  /* type */
+  .hw { font-family: 'Caveat', cursive; font-weight: 700; letter-spacing: -0.5px; line-height: 0.98; }
+  .mono { font-family: 'Special Elite', monospace; letter-spacing: 0.5px; }
+  .tag {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  h1 { font-family: 'Caveat', cursive; font-weight: 700; font-size: 88px; line-height: 0.92; margin: 0 0 16px; }
+  h2 { font-family: 'Caveat', cursive; font-weight: 700; font-size: 56px; line-height: 0.95; margin: 0 0 14px; }
+  h3 { font-family: 'Caveat', cursive; font-weight: 700; font-size: 36px; line-height: 1; margin: 0 0 10px; }
+  h4 { font-family: 'Special Elite', monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sea); margin: 0 0 10px; }
+  p, li { font-family: 'Kalam', cursive; font-size: 17px; line-height: 1.55; color: var(--ink); }
+
+  /* layout */
+  .section { padding: 64px 0; border-bottom: 1.5px dashed var(--ink); }
+  .section:last-of-type { border-bottom: 0; }
+  .section .num {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  /* sketch box */
+  .box {
+    border: 1.5px solid var(--ink);
+    border-radius: 6px 4px 7px 5px / 5px 6px 4px 7px;
+    background: rgba(255,255,255,0.55);
+    padding: 22px 26px;
+  }
+  .box.dashed { border-style: dashed; }
+  .box.navy { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .box.navy * { color: var(--paper); }
+  .box.navy .tag { color: rgba(247,244,238,0.6); }
+  .box.sea { background: var(--sea); color: var(--paper); border-color: var(--sea); }
+  .box.sea * { color: var(--paper); }
+  .box.sea .tag { color: rgba(247,244,238,0.7); }
+
+  /* grid */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .grid-spec { display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: baseline; padding: 14px 0; border-top: 1px solid rgba(20,35,58,0.18); }
+  .grid-spec:first-of-type { border-top: 0; }
+
+  /* swatch */
+  .sw { display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: center; padding: 8px 0; border-top: 1px dashed rgba(20,35,58,0.2); }
+  .sw:first-child { border-top: 0; }
+  .sw .chip { width: 56px; height: 40px; border: 1.25px solid var(--ink); border-radius: 4px; }
+  .sw .name { font-family: 'Caveat', cursive; font-size: 22px; line-height: 1; }
+  .sw .meta { font-family: 'Special Elite', monospace; font-size: 11px; color: var(--ink-soft); }
+
+  /* responsive demo */
+  .vp {
+    border: 1.5px solid var(--ink);
+    border-radius: 6px 4px 7px 5px;
+    padding: 14px;
+    background: rgba(255,255,255,0.5);
+  }
+  .vp .label { font-family: 'Special Elite', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--sea); margin-bottom: 8px; }
+  .vp .stack { display: flex; flex-direction: column; gap: 6px; }
+  .vp .row { display: flex; gap: 6px; }
+  .vp .blk { background: rgba(20,35,58,0.12); border-radius: 3px; height: 18px; flex: 1; }
+  .vp .blk.dark { background: rgba(20,35,58,0.7); }
+  .vp .blk.sea { background: rgba(46,111,142,0.7); }
+  .vp .blk.tall { height: 36px; }
+  .vp .blk.short { height: 10px; }
+
+  /* table */
+  table { width: 100%; border-collapse: collapse; font-family: 'Kalam', sans-serif; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 12px; vertical-align: top; border-top: 1px dashed rgba(20,35,58,0.25); }
+  th { font-family: 'Special Elite', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--sea); text-transform: uppercase; border-top: 0; padding-bottom: 14px; }
+  td.mono { font-family: 'Special Elite', monospace; font-size: 12px; color: var(--ink); }
+
+  /* page card */
+  .pageCard { padding: 28px; border: 1.5px solid var(--ink); border-radius: 6px 4px 7px 5px; background: rgba(255,255,255,0.55); margin-top: 18px; }
+  .pageCard h3 { margin: 0 0 4px; }
+  .pageCard .url { font-family: 'Special Elite', monospace; font-size: 12px; color: var(--sea); margin-bottom: 6px; }
+  .pageCard .meta { font-family: 'Special Elite', monospace; font-size: 11px; color: var(--ink-soft); margin-bottom: 18px; line-height: 1.6; }
+  .pageCard ol { padding-left: 20px; }
+  .pageCard ol li { font-family: 'Kalam', cursive; font-size: 16px; padding: 6px 0; }
+  .copyBox { background: var(--paper-2); border-left: 3px solid var(--sea); padding: 14px 18px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+  .copyBox p { margin: 0 0 8px; font-size: 16px; }
+  .copyBox p:last-child { margin: 0; }
+
+  .lede { font-size: 22px; line-height: 1.45; color: var(--ink-soft); max-width: 720px; }
+  .stamp {
+    display: inline-block;
+    border: 1.5px solid var(--sea);
+    color: var(--sea);
+    padding: 4px 10px;
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    transform: rotate(-3deg);
+    border-radius: 4px;
+  }
+
+  ul.clean { list-style: none; padding: 0; margin: 8px 0; }
+  ul.clean li { padding: 6px 0; border-top: 1px dashed rgba(20,35,58,0.2); display: flex; gap: 12px; }
+  ul.clean li:first-child { border-top: 0; }
+  ul.clean li .k { font-family: 'Special Elite', monospace; font-size: 11px; color: var(--sea); letter-spacing: 1.5px; min-width: 90px; padding-top: 2px; }
+
+  .cover {
+    text-align: left;
+    padding-bottom: 40px;
+    border-bottom: 3px solid var(--ink);
+  }
+  .cover .meta { font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 1.5px; color: var(--ink-soft); }
+
+  .anchor-link { font-family: 'Special Elite', monospace; font-size: 12px; color: var(--sea); text-decoration: none; letter-spacing: 1px; }
+  .anchor-link:hover { color: var(--ink); }
+
+  .toc { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; margin-top: 20px; }
+  .toc a { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px dashed rgba(20,35,58,0.25); text-decoration: none; color: var(--ink); font-family: 'Kalam', cursive; font-size: 17px; }
+  .toc a:hover { color: var(--sea); }
+  .toc a .n { font-family: 'Special Elite', monospace; font-size: 11px; color: var(--ink-faint); letter-spacing: 1.5px; }
+  @media print {
+    body { background: #fff; }
+    .doc { box-shadow: none; max-width: none; padding: 40px; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="meta">POLYWEAVE · DEVELOPER HANDOFF · v1.0</div>
+    <h1>Polyweave<span style="color: var(--sea);">.</span><br>Developer<br>handoff.</h1>
+    <p class="lede">Everything your developer needs to build the website. Visual reference is the Polyweave Wireframes file. This document carries the copy, structure, tokens, behavior, and SEO data that go with it.</p>
+    <div style="display:flex; gap:14px; margin-top:24px; flex-wrap:wrap;">
+      <span class="stamp">For implementation</span>
+      <span class="stamp" style="border-color: var(--ink); color: var(--ink);">India ↔ Europe</span>
+      <span class="stamp" style="border-color: var(--ink-soft); color: var(--ink-soft);">9 pages</span>
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <section class="section">
+    <div class="num">CONTENTS</div>
+    <h2>Read in order.</h2>
+    <div class="toc">
+      <a href="#brief"><span>Project brief & tone</span><span class="n">01</span></a>
+      <a href="#system"><span>Visual system & tokens</span><span class="n">02</span></a>
+      <a href="#components"><span>Component library</span><span class="n">03</span></a>
+      <a href="#nav"><span>Navigation & footer</span><span class="n">04</span></a>
+      <a href="#urls"><span>URL & SEO map</span><span class="n">05</span></a>
+      <a href="#home"><span>Home page</span><span class="n">06</span></a>
+      <a href="#about"><span>About page</span><span class="n">07</span></a>
+      <a href="#services"><span>Services page</span><span class="n">08</span></a>
+      <a href="#contact"><span>Contact page</span><span class="n">09</span></a>
+      <a href="#seo"><span>SEO landing pages (×5)</span><span class="n">10</span></a>
+      <a href="#responsive"><span>Responsive behaviour</span><span class="n">11</span></a>
+      <a href="#interactions"><span>Interactions & states</span><span class="n">12</span></a>
+      <a href="#cta"><span>CTA system</span><span class="n">13</span></a>
+      <a href="#delivery"><span>Delivery checklist</span><span class="n">14</span></a>
+    </div>
+  </section>
+
+  <!-- BRIEF -->
+  <section class="section" id="brief">
+    <div class="num">01 · PROJECT BRIEF</div>
+    <h2>What we're<br>building.</h2>
+    <p class="lede">Polyweave is a sourcing partner between India and Europe. The website needs to communicate trust, sourcing intelligence, and calm authority — not aggressive sales energy or marketplace noise.</p>
+
+    <div class="grid-2" style="margin-top: 28px;">
+      <div class="box">
+        <h4>Site should feel</h4>
+        <p>Calm. Considered. Premium. Like a B2B sourcing consultancy, not a trader and not Alibaba. Lots of whitespace. Strong typography. Restrained visuals. The handwritten/blueprint visual language is intentional — it reads as honest, hand-built, human.</p>
+      </div>
+      <div class="box">
+        <h4>Site should NOT feel</h4>
+        <p>Like a product catalog. Like a generic agency template. Like a marketplace. No stock photography of "global handshakes". No flag emojis. No animated counters. No confetti success states.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 36px;">Audience</h3>
+    <p>European procurement leads, operations managers, and small-to-mid-sized importers — primarily in Spain, Italy, Portugal, Germany, Norway. They are price-sensitive, time-poor, and skeptical. Communication is in English.</p>
+
+    <h3 style="margin-top: 28px;">Tech notes (developer's call)</h3>
+    <ul class="clean">
+      <li><span class="k">STACK</span><span>Static or Next.js / Astro / WordPress — developer's call. Pages are content-light, so SSG is preferred for SEO.</span></li>
+      <li><span class="k">FORMS</span><span>Contact + sticky rail forms post to a single endpoint. Email destination: ajay@polyweave.net. Add anti-spam (honeypot + rate-limit minimum).</span></li>
+      <li><span class="k">ANALYTICS</span><span>Plausible or GA4. Track CTA clicks (send-price, book-call) as named events.</span></li>
+      <li><span class="k">CMS</span><span>Optional. SEO landing page copy is templated; CMS only if Polyweave wants to add product pages later.</span></li>
+      <li><span class="k">PERF</span><span>Target Lighthouse ≥ 95 on mobile. No heavy hero video. Self-host fonts.</span></li>
+    </ul>
+  </section>
+
+  <!-- SYSTEM -->
+  <section class="section" id="system">
+    <div class="num">02 · VISUAL SYSTEM</div>
+    <h2>Tokens.</h2>
+    <p class="lede">Use these values exactly. They are pulled from the wireframes and should be lifted as-is into a design tokens file (Tailwind config, CSS custom properties, or theme.ts).</p>
+
+    <h3 style="margin-top: 36px;">Color</h3>
+    <div class="grid-2" style="margin-top: 14px;">
+      <div class="box">
+        <h4>Primary</h4>
+        <div class="sw"><div class="chip" style="background:#f7f4ee"></div><div><div class="name">Paper / Cream</div><div class="meta">#F7F4EE · page background</div></div></div>
+        <div class="sw"><div class="chip" style="background:#14233a"></div><div><div class="name">Ink / Navy</div><div class="meta">#14233A · headings, primary blocks</div></div></div>
+        <div class="sw"><div class="chip" style="background:#2e6f8e"></div><div><div class="name">Sea</div><div class="meta">#2E6F8E · accent + primary CTA</div></div></div>
+      </div>
+      <div class="box">
+        <h4>Support</h4>
+        <div class="sw"><div class="chip" style="background:#b9d3df"></div><div><div class="name">Sea soft</div><div class="meta">#B9D3DF · navy-band highlights</div></div></div>
+        <div class="sw"><div class="chip" style="background:#4a5468"></div><div><div class="name">Ink soft</div><div class="meta">#4A5468 · body text</div></div></div>
+        <div class="sw"><div class="chip" style="background:#8a91a0"></div><div><div class="name">Ink faint</div><div class="meta">#8A91A0 · captions, placeholders</div></div></div>
+        <div class="sw"><div class="chip" style="background:#c44a3a"></div><div><div class="name">Accent</div><div class="meta">#C44A3A · sparingly, stamps only</div></div></div>
+      </div>
+    </div>
+
+    <div class="box dashed" style="margin-top: 18px;">
+      <h4>Tinted bands</h4>
+      <p style="margin:0;">Sea-tinted bed: <span class="mono" style="font-size:12px;">rgba(46,111,142,0.08)</span> · Sea-tinted strong: <span class="mono" style="font-size:12px;">rgba(46,111,142,0.10)</span> · Grid lines on paper: <span class="mono" style="font-size:12px;">rgba(20,35,58,0.07) at 24px × 24px</span></p>
+    </div>
+
+    <h3 style="margin-top: 36px;">Typography</h3>
+    <p>Three families. All free from Google Fonts. Self-host them.</p>
+    <table>
+      <thead><tr><th>Role</th><th>Family</th><th>Weight</th><th>Used for</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">DISPLAY</td><td>Caveat</td><td class="mono">700</td><td>Page hero · h1 · h2 · h3 (the "handwritten" headlines)</td></tr>
+        <tr><td class="mono">BODY</td><td>Kalam</td><td class="mono">400 / 700</td><td>Body copy, paragraphs, lists</td></tr>
+        <tr><td class="mono">META</td><td>Special Elite</td><td class="mono">400</td><td>Tags, eyebrows, nav, footer, mono labels (the "typewriter")</td></tr>
+      </tbody>
+    </table>
+
+    <table style="margin-top: 18px;">
+      <thead><tr><th>Token</th><th>Desktop</th><th>Mobile</th><th>Line height</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">DISPLAY-1</td><td class="mono">84px</td><td class="mono">52px</td><td class="mono">0.92</td></tr>
+        <tr><td class="mono">H1</td><td class="mono">64–80px</td><td class="mono">44px</td><td class="mono">0.95</td></tr>
+        <tr><td class="mono">H2</td><td class="mono">44–56px</td><td class="mono">34px</td><td class="mono">1.0</td></tr>
+        <tr><td class="mono">H3</td><td class="mono">28–36px</td><td class="mono">24px</td><td class="mono">1.1</td></tr>
+        <tr><td class="mono">BODY-L</td><td class="mono">22px</td><td class="mono">18px</td><td class="mono">1.4</td></tr>
+        <tr><td class="mono">BODY</td><td class="mono">18–19px</td><td class="mono">16px</td><td class="mono">1.55</td></tr>
+        <tr><td class="mono">META</td><td class="mono">10–12px</td><td class="mono">10–12px</td><td class="mono">1.4 · 1.5px tracking</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 36px;">Spacing</h3>
+    <p>Section padding is generous and does most of the rhythm work. Stick to multiples of 8.</p>
+    <ul class="clean">
+      <li><span class="k">SECTION</span><span><span class="mono">80px</span> top/bottom desktop · <span class="mono">48px</span> tablet · <span class="mono">40px</span> mobile</span></li>
+      <li><span class="k">PAGE GUTTER</span><span><span class="mono">80px</span> desktop · <span class="mono">40px</span> tablet · <span class="mono">20px</span> mobile</span></li>
+      <li><span class="k">CARD GAP</span><span><span class="mono">18–24px</span> between sketch boxes</span></li>
+      <li><span class="k">MAX WIDTH</span><span>Page content sits inside <span class="mono">1200px</span>. Hero copy caps at <span class="mono">880px</span>. Body paragraphs cap at <span class="mono">720px</span>.</span></li>
+    </ul>
+
+    <h3 style="margin-top: 36px;">Borders, radii, dividers</h3>
+    <ul class="clean">
+      <li><span class="k">BORDER</span><span><span class="mono">1.5px solid #14233A</span> on sketch boxes. <span class="mono">1.25px dashed</span> for soft dividers.</span></li>
+      <li><span class="k">RADIUS</span><span>Asymmetric "hand-drawn" radius: <span class="mono">6px 4px 7px 5px / 5px 6px 4px 7px</span>. Use this on every sketch box and button — it's intentional, do not normalise to 8px.</span></li>
+      <li><span class="k">RULES</span><span>Section dividers: <span class="mono">1.5–3px solid #14233A</span> for thick separators, <span class="mono">1.25px dashed</span> for soft breaks.</span></li>
+      <li><span class="k">PAPER GRID</span><span>Background grid at <span class="mono">24×24px</span>, <span class="mono">rgba(20,35,58,0.07)</span>, opacity 0.5. Render as a fixed background on every page.</span></li>
+    </ul>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section class="section" id="components">
+    <div class="num">03 · COMPONENT LIBRARY</div>
+    <h2>Components.</h2>
+    <p class="lede">Reusable building blocks. Names match the React components in the wireframes file — keep these names if you want a clean handoff.</p>
+
+    <div class="grid-2" style="margin-top: 28px;">
+      <div class="box"><h4>WFNav</h4><p>Top nav. Logo left (POLYWEAVE in Special Elite), four links right (Home / About / Services / Contact). Active link gets a 1.5px navy underline. Sits on top of the paper grid; bottom border is 1.5px navy.</p></div>
+      <div class="box"><h4>StickyForm</h4><p>308 × 298px sticky rail, fixed top-right at <span class="mono">top: 90px; right: 24px</span>. Three fields (email, product, current price) + primary "Send price →" CTA. Visible on Home, About, Services, all SEO pages. <strong>Hidden on Contact</strong> (the page IS the form). On mobile, collapses into a sticky bottom bar with a single "Send your price →" button that opens the contact form.</p></div>
+      <div class="box"><h4>WFFoot</h4><p>4-column footer: brand · Site · Sourcing · Contact. Links to all 5 SEO pages live under "Sourcing". See section 04.</p></div>
+      <div class="box"><h4>SectionTag</h4><p>Eyebrow row: <span class="mono">"02"</span> · <span class="mono">"MARKET REALITY"</span> · dashed line filling remaining width. Used at the top of every content section.</p></div>
+      <div class="box"><h4>Sketch box (.box)</h4><p>Generic container. Hand-drawn radius, navy border. Variants: default cream-tinted, <span class="mono">.dashed</span>, <span class="mono">.navy</span>, <span class="mono">.sea</span>.</p></div>
+      <div class="box"><h4>Numdot</h4><p>36px circle, navy border, Caveat numeral inside. Used on 4-step process cards. Color-inverts on dark cards.</p></div>
+      <div class="box navy"><h4>Btn · primary (sea)</h4><p>Sea-blue fill. Cream text. <span class="mono">SEND YOUR PRICE →</span> in Special Elite, 14px, 1.5px tracking, uppercase. Padding <span class="mono">14px 22px</span>. Hand-drawn radius.</p></div>
+      <div class="box"><h4>Btn · ghost</h4><p>Transparent fill. Navy border + navy text. <span class="mono">[ BOOK A CALL ]</span> — square brackets are part of the label, render literally.</p></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <section class="section" id="nav">
+    <div class="num">04 · NAVIGATION & FOOTER</div>
+    <h2>Site spine.</h2>
+
+    <h3 style="margin-top: 28px;">Top navigation</h3>
+    <table>
+      <thead><tr><th>Label</th><th>URL</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Home</td><td class="mono">/</td><td>Default landing</td></tr>
+        <tr><td>About</td><td class="mono">/about</td><td>Origin + leadership</td></tr>
+        <tr><td>Services</td><td class="mono">/services</td><td>What / how / pricing</td></tr>
+        <tr><td>Contact</td><td class="mono">/contact</td><td>Form-led page</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;">SEO landing pages are NOT in the top nav. They live in the footer + are linked from the homepage product index.</p>
+
+    <h3 style="margin-top: 36px;">Footer · 4 columns</h3>
+    <div class="grid-4" style="margin-top: 8px;">
+      <div class="box">
+        <h4>Brand</h4>
+        <p style="font-size:15px;">POLYWEAVE<br>"Sourcing from India,<br>made clearer."</p>
+      </div>
+      <div class="box">
+        <h4>Site</h4>
+        <p style="font-size:15px;">Home<br>About<br>Services<br>Contact</p>
+      </div>
+      <div class="box">
+        <h4>Sourcing</h4>
+        <p style="font-size:15px;">HDPE Twine Supplier India<br>Fishing Net Manufacturers India<br>Nylon Net Supplier India<br>Rope Suppliers India<br>Jute Yarn Exporters India</p>
+      </div>
+      <div class="box">
+        <h4>Contact</h4>
+        <p style="font-size:15px;">ajay@polyweave.net<br>India · Europe<br><br>send your price →</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- URLS -->
+  <section class="section" id="urls">
+    <div class="num">05 · URL & SEO MAP</div>
+    <h2>9 pages.<br>9 URLs.</h2>
+    <table>
+      <thead><tr><th>Page</th><th>URL</th><th>SEO Title</th><th>Meta description</th></tr></thead>
+      <tbody>
+        <tr><td>Home</td><td class="mono">/</td><td>Polyweave · Sourcing from India, made clearer</td><td>Polyweave helps European companies import from India with less risk and clearer pricing — without random suppliers, surprise costs, or quality wobbles.</td></tr>
+        <tr><td>About</td><td class="mono">/about</td><td>About Polyweave · India ↔ Europe sourcing partner</td><td>Polyweave is built between India and Europe. We help buyers source with fewer problems, starting from a network rooted in fishing equipment and now expanded across categories.</td></tr>
+        <tr><td>Services</td><td class="mono">/services</td><td>Services · How Polyweave sources from India</td><td>What we do, how we work, and how we're priced. €0 upfront for buyers — Polyweave aligns incentives with manufacturers, not buyers.</td></tr>
+        <tr><td>Contact</td><td class="mono">/contact</td><td>Contact · Send your price to Polyweave</td><td>Send your current product or supplier price. We'll review and respond with what's possible from India. Response within 1–2 business days.</td></tr>
+        <tr><td>SEO · HDPE Twine</td><td class="mono">/hdpe-twine-supplier-india</td><td>HDPE Twine Supplier India | Source HDPE Twine for Europe</td><td>Source HDPE twine from trusted manufacturers in India. Polyweave helps European buyers reduce cost and risk when importing HDPE twine.</td></tr>
+        <tr><td>SEO · Fishing Nets</td><td class="mono">/fishing-net-manufacturers-india</td><td>Fishing Net Manufacturers India | PE & Nylon Fishing Nets</td><td>Find trusted fishing net manufacturers in India for European importers. Source PE and nylon fishing nets with better pricing and lower sourcing risk.</td></tr>
+        <tr><td>SEO · Nylon Nets</td><td class="mono">/nylon-net-supplier-india</td><td>Nylon Net Supplier India | Monofilament & Multifilament Nets</td><td>Source nylon fishing nets from trusted manufacturers in India. Polyweave helps European buyers import monofilament and multifilament nylon nets with lower risk.</td></tr>
+        <tr><td>SEO · Ropes</td><td class="mono">/rope-suppliers-india</td><td>Rope Suppliers India | Industrial & Marine Rope Manufacturers</td><td>Source industrial and marine ropes from trusted manufacturers in India. Polyweave helps European buyers import ropes with better pricing and lower sourcing risk.</td></tr>
+        <tr><td>SEO · Jute Yarn</td><td class="mono">/jute-yarn-exporters-india</td><td>Jute Yarn Exporters India | Source Jute Yarn from India</td><td>Source jute yarn from reliable exporters and manufacturers in India. Polyweave helps European buyers import jute products with better clarity and control.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box dashed" style="margin-top: 24px;">
+      <h4>Open Graph</h4>
+      <p>Each page should ship with: <span class="mono">og:title</span>, <span class="mono">og:description</span>, <span class="mono">og:image</span> (a 1200×630 generated card with the page's H1 in Caveat over a cream/navy background — generate one per page or template it). <span class="mono">og:type = website</span>. <span class="mono">og:locale = en_GB</span>.</p>
+    </div>
+  </section>
+
+  <!-- HOME -->
+  <section class="section" id="home">
+    <div class="num">06 · HOME PAGE</div>
+    <h2>Home<span style="color: var(--sea)">.</span></h2>
+    <p class="lede">Visual reference: <span class="mono">Polyweave Wireframes.html</span> → "Direction A · Editorial". This is the approved layout. Section order is fixed.</p>
+
+    <div class="pageCard">
+      <h3>Home</h3>
+      <div class="url">/ · Home page</div>
+      <div class="meta">SEO TITLE — Polyweave · Sourcing from India, made clearer<br>META — Polyweave helps European companies import from India with less risk and clearer pricing — without random suppliers, surprise costs, or quality wobbles.</div>
+
+      <h4>01 · Hero</h4>
+      <div class="copyBox">
+        <p><strong>H1:</strong> You're probably <span class="mono" style="background:#14233a;color:#f7f4ee;padding:1px 6px;border-radius:3px;">overpaying</span> for your <span style="color: var(--sea);">imports</span>.</p>
+        <p><strong>Lede:</strong> We help companies source from India at better prices, with less risk.</p>
+        <p><strong>Sub:</strong> If you already have a supplier, send us your price. We'll tell you if it can be done better.</p>
+        <p><strong>CTA:</strong> SEND YOUR PRICE → (primary) · [ book a call ] (ghost)</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">02 · Market reality (sea-tinted band)</h4>
+      <div class="copyBox">
+        <p><strong>Card 1 · navy:</strong> Europe is getting expensive. Labour costs up. Operations up. Margins thinner each year.</p>
+        <p><strong>Card 2 · navy:</strong> China is less predictable. Quality wobbles, lead-time slips, and policy noise have buyers actively looking for a second base.</p>
+        <p><strong>Card 3 · sea:</strong> India is the natural shift. Manufacturing capacity is mature. The hard part is finding suppliers who actually deliver to export standards.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">03 · What Polyweave does (navy block)</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> That's where Polyweave comes in.</p>
+        <p><strong>Body:</strong> We help companies import from India without the usual issues.</p>
+        <p><strong>List:</strong> No guesswork. · No random suppliers. · No surprises after the order. · Just clear sourcing and better decisions.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">04 · How it works (4 cards)</h4>
+      <div class="copyBox">
+        <p><strong>01:</strong> You share your product or current pricing.</p>
+        <p><strong>02:</strong> We find the right manufacturer in India.</p>
+        <p><strong>03:</strong> We handle negotiation and alignment.</p>
+        <p><strong>04:</strong> You get a better option.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">05 · What we commonly work with (linked rows)</h4>
+      <div class="copyBox">
+        <p>HDPE Twine → /hdpe-twine-supplier-india</p>
+        <p>Fishing Nets → /fishing-net-manufacturers-india</p>
+        <p>Nylon Nets → /nylon-net-supplier-india</p>
+        <p>Ropes → /rope-suppliers-india</p>
+        <p>Jute Yarn → /jute-yarn-exporters-india</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">06 · A simple example (split block)</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> One quiet switch.</p>
+        <p><strong>Case note:</strong> A company we worked with was sourcing HDPE twine from Europe. We rebuilt the same product through India. The result was lower cost and stable supply, without compromising on performance.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">07 · Built through real trade (navy band) — TWEAKABLE</h4>
+      <div class="copyBox">
+        <p>Containers — delivered across Europe.</p>
+        <p>Hundreds of thousands — in trade handled.</p>
+        <p>Relationships — with buyers + manufacturers.</p>
+        <p style="font-style:italic; color: var(--ink-soft);">Note: Polyweave can choose to hide this band if specific numbers feel premature. The wireframe exposes it as a tweak.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">08 · Final CTA</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> Already working with a supplier?</p>
+        <p><strong>Body:</strong> Send us your current price. We'll tell you what's possible.</p>
+        <p><strong>CTA:</strong> SEND YOUR PRICE →</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="num">07 · ABOUT PAGE</div>
+    <h2>About<span style="color: var(--sea)">.</span></h2>
+
+    <div class="pageCard">
+      <h3>About</h3>
+      <div class="url">/about</div>
+      <div class="meta">SEO TITLE — About Polyweave · India ↔ Europe sourcing partner<br>META — Polyweave is built between India and Europe. We help buyers source with fewer problems, starting from a network rooted in fishing equipment and now expanded across categories.</div>
+
+      <h4>01 · Hero</h4>
+      <div class="copyBox">
+        <p><strong>Eyebrow:</strong> ABOUT · BUILT BETWEEN INDIA AND EUROPE</p>
+        <p><strong>H1:</strong> Built between <span style="color: var(--sea);">India</span> and <span class="mono" style="background:#14233a;color:#f7f4ee;padding:1px 6px;border-radius:3px;">Europe</span>.</p>
+        <p><strong>Lede:</strong> Polyweave works between two markets.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">02 · Two-side band</h4>
+      <div class="copyBox">
+        <p><strong>Side A:</strong> Europe buys.</p>
+        <p><strong>Side B:</strong> India produces.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">03 · Friction (3 cards)</h4>
+      <div class="copyBox">
+        <p><strong>H3:</strong> Making that work is not always simple.</p>
+        <p>Card 1: Suppliers don't always communicate clearly.</p>
+        <p>Card 2: Buyers don't always see the full picture.</p>
+        <p>Card 3: Small mistakes in sourcing become expensive problems.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">04 · Our role (with map)</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> Polyweave exists to remove that gap.</p>
+        <p>We work closely with manufacturers across India and buyers across Europe.</p>
+        <p>Our role is to make sourcing smoother, clearer, and more reliable.</p>
+        <p><strong>Visual:</strong> India ↔ Europe trade map. Polyweave will supply the final illustration. Placeholder lives at <span class="mono">assets/map.png</span>.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">05 · Origin</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> We started in fishing equipment.</p>
+        <p>That is where our network was built.</p>
+        <p>Today, we help companies source across sectors where India offers a real commercial advantage.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">06 · Leadership</h4>
+      <div class="copyBox">
+        <p>The company is led by someone with deep familiarity with Indian manufacturing and direct experience working with European buyers.</p>
+        <p><strong>Caption:</strong> FOUNDER · INDIA × SPAIN</p>
+        <p><strong>Visual:</strong> 120×120 portrait, circle. Polyweave to supply.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">07 · Final CTA</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> Want to see what's possible?</p>
+        <p><strong>CTA:</strong> SEND YOUR PRICE →</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="num">08 · SERVICES PAGE</div>
+    <h2>Services<span style="color: var(--sea)">.</span></h2>
+
+    <div class="pageCard">
+      <h3>Services</h3>
+      <div class="url">/services</div>
+      <div class="meta">SEO TITLE — Services · How Polyweave sources from India<br>META — What we do, how we work, and how we're priced. €0 upfront for buyers — Polyweave aligns incentives with manufacturers, not buyers.</div>
+
+      <h4>01 · Hero</h4>
+      <div class="copyBox">
+        <p><strong>Eyebrow:</strong> SERVICES · WHAT WE DO</p>
+        <p><strong>H1:</strong> What we <span style="color: var(--sea);">do</span>.</p>
+        <p><strong>Lede:</strong> We help companies source from India more efficiently.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">02 · You come to us when (sea-tinted list)</h4>
+      <div class="copyBox">
+        <p>01 — You feel you are overpaying.</p>
+        <p>02 — You want alternative suppliers.</p>
+        <p>03 — You want to explore India but reduce risk.</p>
+        <p>04 — You want to compare your current supplier price.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">03 · How we work (4 cards · navy band)</h4>
+      <div class="copyBox">
+        <p><strong>01 · Understand:</strong> You share your requirement, product, supplier, or current price.</p>
+        <p><strong>02 · Source:</strong> We identify suitable manufacturers in India.</p>
+        <p><strong>03 · Align:</strong> We handle price discussions, specifications, and feasibility.</p>
+        <p><strong>04 · Support:</strong> We help move the deal forward with clarity.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">04 · Pricing (sea-blue band)</h4>
+      <div class="copyBox">
+        <p><strong>Headline:</strong> €0 upfront for buyers.</p>
+        <p>Polyweave works closely with suppliers and aligns incentives based on successful transactions.</p>
+        <p>You only see results, not invoices for exploration.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">05 · Where we work most (chips)</h4>
+      <div class="copyBox">
+        <p>HDPE Twine · Fishing Nets · Nylon Nets · Ropes · Jute Yarn · + adjacent categories</p>
+        <p style="color: var(--ink-soft);">Each chip links to the matching SEO landing page. "+ adjacent categories" is non-clickable copy.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">06 · Final CTA</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> Send your current price.</p>
+        <p><strong>Body:</strong> We'll tell you what's possible.</p>
+        <p><strong>CTA:</strong> SEND YOUR PRICE →</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="num">09 · CONTACT PAGE</div>
+    <h2>Contact<span style="color: var(--sea)">.</span></h2>
+
+    <div class="pageCard">
+      <h3>Contact</h3>
+      <div class="url">/contact</div>
+      <div class="meta">SEO TITLE — Contact · Send your price to Polyweave<br>META — Send your current product or supplier price. We'll review and respond with what's possible from India. Response within 1–2 business days.</div>
+
+      <h4>01 · Hero</h4>
+      <div class="copyBox">
+        <p><strong>Eyebrow:</strong> CONTACT · A SIMPLE CHECK</p>
+        <p><strong>H1:</strong> Start with a <span style="color: var(--sea);">simple check.</span></p>
+        <p><strong>Lede:</strong> If you are currently importing a product, there is a good chance it can be done differently. Send us your product or current price. We will review and respond with what is possible.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">02 · Form (left column · cream sketch box)</h4>
+      <div class="copyBox">
+        <p><strong>Fields (top to bottom):</strong></p>
+        <p>Name · Company · Email · Country · Product / requirement · Current supplier price (optional) · Message</p>
+        <p><strong>CTA:</strong> SEND YOUR PRICE → (full-width)</p>
+        <p><strong>Validation:</strong> Email format. All fields except "Current supplier price" and "Message" are required. Inline error in accent red.</p>
+        <p><strong>Submit behaviour:</strong> POST to backend endpoint. On success, replace form with confirmation card: "Thanks. We'll respond within 1–2 business days." On error, show inline error and keep entered values.</p>
+      </div>
+
+      <h4 style="margin-top: 18px;">03 · Side panel (right column · navy block)</h4>
+      <div class="copyBox">
+        <p><strong>H3:</strong> Or, just write to us.</p>
+        <p>ajay@polyweave.net</p>
+        <p>(response within 1–2 business days)</p>
+        <p><strong>Operating between:</strong> India ↔ Spain · Italy · Portugal · Germany · Norway & other parts of Europe.</p>
+        <p><strong>Stamp:</strong> PRIVATE · SECURE</p>
+      </div>
+
+      <p style="margin-top: 14px;"><strong>Important:</strong> The sticky form rail is hidden on this page (the page is the form).</p>
+    </div>
+  </section>
+
+  <!-- SEO -->
+  <section class="section" id="seo">
+    <div class="num">10 · SEO LANDING PAGES</div>
+    <h2>5 SEO pages.<br>One template.</h2>
+    <p class="lede">All five share an identical structure fed by per-page data. Build it once. Treat each page as an entry in a content collection / CMS / JSON file.</p>
+
+    <h3 style="margin-top: 28px;">Shared template structure</h3>
+    <ol>
+      <li><strong>Hero</strong> — Eyebrow "SOURCING · INDIA → EUROPE", H1 with mark + accent word, intro paragraphs.</li>
+      <li><strong>Where Polyweave fits in</strong> — navy block, "That's where Polyweave comes in.", 2 paragraphs.</li>
+      <li><strong>What we work with</strong> — sea-tinted band, 5–6 list items in two columns.</li>
+      <li><strong>Countries served</strong> — split. Stacked country list left (alternating navy/sea), single supporting paragraph right.</li>
+      <li><strong>Our role</strong> — split. "Better sourcing, fewer problems." + 2–3 paragraphs.</li>
+      <li><strong>Final CTA</strong> — sea-blue band. Page-specific question + 2 short lines + SEND YOUR PRICE button.</li>
+    </ol>
+
+    <p style="margin-top:14px;">Visual reference: <span class="mono">Polyweave Wireframes.html</span> → "SEO" section. Five wireframes are shown — they are visually identical except for copy.</p>
+
+    <h3 style="margin-top: 36px;">Per-page data</h3>
+    <p>Each page below shows the data the template needs. The five page records can be lifted directly from <span class="mono">seo-pages.jsx</span>.</p>
+
+    <!-- HDPE -->
+    <div class="pageCard">
+      <h3>HDPE Twine</h3>
+      <div class="url">/hdpe-twine-supplier-india</div>
+      <div class="meta">TITLE — HDPE Twine Supplier India | Source HDPE Twine for Europe<br>META — Source HDPE twine from trusted manufacturers in India. Polyweave helps European buyers reduce cost and risk when importing HDPE twine.</div>
+      <h4>H1</h4>
+      <div class="copyBox"><p>HDPE Twine <span class="mono" style="background:#14233a;color:#f7f4ee;padding:1px 6px;border-radius:3px;">Supplier</span> <span style="color: var(--sea);">India.</span></p></div>
+      <h4 style="margin-top: 14px;">Intro</h4>
+      <div class="copyBox">
+        <p>Many companies across Europe are now shifting part of their sourcing to India.</p>
+        <p>HDPE twine is one of the product categories where the price difference is becoming difficult to ignore.</p>
+        <p>If you are currently sourcing within Europe, there is a strong chance the same product can be manufactured in India more efficiently.</p>
+        <p>The challenge is not finding suppliers. The challenge is finding suppliers that are reliable, consistent, and aligned with export expectations.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Where Polyweave fits in</h4>
+      <div class="copyBox">
+        <p>We work with trusted manufacturers across India and help European buyers source HDPE twine with more clarity and less risk.</p>
+        <p>Instead of dealing with unknown factories or random sourcing platforms, buyers work through an existing supplier network that already understands export requirements.</p>
+      </div>
+      <h4 style="margin-top: 14px;">We regularly work with</h4>
+      <div class="copyBox">
+        <p>Coreless HDPE twine · HDPE twine for fishing applications · Custom specifications for European buyers · Industrial twine requirements · Export-grade HDPE twine production</p>
+      </div>
+      <h4 style="margin-top: 14px;">Countries</h4>
+      <div class="copyBox"><p>Spain · Italy · Portugal · Germany · Norway — & other parts of Europe</p></div>
+      <h4 style="margin-top: 14px;">Supporting</h4>
+      <div class="copyBox"><p>Many of the companies we work with are looking to reduce sourcing costs while maintaining stable supply and product consistency.</p></div>
+      <h4 style="margin-top: 14px;">Our role</h4>
+      <div class="copyBox">
+        <p>Our role is simple. We help identify the right supplier, align pricing, verify expectations, and simplify communication between both sides.</p>
+        <p>The objective is not just lower pricing. It is better sourcing with fewer problems.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Final CTA</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> Already sourcing HDPE twine?</p>
+        <p>Send us your current price or specification.</p>
+        <p>We will tell you what is realistically possible.</p>
+      </div>
+    </div>
+
+    <!-- Fishing -->
+    <div class="pageCard">
+      <h3>Fishing Net Manufacturers</h3>
+      <div class="url">/fishing-net-manufacturers-india</div>
+      <div class="meta">TITLE — Fishing Net Manufacturers India | PE & Nylon Fishing Nets<br>META — Find trusted fishing net manufacturers in India for European importers. Source PE and nylon fishing nets with better pricing and lower sourcing risk.</div>
+      <h4>H1</h4>
+      <div class="copyBox"><p>Fishing Net <span class="mono" style="background:#14233a;color:#f7f4ee;padding:1px 6px;border-radius:3px;">Manufacturers</span> <span style="color: var(--sea);">India.</span></p></div>
+      <h4 style="margin-top: 14px;">Intro</h4>
+      <div class="copyBox">
+        <p>Fishing equipment sourcing across Europe is changing.</p>
+        <p>Rising operational costs inside Europe are pushing many buyers to explore manufacturing alternatives in India.</p>
+        <p>Fishing nets are one of the categories where India already has strong manufacturing capability.</p>
+        <p>The issue is not availability. The issue is knowing which suppliers are reliable enough to work with long term.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Where Polyweave fits in</h4>
+      <div class="copyBox">
+        <p>Polyweave helps European buyers source fishing nets from India with more confidence and less uncertainty.</p>
+        <p>We work closely with manufacturers that already understand export requirements and commercial fishing applications.</p>
+        <p>Instead of approaching factories blindly, buyers work through a network that has already been tested through real trade.</p>
+      </div>
+      <h4 style="margin-top: 14px;">We regularly work with</h4>
+      <div class="copyBox"><p>PE fishing nets · Nylon multifilament fishing nets · Nylon monofilament fishing nets · Custom fishing net specifications · Commercial fishing net production</p></div>
+      <h4 style="margin-top: 14px;">Countries</h4>
+      <div class="copyBox"><p>Spain · Italy · Portugal · Germany · Norway — & other parts of Europe</p></div>
+      <h4 style="margin-top: 14px;">Supporting</h4>
+      <div class="copyBox"><p>Many companies are now exploring India as a second sourcing option alongside existing European suppliers.</p></div>
+      <h4 style="margin-top: 14px;">Our role</h4>
+      <div class="copyBox">
+        <p>Our role is to simplify sourcing.</p>
+        <p>We help align suppliers, pricing, specifications, and communication before production moves forward.</p>
+        <p>This reduces unnecessary risk and makes supplier transition easier.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Final CTA</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> Sourcing fishing nets?</p>
+        <p>Send us your current specification or pricing.</p>
+        <p>We will tell you what is possible.</p>
+      </div>
+    </div>
+
+    <!-- Nylon -->
+    <div class="pageCard">
+      <h3>Nylon Net Supplier</h3>
+      <div class="url">/nylon-net-supplier-india</div>
+      <div class="meta">TITLE — Nylon Net Supplier India | Monofilament & Multifilament Nets<br>META — Source nylon fishing nets from trusted manufacturers in India. Polyweave helps European buyers import monofilament and multifilament nylon nets with lower risk.</div>
+      <h4>H1</h4>
+      <div class="copyBox"><p>Nylon Net <span class="mono" style="background:#14233a;color:#f7f4ee;padding:1px 6px;border-radius:3px;">Supplier</span> <span style="color: var(--sea);">India.</span></p></div>
+      <h4 style="margin-top: 14px;">Intro</h4>
+      <div class="copyBox">
+        <p>Nylon fishing nets continue to be widely used across Europe, but sourcing them efficiently has become more difficult over time.</p>
+        <p>Costs are increasing and many buyers are now exploring India as an alternative manufacturing base.</p>
+        <p>India offers strong production capability, but supplier selection remains the biggest challenge.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Where Polyweave fits in</h4>
+      <div class="copyBox">
+        <p>Polyweave helps buyers source nylon nets from manufacturers in India that already produce for export markets.</p>
+        <p>Our role is to reduce uncertainty and simplify the sourcing process.</p>
+        <p>We help buyers avoid common problems related to communication, pricing alignment, and production expectations.</p>
+      </div>
+      <h4 style="margin-top: 14px;">We regularly work with</h4>
+      <div class="copyBox"><p>Monofilament nylon nets · Multifilament nylon nets · Commercial fishing net applications · Export-oriented nylon net manufacturing · Custom sizing and specifications</p></div>
+      <h4 style="margin-top: 14px;">Countries</h4>
+      <div class="copyBox"><p>Spain · Italy · Portugal · Germany · Norway — & other parts of Europe</p></div>
+      <h4 style="margin-top: 14px;">Supporting</h4>
+      <div class="copyBox"><p>Many buyers are now using India as an additional sourcing option to reduce dependence on a single supplier base.</p></div>
+      <h4 style="margin-top: 14px;">Our role</h4>
+      <div class="copyBox">
+        <p>We work closely with both buyers and manufacturers to align product expectations before production begins.</p>
+        <p>This helps create smoother sourcing relationships and more stable supply over time.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Final CTA</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> Already sourcing nylon nets?</p>
+        <p>Send us your current product details or pricing.</p>
+        <p>We will review and respond with what is realistically possible.</p>
+      </div>
+    </div>
+
+    <!-- Ropes -->
+    <div class="pageCard">
+      <h3>Rope Suppliers</h3>
+      <div class="url">/rope-suppliers-india</div>
+      <div class="meta">TITLE — Rope Suppliers India | Industrial & Marine Rope Manufacturers<br>META — Source industrial and marine ropes from trusted manufacturers in India. Polyweave helps European buyers import ropes with better pricing and lower sourcing risk.</div>
+      <h4>H1</h4>
+      <div class="copyBox"><p>Rope <span class="mono" style="background:#14233a;color:#f7f4ee;padding:1px 6px;border-radius:3px;">Suppliers</span> <span style="color: var(--sea);">India.</span></p></div>
+      <h4 style="margin-top: 14px;">Intro</h4>
+      <div class="copyBox">
+        <p>Rope sourcing is one of the product areas where the pricing gap between Europe and India continues to grow.</p>
+        <p>Many companies still purchase locally even when more efficient sourcing options exist.</p>
+        <p>India has a large manufacturing base for industrial and marine ropes, but supplier quality and consistency can vary significantly.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Where Polyweave fits in</h4>
+      <div class="copyBox">
+        <p>Polyweave helps buyers identify rope manufacturers in India that are aligned with export expectations and long-term commercial relationships.</p>
+        <p>Instead of approaching suppliers blindly, buyers work through a sourcing network that already understands production capability and communication requirements.</p>
+      </div>
+      <h4 style="margin-top: 14px;">We regularly work with</h4>
+      <div class="copyBox"><p>Polysteel ropes · Polypropylene ropes · HDPE ropes · Marine ropes · Industrial ropes · Commercial rope applications</p></div>
+      <h4 style="margin-top: 14px;">Countries</h4>
+      <div class="copyBox"><p>Spain · Italy · Portugal · Germany · Norway — & other parts of Europe</p></div>
+      <h4 style="margin-top: 14px;">Supporting</h4>
+      <div class="copyBox"><p>Many of the companies we work with are looking to reduce import costs without creating unnecessary sourcing instability.</p></div>
+      <h4 style="margin-top: 14px;">Our role</h4>
+      <div class="copyBox">
+        <p>Our role is to simplify sourcing decisions.</p>
+        <p>We help buyers identify the right suppliers, align pricing expectations, and reduce communication friction before production begins.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Final CTA</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> Sourcing ropes?</p>
+        <p>Send us your current specification or pricing.</p>
+        <p>We will tell you what is realistically possible.</p>
+      </div>
+    </div>
+
+    <!-- Jute -->
+    <div class="pageCard">
+      <h3>Jute Yarn Exporters</h3>
+      <div class="url">/jute-yarn-exporters-india</div>
+      <div class="meta">TITLE — Jute Yarn Exporters India | Source Jute Yarn from India<br>META — Source jute yarn from reliable exporters and manufacturers in India. Polyweave helps European buyers import jute products with better clarity and control.</div>
+      <h4>H1</h4>
+      <div class="copyBox"><p>Jute Yarn <span class="mono" style="background:#14233a;color:#f7f4ee;padding:1px 6px;border-radius:3px;">Exporters</span> <span style="color: var(--sea);">India.</span></p></div>
+      <h4 style="margin-top: 14px;">Intro</h4>
+      <div class="copyBox">
+        <p>Demand for jute products continues to increase across Europe.</p>
+        <p>India remains one of the strongest manufacturing and export bases for jute yarn and related materials.</p>
+        <p>At the same time, many buyers struggle with supplier communication, consistency, and sourcing clarity when working directly with manufacturers.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Where Polyweave fits in</h4>
+      <div class="copyBox">
+        <p>Polyweave helps buyers source jute yarn from established manufacturers in India with more structure and less uncertainty.</p>
+        <p>Our role is to simplify sourcing and create smoother communication between buyers and suppliers.</p>
+      </div>
+      <h4 style="margin-top: 14px;">We regularly work with</h4>
+      <div class="copyBox"><p>Jute yarn · Jute raw materials · Export-oriented jute production · Custom jute requirements · Industrial jute applications</p></div>
+      <h4 style="margin-top: 14px;">Countries</h4>
+      <div class="copyBox"><p>Spain · Italy · Portugal · Germany · Norway — & other parts of Europe</p></div>
+      <h4 style="margin-top: 14px;">Supporting</h4>
+      <div class="copyBox"><p>Many companies are now exploring India to improve pricing flexibility while maintaining long-term supply capability.</p></div>
+      <h4 style="margin-top: 14px;">Our role</h4>
+      <div class="copyBox">
+        <p>We help buyers identify suitable suppliers, align pricing expectations, and simplify sourcing conversations before production begins.</p>
+      </div>
+      <h4 style="margin-top: 14px;">Final CTA</h4>
+      <div class="copyBox">
+        <p><strong>H2:</strong> Already sourcing jute yarn?</p>
+        <p>Send us your current requirement or pricing.</p>
+        <p>We will review and respond with what is realistically possible.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESPONSIVE -->
+  <section class="section" id="responsive">
+    <div class="num">11 · RESPONSIVE</div>
+    <h2>3 breakpoints.</h2>
+    <p class="lede">Mobile-first. Wireframes are drawn at desktop width — these are the rules for translating them down.</p>
+
+    <table style="margin-top: 18px;">
+      <thead><tr><th>Range</th><th>Gutter</th><th>Section padding</th><th>H1</th><th>Body</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">≤ 768 · MOBILE</td><td class="mono">20px</td><td class="mono">40px</td><td class="mono">44–52px</td><td class="mono">16px</td></tr>
+        <tr><td class="mono">769–1199 · TABLET</td><td class="mono">40px</td><td class="mono">48px</td><td class="mono">60px</td><td class="mono">17px</td></tr>
+        <tr><td class="mono">≥ 1200 · DESKTOP</td><td class="mono">80px</td><td class="mono">80px</td><td class="mono">76–84px</td><td class="mono">18–22px</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid-3" style="margin-top: 28px;">
+      <div class="vp">
+        <div class="label">MOBILE · ≤ 768</div>
+        <div class="stack">
+          <div class="row"><div class="blk short" style="flex: 0 0 60px;"></div><div style="flex:1"></div><div class="blk short" style="flex: 0 0 24px;"></div></div>
+          <div class="blk tall dark"></div>
+          <div class="blk short"></div>
+          <div class="blk"></div>
+          <div class="blk"></div>
+          <div class="blk sea"></div>
+          <div class="blk dark"></div>
+          <div class="blk"></div>
+          <div class="blk"></div>
+        </div>
+      </div>
+      <div class="vp">
+        <div class="label">TABLET · 769–1199</div>
+        <div class="stack">
+          <div class="row"><div class="blk short" style="flex:0 0 90px;"></div><div style="flex:1"></div><div class="blk short" style="flex:0 0 70px;"></div></div>
+          <div class="blk tall dark"></div>
+          <div class="row"><div class="blk"></div><div class="blk"></div></div>
+          <div class="row"><div class="blk sea"></div><div class="blk dark"></div></div>
+          <div class="blk"></div>
+        </div>
+      </div>
+      <div class="vp">
+        <div class="label">DESKTOP · ≥ 1200</div>
+        <div class="stack">
+          <div class="row"><div class="blk short" style="flex:0 0 110px;"></div><div style="flex:1"></div><div class="blk short" style="flex:0 0 110px;"></div></div>
+          <div class="blk tall dark"></div>
+          <div class="row"><div class="blk"></div><div class="blk"></div><div class="blk"></div></div>
+          <div class="row"><div class="blk sea"></div><div class="blk dark"></div></div>
+          <div class="blk"></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 36px;">Specific behaviours</h3>
+    <ul class="clean">
+      <li><span class="k">NAV</span><span>Mobile: collapse to hamburger. Logo stays. Drawer opens full-screen with the four links + a SEND YOUR PRICE → button.</span></li>
+      <li><span class="k">STICKY RAIL</span><span>Mobile: replace the floating sticky rail with a sticky bottom bar containing one button: "Send your price →". Tap opens the contact form (or scrolls to it on /contact).</span></li>
+      <li><span class="k">3-COL CARDS</span><span>Tablet: stack to 1 column or 2 columns where it reads better (e.g. Market Reality stays 1 col on mobile because each line is a strong statement).</span></li>
+      <li><span class="k">SPLIT SECTIONS</span><span>About "Side A / Side B", Services pricing block, About "Our role + map", SEO "Countries + paragraph" — all stack vertically on mobile, with the same visual order.</span></li>
+      <li><span class="k">CHIPS / TAGS</span><span>Wrap. Don't shrink type below 14px. Center on mobile.</span></li>
+      <li><span class="k">CONTACT FORM</span><span>Already single-column on mobile. Side panel ("Or, just write to us.") stacks below the form.</span></li>
+      <li><span class="k">H1 BLOCKS</span><span>The navy "highlighted word" block (e.g. <span class="mono">overpaying</span>) stays inline on all sizes — do not break it onto its own background-strip.</span></li>
+    </ul>
+  </section>
+
+  <!-- INTERACTIONS -->
+  <section class="section" id="interactions">
+    <div class="num">12 · INTERACTIONS & STATES</div>
+    <h2>Quiet motion.</h2>
+    <p class="lede">Animations should feel like ink settling, not screens animating. Default duration <span class="mono">180ms</span>, easing <span class="mono">cubic-bezier(.2,.6,.2,1)</span>.</p>
+
+    <ul class="clean">
+      <li><span class="k">BUTTON HOVER</span><span>Primary (sea): background darkens to <span class="mono">#23566F</span>. Arrow translates 3px right. No shadow lift, no scale.</span></li>
+      <li><span class="k">BUTTON HOVER</span><span>Ghost: background fills cream <span class="mono">#F7F4EE</span>, border stays.</span></li>
+      <li><span class="k">LINK HOVER</span><span>Color shift to sea <span class="mono">#2E6F8E</span>. Underline thickness stays; no decoration changes.</span></li>
+      <li><span class="k">INPUT FOCUS</span><span>Border color: <span class="mono">#14233A</span> (already navy). Add 2px sea outline at <span class="mono">rgba(46,111,142,0.25)</span>. No glow.</span></li>
+      <li><span class="k">FORM SUBMIT</span><span>Button: subtle disabled state during submit. On success, replace form with confirmation card. On error, inline message below failing field.</span></li>
+      <li><span class="k">SECTION ENTRY</span><span>Optional: 80ms fade-in + 12px translate-up as section enters viewport. Disable with <span class="mono">prefers-reduced-motion</span>. Ship without if in doubt.</span></li>
+      <li><span class="k">PRODUCT ROW HOVER</span><span>Homepage product index — entire row gets a sea-tinted background <span class="mono">rgba(46,111,142,0.06)</span>. The "READ →" tag in the right cell shifts 3px right.</span></li>
+      <li><span class="k">STICKY RAIL</span><span>Fades in when user scrolls past the hero. Fades out before footer (last 200px of page).</span></li>
+      <li><span class="k">NO</span><span>No parallax. No animated counters. No confetti. No carousels. No hover tilts. No "back to top" button.</span></li>
+    </ul>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="cta">
+    <div class="num">13 · CTA SYSTEM</div>
+    <h2>Two CTAs.<br>Everywhere.</h2>
+    <div class="grid-2" style="margin-top: 18px;">
+      <div class="box sea">
+        <h4>Primary</h4>
+        <h3 style="color: var(--paper);">SEND YOUR PRICE →</h3>
+        <p>Used on every page hero and every final CTA. On submit, scrolls to / opens the contact form on the current page (or on Home/SEO, opens a lightweight modal that posts to the same endpoint).</p>
+      </div>
+      <div class="box">
+        <h4>Secondary</h4>
+        <h3>[ book a call ]</h3>
+        <p>Square brackets are part of the label. Opens scheduling tool (Calendly / Cal.com — Polyweave to provide link). Lower visual weight intentionally.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 36px;">Where each appears</h3>
+    <table>
+      <thead><tr><th>Location</th><th>Primary</th><th>Secondary</th></tr></thead>
+      <tbody>
+        <tr><td>Home — hero</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Home — final CTA</td><td>✓</td><td>—</td></tr>
+        <tr><td>About — final CTA</td><td>✓</td><td>—</td></tr>
+        <tr><td>Services — final CTA</td><td>✓</td><td>—</td></tr>
+        <tr><td>Contact — form</td><td>✓ (full-width)</td><td>—</td></tr>
+        <tr><td>SEO pages — final CTA</td><td>✓</td><td>—</td></tr>
+        <tr><td>Sticky rail (all pages except Contact)</td><td>✓</td><td>"or [ book a call ]" text link</td></tr>
+        <tr><td>Top nav</td><td>—</td><td>— (kept clean)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- DELIVERY -->
+  <section class="section" id="delivery">
+    <div class="num">14 · DELIVERY</div>
+    <h2>Before launch.</h2>
+    <ul class="clean">
+      <li><span class="k">FAVICON</span><span>Generate from the POLYWEAVE wordmark. 32×32, 180×180 (apple-touch-icon), SVG.</span></li>
+      <li><span class="k">SITEMAP</span><span><span class="mono">/sitemap.xml</span> with all 9 URLs. Submit to Google Search Console.</span></li>
+      <li><span class="k">ROBOTS</span><span><span class="mono">/robots.txt</span> with sitemap reference. No disallow.</span></li>
+      <li><span class="k">CANONICAL</span><span>Each page sets <span class="mono">&lt;link rel="canonical"&gt;</span> to its own URL. Lowercase, no trailing slash, no query params.</span></li>
+      <li><span class="k">SCHEMA</span><span>Add <span class="mono">Organization</span> schema on home (name, URL, email, areaServed: India + Europe). <span class="mono">Service</span> schema on each SEO page. <span class="mono">ContactPage</span> schema on /contact.</span></li>
+      <li><span class="k">FORM</span><span>Test end-to-end: submit lands in ajay@polyweave.net inbox with all fields. Anti-spam in place. Error states visible.</span></li>
+      <li><span class="k">MOBILE</span><span>Full QA on iPhone SE (smallest mainstream), iPhone 14, Pixel 7, iPad. No horizontal scroll. Sticky bottom bar visible. Forms keyboard-friendly.</span></li>
+      <li><span class="k">PERF</span><span>Lighthouse ≥ 95 mobile. Self-host fonts. Compress all images. Defer all non-critical JS. No layout shift.</span></li>
+      <li><span class="k">A11Y</span><span>All form fields labelled. Color contrast ≥ 4.5:1 for body text. Sea on cream is OK; verify on navy bands. Skip-to-content link. Focus rings visible.</span></li>
+      <li><span class="k">ANALYTICS</span><span>Track <span class="mono">cta_send_price_click</span>, <span class="mono">cta_book_call_click</span>, <span class="mono">form_submit_success</span>, <span class="mono">form_submit_error</span>.</span></li>
+      <li><span class="k">404 / 500</span><span>Branded error pages. Cream paper, navy headline, single "Back to home" link. Same wireframe language.</span></li>
+      <li><span class="k">LEGAL</span><span>Privacy + Cookies link in footer. Polyweave to provide copy.</span></li>
+    </ul>
+
+    <div class="box dashed" style="margin-top: 36px;">
+      <h4>Files in this handoff</h4>
+      <p style="margin: 0;">
+        <strong>Polyweave Wireframes.html</strong> — visual reference. Open it. Every layout, every color block, every section the developer needs to build is shown there. Tweaks panel toggles map / numbers / sticky rail.<br><br>
+        <strong>Polyweave Developer Handoff.html</strong> — this document. Copy, structure, tokens, responsive rules, SEO data.<br><br>
+        Together they are the complete handoff package.
+      </p>
+    </div>
+  </section>
+
+  <!-- SIGN OFF -->
+  <footer style="margin-top: 80px; padding-top: 28px; border-top: 3px solid var(--ink); display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px;">
+    <div>
+      <div class="hw" style="font-size: 36px; line-height: 1;">Polyweave<span style="color: var(--sea)">.</span></div>
+      <div class="mono" style="font-size: 11px; color: var(--ink-soft); margin-top: 6px;">Sourcing from India, made clearer.</div>
+    </div>
+    <div class="mono" style="font-size: 11px; color: var(--ink-soft); text-align: right;">
+      DEVELOPER HANDOFF · v1.0<br>
+      ajay@polyweave.net
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

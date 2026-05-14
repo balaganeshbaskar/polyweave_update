@@ -1,0 +1,388 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = 'Contact · Send your price to Polyweave';
+const pageDescription = 'Send your current product or supplier price. We\'ll review and respond with what\'s possible from India. Response within 1–2 business days.';
+
+const countries = ['Spain', 'Italy', 'Portugal', 'Germany', 'France', 'Norway'];
+
+const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Polyweave",
+  "description": "Contact form to send your current price and get sourcing advice from India.",
+  "url": "https://polyweave.net/contact",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "ajay@polyweave.net",
+    "contactType": "customer service",
+    "availableLanguage": ["English"]
+  }
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/contact" schema={contactPageSchema}>
+  <Nav active="contact" />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="hero-eyebrow tag">CONTACT · A SIMPLE CHECK</div>
+        <h1 class="hero-title text-display-1">
+          Start with a <span class="highlight-sea">simple check</span>.
+        </h1>
+        <p class="hero-lede text-body-lg">
+          If you are currently importing a product, there is a good chance it can be done differently. Send us your product or current price. We will review and respond with what is possible.
+        </p>
+      </div>
+    </section>
+
+    <!-- Form + Side panel -->
+    <section class="contact-section section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="contact-grid">
+          <!-- Form -->
+          <div class="contact-form-wrapper">
+            <form class="contact-form sketch-box" id="contact-form">
+              <div class="form-group">
+                <label for="name" class="form-label">Name *</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="input-field"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="company" class="form-label">Company *</label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  class="input-field"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="input-field"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="country" class="form-label">Country *</label>
+                <select id="country" name="country" class="input-field" required>
+                  <option value="">Select your country</option>
+                  {countries.map(country => (
+                    <option value={country}>{country}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="product" class="form-label">Product / Requirement *</label>
+                <input
+                  type="text"
+                  id="product"
+                  name="product"
+                  class="input-field"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="current-price" class="form-label">Current Supplier Price (optional)</label>
+                <input
+                  type="text"
+                  id="current-price"
+                  name="current-price"
+                  class="input-field"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label">Message (optional)</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  class="input-field textarea"
+                  rows="4"
+                ></textarea>
+              </div>
+
+              <!-- Honeypot -->
+              <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" />
+
+              <button type="submit" class="btn-primary submit-btn" id="submit-btn">
+                SEND YOUR PRICE <span class="btn-arrow">→</span>
+              </button>
+
+              <div class="form-success" id="form-success" hidden>
+                <p>Thanks. We'll respond within 1–2 business days.</p>
+              </div>
+            </form>
+          </div>
+
+          <!-- Side panel -->
+          <div class="contact-side">
+            <div class="side-panel sketch-box-navy">
+              <h3 class="side-title">Or, just write to us.</h3>
+              <p class="side-email">
+                <a href="mailto:ajay@polyweave.net">ajay@polyweave.net</a>
+              </p>
+              <p class="side-response">(response within 1–2 business days)</p>
+
+              <div class="side-countries">
+                <p class="side-label">Operating between:</p>
+                <p class="side-text">India ↔ Spain · Italy · Portugal · Germany · France · Norway & other parts of Europe.</p>
+              </div>
+
+              <div class="side-stamp stamp">PRIVATE · SECURE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const formSuccess = document.getElementById('form-success');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const honeypot = form.querySelector('.honeypot') as HTMLInputElement;
+    if (honeypot.value) {
+      console.log('Bot detected');
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'SENDING...';
+    }
+
+    try {
+      const response = await fetch('/submit-form.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        if (typeof window.trackFormSuccess === 'function') {
+          window.trackFormSuccess('contact-form');
+        }
+        formSuccess?.removeAttribute('hidden');
+        form.reset();
+      } else {
+        if (typeof window.trackFormError === 'function') {
+          window.trackFormError('contact-form', 'Server error');
+        }
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      if (typeof window.trackFormError === 'function') {
+        window.trackFormError('contact-form', error?.message || 'Network error');
+      }
+      alert('Something went wrong. Please try again.');
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'SEND YOUR PRICE <span class="btn-arrow">→</span>';
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Hero */
+  .hero {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    margin-bottom: 20px;
+  }
+
+  .hero-lede {
+    max-width: 720px;
+    color: var(--color-ink-soft);
+  }
+
+  .highlight-sea {
+    color: var(--color-sea);
+  }
+
+  /* Contact grid */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+
+  /* Form */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-family: var(--font-meta);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+
+  .input-field {
+    padding: 12px 14px;
+    border: 1.5px solid var(--color-ink);
+    border-radius: var(--radius-sketch);
+    font-family: var(--font-body);
+    font-size: 16px;
+    background: rgba(255,255,255,0.8);
+    transition: outline 180ms cubic-bezier(.2,.6,.2,1);
+  }
+
+  .input-field:focus {
+    outline: 2px solid rgba(46,111,142,0.25);
+    outline-offset: 2px;
+  }
+
+  .textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  select.input-field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2314233A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+  }
+
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 8px;
+    height: 56px;
+  }
+
+  .form-success {
+    text-align: center;
+    padding: 24px;
+    background: rgba(46,111,142,0.1);
+    border-radius: var(--radius-sketch);
+  }
+
+  .form-success p {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--color-sea);
+    margin: 0;
+  }
+
+  /* Side panel */
+  .side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+  }
+
+  .side-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .side-email {
+    margin: 0;
+  }
+
+  .side-email a {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--color-paper);
+    text-decoration: none;
+  }
+
+  .side-email a:hover {
+    color: var(--color-sea-soft);
+  }
+
+  .side-response {
+    font-size: 14px;
+    color: var(--color-sea-soft);
+    margin: 0;
+  }
+
+  .side-countries {
+    margin-top: 16px;
+  }
+
+  .side-label {
+    font-family: var(--font-meta);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--color-sea-soft);
+    margin: 0 0 4px;
+  }
+
+  .side-text {
+    font-size: 15px;
+    color: var(--color-paper);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .side-stamp {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+</style>

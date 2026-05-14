@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet">
+  <circle cx="60" cy="60" r="58" fill="#F7F4EE" stroke="#14233A" stroke-width="1.5"/>
+
+  <!-- Placeholder person icon -->
+  <circle cx="60" cy="45" r="15" fill="#B9D3DF" stroke="#14233A" stroke-width="1"/>
+  <path d="M35 100 Q35 65 60 65 Q85 65 85 100" fill="#B9D3DF" stroke="#14233A" stroke-width="1"/>
+
+  <!-- Founder text -->
+  <text x="60" y="105" font-family="cursive" font-size="14" fill="#4A5468" text-anchor="middle">Founder</text>
+</svg>

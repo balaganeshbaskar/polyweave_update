@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import StickyForm from '../components/StickyForm.astro';
+import SectionTag from '../components/SectionTag.astro';
+
+const pageTitle = 'About Polyweave · India ↔ Europe sourcing partner';
+const pageDescription = 'Polyweave is built between India and Europe. We help buyers source with fewer problems, starting from a network rooted in fishing equipment and now expanded across categories.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/about">
+  <Nav active="about" />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="hero-eyebrow tag">ABOUT · BUILT BETWEEN INDIA AND EUROPE</div>
+        <h1 class="hero-title text-display-1">
+          Built between <span class="highlight-sea">India</span> and <span class="highlight-navy">Europe</span>.
+        </h1>
+        <p class="hero-lede text-body-lg">
+          Polyweave works between two markets.
+        </p>
+      </div>
+    </section>
+
+    <!-- Two-side band -->
+    <section class="two-side section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="two-side-grid">
+          <div class="side-card sketch-box-navy">
+            <h3 class="side-heading">Europe</h3>
+            <p class="side-sub">buys.</p>
+          </div>
+          <div class="side-card sketch-box-sea">
+            <h3 class="side-heading">India</h3>
+            <p class="side-sub">produces.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Friction -->
+    <section class="friction section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="FRICTION" />
+        <h2 class="text-h3">Making that work is not always simple.</h2>
+
+        <div class="friction-cards">
+          <div class="friction-card sketch-box">
+            <div class="friction-num">01</div>
+            <p>Suppliers don't always communicate clearly.</p>
+          </div>
+          <div class="friction-card sketch-box">
+            <div class="friction-num">02</div>
+            <p>Buyers don't always see the full picture.</p>
+          </div>
+          <div class="friction-card sketch-box">
+            <div class="friction-num">03</div>
+            <p>Small mistakes in sourcing become expensive problems.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Role + Map -->
+    <section class="our-role section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="role-grid">
+          <div class="role-content">
+            <h2 class="text-h2">Polyweave exists to remove that gap.</h2>
+            <p class="text-body-lg">
+              We work closely with manufacturers across India and buyers across Europe.
+            </p>
+            <p class="text-body">
+              Our role is to make sourcing smoother, clearer, and more reliable.
+            </p>
+          </div>
+          <div class="role-map">
+            <img src="/assets/map.svg" alt="India ↔ Europe trade map" class="map-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Origin -->
+    <section class="origin section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="ORIGIN" />
+        <h2 class="text-h2">We started in fishing equipment.</h2>
+        <p class="text-body-lg">
+          That is where our network was built.
+        </p>
+        <p class="text-body">
+          Today, we help companies source across sectors where India offers a real commercial advantage.
+        </p>
+      </div>
+    </section>
+
+    <!-- Leadership -->
+    <section class="leadership section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="LEADERSHIP" />
+        <div class="leadership-content">
+          <div class="leadership-photo">
+            <img src="/assets/founder.svg" alt="Founder" class="founder-image" />
+          </div>
+          <div class="leadership-bio">
+            <p class="text-body-lg">
+              The company is led by someone with deep familiarity with Indian manufacturing and direct experience working with European buyers.
+            </p>
+            <div class="leadership-caption tag">FOUNDER · INDIA × SPAIN</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta section-padding">
+      <div class="max-w-content page-gutter">
+        <h2 class="text-h2">Want to see what's possible?</h2>
+        <div class="cta-button">
+          <a href="/contact" class="btn-primary">
+            SEND YOUR PRICE <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <StickyForm showBookCall={true} />
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    margin-bottom: 20px;
+  }
+
+  .hero-lede {
+    max-width: 720px;
+    color: var(--color-ink-soft);
+  }
+
+  .highlight-sea {
+    color: var(--color-sea);
+  }
+
+  .highlight-navy {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* Two-side band */
+  .two-side-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  @media (min-width: 768px) {
+    .two-side-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .side-heading {
+    font-family: var(--font-display);
+    font-size: 36px;
+    margin: 0 0 4px;
+  }
+
+  .side-sub {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+
+  .sketch-box-navy .side-sub {
+    color: var(--color-sea-soft);
+  }
+
+  /* Friction */
+  .friction h2 {
+    margin-bottom: 24px;
+  }
+
+  .friction-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  @media (min-width: 768px) {
+    .friction-cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .friction-card {
+    position: relative;
+    padding-top: 40px;
+  }
+
+  .friction-num {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    width: 24px;
+    height: 24px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .friction-card p {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  /* Our Role */
+  .role-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .role-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .map-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  /* Origin */
+  .origin h2 {
+    margin-bottom: 16px;
+  }
+
+  .origin p {
+    max-width: 720px;
+  }
+
+  .origin p:first-of-type {
+    margin-bottom: 16px;
+    color: var(--color-ink-soft);
+  }
+
+  /* Leadership */
+  .leadership-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .leadership-content {
+      grid-template-columns: 140px 1fr;
+    }
+  }
+
+  .founder-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-ink);
+  }
+
+  .leadership-caption {
+    margin-top: 16px;
+    display: inline-block;
+  }
+
+  /* Final CTA */
+  .final-cta {
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    margin-bottom: 24px;
+  }
+</style>

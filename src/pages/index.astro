@@ -1,0 +1,504 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import StickyForm from '../components/StickyForm.astro';
+import SectionTag from '../components/SectionTag.astro';
+
+const pageTitle = 'Polyweave · Sourcing from India, made clearer';
+const pageDescription = 'Polyweave helps European companies import from India with less risk and clearer pricing — without random suppliers, surprise costs, or quality wobbles.';
+
+const products = [
+  { label: 'HDPE Twine', href: '/hdpe-twine-supplier-india' },
+  { label: 'Fishing Nets', href: '/fishing-net-manufacturers-india' },
+  { label: 'Nylon Nets', href: '/nylon-net-supplier-india' },
+  { label: 'Ropes', href: '/rope-suppliers-india' },
+  { label: 'Jute Yarn', href: '/jute-yarn-exporters-india' }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/">
+  <Nav active="home" />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero section-padding">
+      <div class="max-w-content page-gutter">
+        <h1 class="hero-title text-display-1">
+          You're probably <span class="highlight-navy">overpaying</span> for your <span class="highlight-sea">imports</span>.
+        </h1>
+        <p class="hero-lede text-body-lg">
+          We help companies source from India at better prices, with less risk.
+        </p>
+        <p class="hero-sub text-body">
+          If you already have a supplier, send us your price. We'll tell you if it can be done better.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="/contact" class="btn-primary">
+            SEND YOUR PRICE <span class="btn-arrow">→</span>
+          </a>
+          <a href="#" class="btn-ghost">[ book a call ]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Market Reality (sea-tinted band per handoff) -->
+    <section class="market-reality section-padding bg-sea-tint">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="MARKET REALITY" />
+
+        <div class="market-reality-grid">
+          <div class="market-reality-card">
+            <div class="reality-bar reality-bar-navy"></div>
+            <h3 class="reality-title">Europe is getting expensive.</h3>
+            <p class="reality-body">Labour costs up. Operations up. Margins thinner each year.</p>
+          </div>
+          <div class="market-reality-card">
+            <div class="reality-bar reality-bar-navy"></div>
+            <h3 class="reality-title">China is less predictable.</h3>
+            <p class="reality-body">Quality wobbles, lead-time slips, and policy noise have buyers actively looking for a second base.</p>
+          </div>
+          <div class="market-reality-card">
+            <div class="reality-bar reality-bar-sea"></div>
+            <h3 class="reality-title">India is the natural shift.</h3>
+            <p class="reality-body">Manufacturing capacity is mature. The hard part is finding suppliers who actually deliver to export standards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Polyweave Does (navy block per handoff) -->
+    <section class="what-we-do section-padding bg-navy">
+      <div class="max-w-content page-gutter">
+        <div class="what-we-do-grid">
+          <div class="what-we-do-left">
+            <SectionTag label="WHAT WE DO" class="section-tag-light" />
+            <h2 class="what-we-do-heading text-paper">That's where<br /><span class="text-sea-soft">Polyweave</span><br />comes in.</h2>
+          </div>
+          <div class="what-we-do-right text-paper-op-85">
+            <p class="what-we-do-body">We help companies import from India without the usual issues.</p>
+            <ul class="what-we-do-list">
+              <li class="text-paper-op-85">— No guesswork.</li>
+              <li class="text-paper-op-85">— No random suppliers.</li>
+              <li class="text-paper-op-85">— No surprises after the order.</li>
+              <li class="text-paper-op-85">— Just clear sourcing and better decisions.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="HOW IT WORKS" />
+        <div class="grid-4">
+          <div class="step-card sketch-box">
+            <div class="numdot">01</div>
+            <p>You share your product or current pricing.</p>
+          </div>
+          <div class="step-card sketch-box">
+            <div class="numdot">02</div>
+            <p>We find the right manufacturer in India.</p>
+          </div>
+          <div class="step-card sketch-box">
+            <div class="numdot">03</div>
+            <p>We handle negotiation and alignment.</p>
+          </div>
+          <div class="step-card sketch-box">
+            <div class="numdot">04</div>
+            <p>You get a better option.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Index -->
+    <section class="product-index section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="WHAT WE COMMONLY WORK WITH" />
+
+        <div class="product-list">
+          {products.map((product, index) => (
+            <a href={product.href} class="product-row">
+              <span class="product-label">{product.label}</span>
+              <span class="product-read">READ <span class="product-read-arrow">→</span></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study -->
+    <section class="case-study section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="A SIMPLE EXAMPLE" />
+        <div class="case-study-grid">
+          <div class="case-study-content">
+            <h2 class="text-h2">One quiet switch.</h2>
+            <p class="text-body-lg">
+              A company we worked with was sourcing HDPE twine from Europe. We rebuilt the same product through India. The result was lower cost and stable supply, without compromising on performance.
+            </p>
+          </div>
+          <div class="case-study-visual sketch-box-dashed">
+            <span class="case-study-placeholder">[ Before / After ]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof Band -->
+    <section class="proof-band section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="BUILT THROUGH REAL TRADE" />
+        <div class="proof-stats">
+          <div class="stat">
+            <span class="stat-num">100+</span>
+            <span class="stat-label">Containers delivered across Europe</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">€2M+</span>
+            <span class="stat-label">In trade handled</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">15+</span>
+            <span class="stat-label">Relationships with buyers + manufacturers</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta section-padding">
+      <div class="max-w-content page-gutter">
+        <h2 class="text-h2">Already working with a supplier?</h2>
+        <p class="text-body-lg">Send us your current price. We'll tell you what's possible.</p>
+        <div class="cta-button">
+          <a href="/contact" class="btn-primary">
+            SEND YOUR PRICE <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <StickyForm showBookCall={true} />
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-title {
+    margin-bottom: 20px;
+  }
+
+  .highlight-navy {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  .highlight-sea {
+    color: var(--color-sea);
+  }
+
+  .hero-lede {
+    max-width: 720px;
+    margin-bottom: 12px;
+    color: var(--color-ink-soft);
+  }
+
+  .hero-sub {
+    max-width: 720px;
+    margin-bottom: 32px;
+    color: var(--color-ink-soft);
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* Market Reality */
+  .market-reality-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .market-reality-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .market-reality-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reality-bar {
+    width: 28px;
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+
+  .reality-bar-navy {
+    background: var(--color-ink);
+  }
+
+  .reality-bar-sea {
+    background: var(--color-sea);
+  }
+
+  .reality-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+
+  .reality-title:first-of-type {
+    color: var(--color-ink);
+  }
+
+  .market-reality-card:nth-child(1) .reality-title {
+    color: var(--color-ink);
+  }
+
+  .market-reality-card:nth-child(2) .reality-title {
+    color: var(--color-ink);
+  }
+
+  .market-reality-card:nth-child(3) .reality-title {
+    color: var(--color-sea);
+  }
+
+  .reality-body {
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  /* What We Do (2-column per wireframe) */
+  .what-we-do-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .what-we-do-grid {
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+    }
+  }
+
+  .what-we-do-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .what-we-do-heading {
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    margin: 0;
+    color: var(--color-paper);
+  }
+
+  .what-we-do-right {
+    padding-top: 60px;
+  }
+
+  @media (max-width: 767px) {
+    .what-we-do-right {
+      padding-top: 24px;
+    }
+  }
+
+  .what-we-do-body {
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.5;
+    margin: 0 0 20px;
+    color: rgba(247,244,238,0.85);
+  }
+
+  .what-we-do-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .what-we-do-list li {
+    font-size: 18px;
+    padding: 10px 0;
+    border-top: 1px dashed rgba(247,244,238,0.35);
+    color: rgba(247,244,238,0.85);
+  }
+
+  /* How It Works */
+  .grid-4 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  @media (min-width: 768px) {
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .step-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .step-card p {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  /* Product Index */
+  .product-list {
+    display: flex;
+    flex-direction: column;
+    border: 1.5px solid var(--color-ink);
+    border-radius: var(--radius-sketch);
+  }
+
+  .product-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(20,35,58,0.2);
+    transition: background 180ms cubic-bezier(.2,.6,.2,1);
+  }
+
+  .product-row:first-child {
+    border-top: none;
+  }
+
+  .product-row:last-child {
+    border-bottom: none;
+  }
+
+  .product-row:hover {
+    background: rgba(46,111,142,0.06);
+  }
+
+  .product-row:hover .product-read-arrow {
+    transform: translateX(3px);
+  }
+
+  .product-label {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--color-ink);
+  }
+
+  .product-read {
+    font-family: var(--font-meta);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--color-ink-faint);
+  }
+
+  .product-read-arrow {
+    display: inline-block;
+    transition: transform 180ms cubic-bezier(.2,.6,.2,1);
+  }
+
+  /* Case Study */
+  .case-study-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .case-study-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .case-study-placeholder {
+    font-family: var(--font-meta);
+    font-size: 12px;
+    color: var(--color-ink-faint);
+    letter-spacing: 1.5px;
+  }
+
+  /* Proof Band */
+  .proof-band {
+    background: var(--color-ink);
+  }
+
+  .proof-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .proof-stats {
+      flex-direction: row;
+      justify-content: space-around;
+      text-align: left;
+    }
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--color-paper);
+  }
+
+  .stat-label {
+    font-family: var(--font-meta);
+    font-size: 12px;
+    color: var(--color-sea-soft);
+    letter-spacing: 1px;
+  }
+
+  /* Final CTA */
+  .final-cta {
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    margin-bottom: 12px;
+  }
+
+  .final-cta p {
+    margin-bottom: 24px;
+    color: var(--color-ink-soft);
+  }
+
+  .cta-button {
+    display: inline-block;
+  }
+</style>

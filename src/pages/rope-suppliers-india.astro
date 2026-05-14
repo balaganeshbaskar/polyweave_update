@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import StickyForm from '../components/StickyForm.astro';
+import SectionTag from '../components/SectionTag.astro';
+
+const pageTitle = 'Rope Suppliers India | Industrial & Marine Rope Manufacturers';
+const pageDescription = 'Source industrial and marine ropes from trusted manufacturers in India. Polyweave helps European buyers import ropes with better pricing and lower sourcing risk.';
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Rope Sourcing from India",
+  "description": "Source industrial and marine ropes from trusted manufacturers in India. Polyweave helps European buyers import ropes with better pricing and lower sourcing risk.",
+  "provider": { "@type": "Organization", "name": "Polyweave", "url": "https://polyweave.net" },
+  "areaServed": ["Spain", "Italy", "Portugal", "Germany", "France", "Norway", "Europe"],
+  "serviceType": "Sourcing Service"
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/rope-suppliers-india" schema={serviceSchema}>
+  <Nav active="home" />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
+        <h1 class="hero-title text-display-1">
+          Rope <span class="highlight-navy">Suppliers</span> <span class="highlight-sea">India</span>.
+        </h1>
+        <div class="hero-intro">
+          <p>Rope sourcing is one of the product areas where the pricing gap between Europe and India continues to grow.</p>
+          <p>Many companies still purchase locally even when more efficient sourcing options exist.</p>
+          <p>India has a large manufacturing base for industrial and marine ropes, but supplier quality and consistency can vary significantly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where Polyweave fits (navy block per handoff) -->
+    <section class="where-fits section-padding bg-navy">
+      <div class="max-w-content page-gutter">
+        <div class="fits-content">
+          <h2 class="fits-title text-paper">That's where <span class="text-sea-soft">Polyweave</span> comes in.</h2>
+          <p class="text-paper-op-85">Polyweave helps buyers identify rope manufacturers in India that are aligned with export expectations and long-term commercial relationships.</p>
+          <p class="text-paper-op-85">Instead of approaching suppliers blindly, buyers work through a sourcing network that already understands production capability and communication requirements.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What we work with -->
+    <section class="what-work section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag num="02" label="WE REGULARLY WORK WITH" />
+
+        <div class="work-list bg-sea-tint">
+          <ul>
+            <li>Polysteel ropes</li>
+            <li>Polypropylene ropes</li>
+            <li>HDPE ropes</li>
+            <li>Marine ropes</li>
+            <li>Industrial ropes</li>
+            <li>Commercial rope applications</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countries -->
+    <section class="countries section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="countries-grid">
+          <div class="country-list">
+            <span class="country-item">Spain</span>
+            <span class="country-item country-sea">Italy</span>
+            <span class="country-item">Portugal</span>
+            <span class="country-item country-sea">Germany</span>
+            <span class="country-item">France</span>
+            <span class="country-item country-sea">Norway</span>
+            <span class="country-more">— & other parts of Europe</span>
+          </div>
+          <div class="country-support">
+            <p>Many of the companies we work with are looking to reduce import costs without creating unnecessary sourcing instability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our role -->
+    <section class="our-role section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="role-grid">
+          <div class="role-content">
+            <h2 class="text-h2">Better sourcing, fewer problems.</h2>
+            <p>Our role is to simplify sourcing decisions.</p>
+            <p>We help buyers identify the right suppliers, align pricing expectations, and reduce communication friction before production begins.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA (sea-blue band per handoff) -->
+    <section class="final-cta section-padding bg-sea-blue">
+      <div class="max-w-content page-gutter">
+        <div class="cta-content">
+          <h2 class="cta-title text-paper">Sourcing ropes?</h2>
+          <p class="text-paper-op-90">Send us your current specification or pricing.</p>
+          <p class="cta-sub text-paper-op-75">We will tell you what is realistically possible.</p>
+          <div class="cta-button">
+            <a href="/contact" class="btn-primary btn-paper">
+              SEND YOUR PRICE <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <StickyForm showBookCall={false} />
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero { min-height: 50vh; }
+  .hero-eyebrow { margin-bottom: 16px; }
+  .hero-title { margin-bottom: 24px; }
+  .hero-intro { max-width: 720px; }
+  .hero-intro p { font-size: 18px; line-height: 1.6; margin-bottom: 12px; color: var(--color-ink-soft); }
+  .hero-intro p:last-child { margin-bottom: 0; }
+  .highlight-navy { background: var(--color-ink); color: var(--color-paper); padding: 1px 6px; border-radius: 3px; }
+  .highlight-sea { color: var(--color-sea); }
+
+  .fits-content { max-width: 800px; }
+  .fits-title { font-family: var(--font-display); font-size: 32px; margin: 0 0 16px; }
+  .fits-content p { font-size: 17px; line-height: 1.6; margin-bottom: 12px; }
+  .fits-content p:last-child { margin-bottom: 0; }
+
+  .work-list { padding: 24px; border-radius: var(--radius-sketch); }
+  .work-list ul { display: grid; grid-template-columns: 1fr; gap: 8px; padding: 0; margin: 0; list-style: none; }
+  @media (min-width: 768px) { .work-list ul { grid-template-columns: repeat(2, 1fr); } }
+  .work-list li { font-size: 16px; padding: 4px 0; }
+  .work-list li::before { content: "· "; color: var(--color-sea); }
+
+  .countries-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 768px) { .countries-grid { grid-template-columns: 1fr 1fr; } }
+  .country-list { display: flex; flex-direction: column; gap: 4px; }
+  .country-item { font-family: var(--font-display); font-size: 24px; }
+  .country-sea { color: var(--color-sea); }
+  .country-more { font-family: var(--font-body); font-size: 16px; color: var(--color-ink-faint); margin-top: 8px; }
+  .country-support p { font-size: 17px; line-height: 1.6; color: var(--color-ink-soft); }
+
+  .role-content p { font-size: 17px; line-height: 1.6; margin-bottom: 12px; max-width: 720px; }
+  .role-content p:last-child { margin-bottom: 0; }
+
+  .cta-content { text-align: center; max-width: 600px; margin: 0 auto; }
+  .cta-title { font-family: var(--font-display); font-size: 32px; margin: 0 0 12px; }
+  .cta-content p { font-size: 18px; margin: 0 0 8px; }
+  .cta-sub { margin-bottom: 24px; }
+  .cta-button { display: inline-block; }
+  .btn-paper { background: var(--color-paper); color: var(--color-ink); }
+  .btn-paper:hover { background: var(--color-paper-2); }
+</style>

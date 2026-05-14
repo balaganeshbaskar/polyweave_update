@@ -1,0 +1,188 @@
+---
+const siteLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/contact', label: 'Contact' }
+];
+
+const sourcingLinks = [
+  { href: '/hdpe-twine-supplier-india', label: 'HDPE Twine Supplier India' },
+  { href: '/fishing-net-manufacturers-india', label: 'Fishing Net Manufacturers India' },
+  { href: '/nylon-net-supplier-india', label: 'Nylon Net Supplier India' },
+  { href: '/rope-suppliers-india', label: 'Rope Suppliers India' },
+  { href: '/jute-yarn-exporters-india', label: 'Jute Yarn Exporters India' }
+];
+---
+
+<footer class="footer">
+  <div class="footer-inner max-w-content page-gutter">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <div class="footer-logo">POLYWEAVE</div>
+      <p class="footer-tagline">Sourcing from India,<br />made clearer.</p>
+    </div>
+
+    <!-- Site -->
+    <div class="footer-col">
+      <h5 class="footer-heading">SITE</h5>
+      <ul class="footer-links">
+        {siteLinks.map(link => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Sourcing -->
+    <div class="footer-col">
+      <h5 class="footer-heading">SOURCING</h5>
+      <ul class="footer-links">
+        {sourcingLinks.map(link => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col">
+      <h5 class="footer-heading">CONTACT</h5>
+      <ul class="footer-links">
+        <li><a href="mailto:ajay@polyweave.net">ajay@polyweave.net</a></li>
+        <li>India · Europe</li>
+        <li class="footer-cta">
+          <a href="/contact" class="link-cta">send your price →</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom max-w-content page-gutter">
+    <p>&copy; {new Date().getFullYear()} Polyweave. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="/privacy">Privacy</a>
+      <a href="/cookies">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-paper);
+    border-top: 3px solid var(--color-ink);
+    margin-top: 80px;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .footer-inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-inner {
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+
+  .footer-logo {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.1;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .footer-heading {
+    font-family: var(--font-meta);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--color-sea);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-links a {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color 180ms cubic-bezier(.2,.6,.2,1);
+  }
+
+  .footer-links a:hover {
+    color: var(--color-sea);
+  }
+
+  .footer-links li {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-ink);
+  }
+
+  .footer-cta {
+    margin-top: 12px;
+  }
+
+  .link-cta {
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--color-ink);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-top: 1.25px dashed var(--color-ink-soft);
+  }
+
+  .footer-bottom p {
+    font-family: var(--font-meta);
+    font-size: 11px;
+    color: var(--color-ink-faint);
+    margin: 0;
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 16px;
+  }
+
+  .footer-legal a {
+    font-family: var(--font-meta);
+    font-size: 11px;
+    color: var(--color-ink-faint);
+    text-decoration: none;
+  }
+
+  .footer-legal a:hover {
+    color: var(--color-sea);
+  }
+</style>

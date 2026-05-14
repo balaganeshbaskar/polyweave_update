@@ -1,0 +1,190 @@
+---
+interface Props {
+  active?: 'home' | 'about' | 'services' | 'contact';
+}
+
+const { active = 'home' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/contact', label: 'Contact' }
+];
+---
+
+<nav class="nav">
+  <div class="nav-inner max-w-content page-gutter">
+    <a href="/" class="logo">POLYWEAVE</a>
+
+    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-links">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={['nav-link', { active: active === link.label.toLowerCase() }]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu-content">
+    {navLinks.map(link => (
+      <a href={link.href} class="mobile-nav-link">
+        {link.label}
+      </a>
+    ))}
+    <button class="btn-primary mobile-cta">
+      Send your price <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-paper);
+    border-bottom: 1.5px solid var(--color-ink);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .logo {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: none;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    font-family: var(--font-meta);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    padding-bottom: 2px;
+    transition: color 180ms cubic-bezier(.2,.6,.2,1),
+                border-color 180ms cubic-bezier(.2,.6,.2,1);
+  }
+
+  .nav-link:hover {
+    color: var(--color-ink);
+  }
+
+  .nav-link.active {
+    color: var(--color-ink);
+    border-bottom: 1.5px solid var(--color-ink);
+  }
+
+  /* Mobile menu button */
+  .mobile-menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-menu-btn {
+      display: none;
+    }
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-ink);
+    border-radius: 1px;
+    transition: transform 180ms cubic-bezier(.2,.6,.2,1),
+                opacity 180ms cubic-bezier(.2,.6,.2,1);
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--color-paper);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 180ms cubic-bezier(.2,.6,.2,1),
+                visibility 180ms cubic-bezier(.2,.6,.2,1);
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    height: 100%;
+    padding: 40px;
+  }
+
+  .mobile-nav-link {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .mobile-cta {
+    margin-top: 24px;
+  }
+</style>
+
+<script>
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-cta');
+
+  function toggleMenu() {
+    const isOpen = mobileMenu?.classList.contains('open');
+    mobileMenu?.classList.toggle('open');
+    menuBtn?.setAttribute('aria-expanded', String(!isOpen));
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+
+  menuBtn?.addEventListener('click', toggleMenu);
+  mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+</script>

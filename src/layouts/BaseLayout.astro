@@ -1,0 +1,150 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  pageType?: 'website' | 'article';
+  schema?: object;
+}
+
+const {
+  title,
+  description = 'Polyweave helps European companies import from India with less risk and clearer pricing — without random suppliers, surprise costs, or quality wobbles.',
+  canonicalUrl,
+  ogImage = '/assets/og-default.svg',
+  pageType = 'website',
+  schema
+} = Astro.props;
+
+const fullTitle = title.includes('Polyweave') ? title : `${title} · Polyweave`;
+const siteUrl = 'https://polyweave.net';
+const currentUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
+
+// Default Organization schema for home page
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Polyweave",
+  "url": siteUrl,
+  "email": "ajay@polyweave.net",
+  "areaServed": [
+    { "@type": "Country", "name": "India" },
+    { "@type": "Country", "name": "Spain" },
+    { "@type": "Country", "name": "Italy" },
+    { "@type": "Country", "name": "Portugal" },
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "France" },
+    { "@type": "Country", "name": "Norway" }
+  ],
+  "description": "Polyweave helps European companies import from India with less risk and clearer pricing."
+};
+
+// Determine which schema to use
+const finalSchema = schema || organizationSchema;
+const isHomePage = !canonicalUrl || canonicalUrl === '/';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+
+  <!-- SEO -->
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  {canonicalUrl && <link rel="canonical" href={currentUrl} />}
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`} />
+  <meta property="og:type" content={pageType} />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:url" content={currentUrl} />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+</head>
+<body>
+  <!-- Skip to content for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <slot />
+
+  <!-- Analytics tracking -->
+  <script>
+    // Track CTA clicks - call this with event name
+    function trackEvent(eventName, eventData = {}) {
+      // Check if analytics is configured (e.g., gtag, plausible, etc.)
+      // For now, log to console - replace with actual analytics
+      console.log('[Analytics]', eventName, eventData);
+
+      // Example: Google Analytics
+      // if (typeof gtag === 'function') {
+      //   gtag('event', eventName, eventData);
+      // }
+
+      // Example: Plausible
+      // if (window.plausible) {
+      //   window.plausible(eventName, { props: eventData });
+      // }
+    }
+
+    // Track "Send your price" CTA clicks
+    document.querySelectorAll('a[href*="contact"], .btn-primary, .mobile-sticky-btn').forEach(el => {
+      el.addEventListener('click', () => {
+        trackEvent('cta_send_price_click', {
+          location: window.location.pathname
+        });
+      });
+    });
+
+    // Track "Book a call" clicks
+    document.querySelectorAll('.btn-ghost, .book-call-link, a[href*="book"]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        // Don't track if it's just linking to contact
+        if (el.getAttribute('href')?.includes('contact')) return;
+        trackEvent('cta_book_call_click', {
+          location: window.location.pathname
+        });
+      });
+    });
+
+    // Track form submissions
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        const formId = form.id || 'unknown';
+        trackEvent('form_submit_attempt', {
+          form: formId,
+          location: window.location.pathname
+        });
+      });
+    });
+
+    // Custom events for success/error (called from form handlers)
+    window.trackFormSuccess = function(formId) {
+      trackEvent('form_submit_success', {
+        form: formId,
+        location: window.location.pathname
+      });
+    };
+
+    window.trackFormError = function(formId, errorMessage) {
+      trackEvent('form_submit_error', {
+        form: formId,
+        error: errorMessage,
+        location: window.location.pathname
+      });
+    };
+  </script>
+</body>
+</html>
