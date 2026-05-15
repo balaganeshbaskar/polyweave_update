@@ -181,7 +181,7 @@ const contactPageSchema = {
     }
 
     try {
-      const response = await fetch('/submit-form.php', {
+      const response = await fetch(`${import.meta.env.BASE_URL}/submit-form.php`, {
         method: 'POST',
         body: formData
       });

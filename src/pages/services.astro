@@ -7,13 +7,14 @@ import SectionTag from '../components/SectionTag.astro';
 
 const pageTitle = 'Services · How Polyweave sources from India';
 const pageDescription = 'What we do, how we work, and how we\'re priced. €0 upfront for buyers — Polyweave aligns incentives with manufacturers, not buyers.';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const categories = [
-  { label: 'HDPE Twine', href: '/hdpe-twine-supplier-india' },
-  { label: 'Fishing Nets', href: '/fishing-net-manufacturers-india' },
-  { label: 'Nylon Nets', href: '/nylon-net-supplier-india' },
-  { label: 'Ropes', href: '/rope-suppliers-india' },
-  { label: 'Jute Yarn', href: '/jute-yarn-exporters-india' }
+  { label: 'HDPE Twine', href: `${base}/hdpe-twine-supplier-india` },
+  { label: 'Fishing Nets', href: `${base}/fishing-net-manufacturers-india` },
+  { label: 'Nylon Nets', href: `${base}/nylon-net-supplier-india` },
+  { label: 'Ropes', href: `${base}/rope-suppliers-india` },
+  { label: 'Jute Yarn', href: `${base}/jute-yarn-exporters-india` }
 ];
 ---
 
@@ -125,7 +126,7 @@ const categories = [
         <h2 class="text-h2">Send your current price.</h2>
         <p class="text-body-lg">We'll tell you what's possible.</p>
         <div class="cta-button">
-          <a href="/contact" class="btn-primary">
+          <a href={`${base}/contact`} class="btn-primary">
             SEND YOUR PRICE <span class="btn-arrow">→</span>
           </a>
         </div>

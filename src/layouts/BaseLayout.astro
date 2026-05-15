@@ -20,15 +20,17 @@ const {
 } = Astro.props;
 
 const fullTitle = title.includes('Polyweave') ? title : `${title} · Polyweave`;
-const siteUrl = 'https://polyweave.net';
-const currentUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
+const siteUrl = Astro.site?.origin || 'https://polyweave.net';
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fullSiteUrl = `${siteUrl}${basePath}`;
+const currentUrl = canonicalUrl ? `${fullSiteUrl}${canonicalUrl}` : fullSiteUrl;
 
 // Default Organization schema for home page
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Polyweave",
-  "url": siteUrl,
+  "url": fullSiteUrl,
   "email": "ajay@polyweave.net",
   "areaServed": [
     { "@type": "Country", "name": "India" },
@@ -62,7 +64,7 @@ const isHomePage = !canonicalUrl || canonicalUrl === '/';
   <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`} />
+  <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${fullSiteUrl}${ogImage}`} />
   <meta property="og:type" content={pageType} />
   <meta property="og:locale" content="en_GB" />
   <meta property="og:url" content={currentUrl} />
@@ -71,8 +73,8 @@ const isHomePage = !canonicalUrl || canonicalUrl === '/';
   <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href={`${basePath}/favicon.svg`} />
+  <link rel="apple-touch-icon" href={`${basePath}/favicon.svg`} />
 </head>
 <body>
   <!-- Skip to content for accessibility -->

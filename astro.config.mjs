@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://balaganeshbaskar.github.io',
+  base: '/polyweave_update',
   build: {
     assets: 'assets'
   },

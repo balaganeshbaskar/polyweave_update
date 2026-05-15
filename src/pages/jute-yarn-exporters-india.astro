@@ -7,6 +7,8 @@ import SectionTag from '../components/SectionTag.astro';
 
 const pageTitle = 'Jute Yarn Exporters India | Source Jute Yarn from India';
 const pageDescription = 'Source jute yarn from reliable exporters and manufacturers in India. Polyweave helps European buyers import jute products with better clarity and control.';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/jute-yarn-exporters-india">
@@ -96,7 +98,7 @@ const pageDescription = 'Source jute yarn from reliable exporters and manufactur
           <p class="text-paper-op-90">Send us your current requirement or pricing.</p>
           <p class="cta-sub text-paper-op-75">We will review and respond with what is realistically possible.</p>
           <div class="cta-button">
-            <a href="/contact" class="btn-primary btn-paper">
+            <a href={`${base}/contact`} class="btn-primary btn-paper">
               SEND YOUR PRICE <span class="btn-arrow">→</span>
             </a>
           </div>

@@ -1,17 +1,18 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const siteLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
-  { href: '/contact', label: 'Contact' }
+  { href: `${base}/`, label: 'Home' },
+  { href: `${base}/about`, label: 'About' },
+  { href: `${base}/services`, label: 'Services' },
+  { href: `${base}/contact`, label: 'Contact' }
 ];
 
 const sourcingLinks = [
-  { href: '/hdpe-twine-supplier-india', label: 'HDPE Twine Supplier India' },
-  { href: '/fishing-net-manufacturers-india', label: 'Fishing Net Manufacturers India' },
-  { href: '/nylon-net-supplier-india', label: 'Nylon Net Supplier India' },
-  { href: '/rope-suppliers-india', label: 'Rope Suppliers India' },
-  { href: '/jute-yarn-exporters-india', label: 'Jute Yarn Exporters India' }
+  { href: `${base}/hdpe-twine-supplier-india`, label: 'HDPE Twine Supplier India' },
+  { href: `${base}/fishing-net-manufacturers-india`, label: 'Fishing Net Manufacturers India' },
+  { href: `${base}/nylon-net-supplier-india`, label: 'Nylon Net Supplier India' },
+  { href: `${base}/rope-suppliers-india`, label: 'Rope Suppliers India' },
+  { href: `${base}/jute-yarn-exporters-india`, label: 'Jute Yarn Exporters India' }
 ];
 ---
 
@@ -50,7 +51,7 @@ const sourcingLinks = [
         <li><a href="mailto:ajay@polyweave.net">ajay@polyweave.net</a></li>
         <li>India · Europe</li>
         <li class="footer-cta">
-          <a href="/contact" class="link-cta">send your price →</a>
+          <a href={`${base}/contact`} class="link-cta">send your price →</a>
         </li>
       </ul>
     </div>
@@ -59,8 +60,8 @@ const sourcingLinks = [
   <div class="footer-bottom max-w-content page-gutter">
     <p>&copy; {new Date().getFullYear()} Polyweave. All rights reserved.</p>
     <div class="footer-legal">
-      <a href="/privacy">Privacy</a>
-      <a href="/cookies">Cookies</a>
+      <a href={`${base}/privacy`}>Privacy</a>
+      <a href={`${base}/cookies`}>Cookies</a>
     </div>
   </div>
 </footer>

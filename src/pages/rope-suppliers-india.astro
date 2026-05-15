@@ -8,6 +8,8 @@ import SectionTag from '../components/SectionTag.astro';
 const pageTitle = 'Rope Suppliers India | Industrial & Marine Rope Manufacturers';
 const pageDescription = 'Source industrial and marine ropes from trusted manufacturers in India. Polyweave helps European buyers import ropes with better pricing and lower sourcing risk.';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -108,7 +110,7 @@ const serviceSchema = {
           <p class="text-paper-op-90">Send us your current specification or pricing.</p>
           <p class="cta-sub text-paper-op-75">We will tell you what is realistically possible.</p>
           <div class="cta-button">
-            <a href="/contact" class="btn-primary btn-paper">
+            <a href={`${base}/contact`} class="btn-primary btn-paper">
               SEND YOUR PRICE <span class="btn-arrow">→</span>
             </a>
           </div>
