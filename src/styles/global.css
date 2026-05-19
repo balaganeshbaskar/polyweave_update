@@ -329,7 +329,7 @@ body {
 /* Tag/Eyebrow */
 .tag {
   font-family: var(--font-meta);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1.8px;
   text-transform: uppercase;
   color: var(--color-ink-soft);
@@ -415,4 +415,16 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Highlight styles — navy background for inline emphasis */
+.highlight-navy {
+  background: linear-gradient(to bottom, transparent 15%, var(--color-ink) 15%, var(--color-ink) 85%, transparent 85%);
+  color: var(--color-paper);
+  padding: 0 6px;
+  border-radius: 3px;
+}
+
+.highlight-sea {
+  color: var(--color-sea);
 }

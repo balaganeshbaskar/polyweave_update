@@ -67,7 +67,7 @@ const { showBookCall = true } = Astro.props;
 
   function handleScroll() {
     const scrollY = window.scrollY;
-    const heroHeight = window.innerHeight * 0.8;
+    const heroHeight = window.innerHeight * 0.6;
 
     if (scrollY > heroHeight && !scrolledPastHero) {
       scrolledPastHero = true;
@@ -161,7 +161,7 @@ const { showBookCall = true } = Astro.props;
 <style>
   .sticky-rail {
     position: fixed;
-    top: 90px;
+    bottom: 24px;
     right: 24px;
     width: 308px;
     z-index: 40;
@@ -180,7 +180,7 @@ const { showBookCall = true } = Astro.props;
 
   .sticky-rail.fading-out {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(10px);
   }
 
   @media (max-width: 1199px) {
