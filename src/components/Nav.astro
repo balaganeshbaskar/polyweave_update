@@ -1,6 +1,6 @@
 ---
 interface Props {
-  active?: 'home' | 'about' | 'services' | 'contact';
+  active?: 'home' | 'about' | 'services' | 'defence' | 'contact';
 }
 
 const { active = 'home' } = Astro.props;
@@ -10,6 +10,7 @@ const navLinks = [
   { href: `${base}/`, label: 'Home' },
   { href: `${base}/about`, label: 'About' },
   { href: `${base}/services`, label: 'Services' },
+  { href: `${base}/defence`, label: 'Defence' },
   { href: `${base}/contact`, label: 'Contact' }
 ];
 ---

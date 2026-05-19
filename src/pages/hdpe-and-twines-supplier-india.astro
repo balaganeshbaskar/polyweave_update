@@ -5,22 +5,22 @@ import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
 
-const pageTitle = 'Nylon Fishing Net Supplier India | Monofilament & Multifilament Nets';
-const pageDescription = 'Source nylon fishing nets from Indian manufacturers for commercial fishing applications. Polyweave helps European buyers import monofilament and multifilament nylon nets.';
+const pageTitle = 'HDPE, PP & Nylon Twine Supplier India | Polyweave';
+const pageDescription = 'Source HDPE, PP and nylon twines from Indian manufacturers. Polyweave helps European buyers find the right twine construction, size, packing and price.';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Nylon Fishing Net Sourcing from India",
-  "description": "Source nylon fishing nets from Indian manufacturers for commercial fishing applications including gill nets.",
+  "name": "HDPE, PP & Nylon Twine Sourcing from India",
+  "description": "Source HDPE, PP and nylon twines from Indian manufacturers with the right construction, size, packing and price.",
   "provider": { "@type": "Organization", "name": "Polyweave", "url": "https://polyweave.net" },
   "areaServed": ["Spain", "Italy", "Portugal", "Germany", "France", "Norway", "Europe"],
   "serviceType": "Sourcing Service"
 };
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/nylon-net-supplier-india" schema={serviceSchema}>
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/hdpe-and-twines-supplier-india" schema={serviceSchema}>
   <Nav active="home" />
 
   <main id="main-content">
@@ -29,12 +29,12 @@ const serviceSchema = {
       <div class="max-w-content page-gutter">
         <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
         <h1 class="hero-title text-display-1">
-          Nylon Fishing Net <span class="highlight-navy">Supplier</span> <span class="highlight-sea">from India</span>.
+          HDPE, PP & Nylon Twine <span class="highlight-navy">Supplier</span> <span class="highlight-sea">from India</span>.
         </h1>
         <div class="hero-intro">
-          <p>Polyweave helps buyers source nylon fishing nets from Indian manufacturers for commercial fishing applications, especially gill nets.</p>
-          <p>We work with nylon monofilament and multifilament fishing nets, including depthway and lengthway stretching nylon nets. Knotless nets are not our focus.</p>
-          <p>Nylon nets are used differently from HDPE or PE nets, so the application must be understood clearly before quoting.</p>
+          <p>Polyweave helps buyers source HDPE, PP and nylon twines from Indian manufacturers with the right construction, size, packing and price.</p>
+          <p>We work with braided, twisted, coreless and standard twines across fishing, net-making, agricultural and industrial applications.</p>
+          <p>For PP and HDPE twines, we can source sizes up to around 4 mm. For nylon braided twines, larger sizes can also be developed depending on the application and buyer requirement.</p>
         </div>
         <div class="europe-note tag">WORKING WITH BUYERS ACROSS EUROPE · ES · IT · PT · DE · NO</div>
       </div>
@@ -43,38 +43,29 @@ const serviceSchema = {
     <!-- What Matters -->
     <section class="what-matters section-padding">
       <div class="max-w-content page-gutter">
-        <SectionTag num="02" label="STRONG NETS, CLEAR SPECS" />
-        <h2 class="text-h2">For nylon, quality is the conversation.</h2>
+        <SectionTag num="02" label="WHAT BUYERS USUALLY NEED TO GET RIGHT" />
+        <h2 class="text-h2">It isn't only about price per kg.</h2>
         <p class="text-body-lg">
-          Buyers usually need to provide the exact diameter, mesh size, depth, length, colour, stretching direction and packing requirement.
+          The construction, thickness, cone quality, winding, colour, packing and final application all affect the actual usability of the product.
         </p>
         <p class="text-body">
-          We work with manufacturers who can produce strong, high-quality nylon nets for fishing buyers who need consistency and durability.
+          Many buyers face issues with inconsistent thickness, wrong construction, poor finishing, weak packing or cones that do not work properly during production.
         </p>
-      </div>
-    </section>
-
-    <!-- Example Spec -->
-    <section class="example-spec section-padding">
-      <div class="max-w-content page-gutter">
-        <SectionTag num="03" label="EXAMPLE SPECIFICATION" />
-        <div class="spec-card sketch-box-dashed">
-          <span class="stamp">SAMPLE ONLY</span>
-          <p class="spec-value">0.30 x 50 mm x 50 MD x 1000 ML</p>
-          <p class="spec-note text-body">This level of detail allows us to check the right supplier and avoid vague, unreliable pricing.</p>
-        </div>
+        <p class="text-body">
+          Polyweave helps check the requirement clearly before approaching suppliers, so buyers are not comparing random offers.
+        </p>
       </div>
     </section>
 
     <!-- What to Send -->
     <section class="what-to-send section-padding">
       <div class="max-w-content page-gutter">
-        <SectionTag num="04" label="WHAT TO SEND US" />
-        <h2 class="text-h2">Send your nylon net spec.</h2>
+        <SectionTag num="03" label="WHAT TO SEND US" />
+        <h2 class="text-h2">Send your spec — or your sample.</h2>
         <ul class="send-list">
-          <li>Diameter, mesh size, depth, length, colour, stretching direction, packing and quantity.</li>
+          <li>Twine type, size, material, colour, packing requirement, quantity and current supplier price.</li>
         </ul>
-        <p class="text-body">Current supplier pricing helps us benchmark quickly. If you have a sample or photo, that works too.</p>
+        <p class="text-body">If you already have a sample or photo, even better. We can check whether Indian manufacturers can match the product and offer a better sourcing route.</p>
       </div>
     </section>
 
@@ -82,7 +73,7 @@ const serviceSchema = {
     <section class="final-cta section-padding bg-sea-blue">
       <div class="max-w-content page-gutter">
         <div class="cta-content">
-          <h2 class="cta-title text-paper">Send your nylon net spec.</h2>
+          <h2 class="cta-title text-paper">Send your current twine spec and price.</h2>
           <p class="text-paper-op-90">We'll review and respond with what's realistically possible from India.</p>
           <div class="cta-button">
             <a href={`${base}/contact`} class="btn-primary btn-paper">
@@ -113,11 +104,8 @@ const serviceSchema = {
   .what-matters h2 { margin-bottom: 16px; }
   .what-matters p { max-width: 720px; color: var(--color-ink-soft); }
   .what-matters p.text-body-lg { margin-bottom: 12px; }
-
-  /* Example Spec */
-  .spec-card { display: flex; flex-direction: column; gap: 12px; max-width: 600px; }
-  .spec-value { font-family: var(--font-meta); font-size: 18px; color: var(--color-ink); margin: 0; }
-  .spec-note { color: var(--color-ink-soft); margin: 0; }
+  .what-matters p.text-body { margin-bottom: 8px; }
+  .what-matters p.text-body:last-child { margin-bottom: 0; }
 
   /* What to Send */
   .what-to-send h2 { margin-bottom: 16px; }

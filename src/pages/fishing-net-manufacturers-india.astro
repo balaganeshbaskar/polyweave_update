@@ -6,15 +6,14 @@ import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
 
 const pageTitle = 'Fishing Net Manufacturers India | PE & Nylon Fishing Nets';
-const pageDescription = 'Find trusted fishing net manufacturers in India for European importers. Source PE and nylon fishing nets with better pricing and lower sourcing risk.';
-
+const pageDescription = 'Source custom fishing nets from Indian manufacturers for commercial fishing, aquaculture and marine use. Polyweave helps European buyers find the right mesh, twine and knot configuration.';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Fishing Net Sourcing from India",
-  "description": "Find trusted fishing net manufacturers in India for European importers. Source PE and nylon fishing nets with better pricing and lower sourcing risk.",
+  "description": "Source custom fishing nets from Indian manufacturers for commercial fishing, aquaculture and marine use.",
   "provider": { "@type": "Organization", "name": "Polyweave", "url": "https://polyweave.net" },
   "areaServed": ["Spain", "Italy", "Portugal", "Germany", "France", "Norway", "Europe"],
   "serviceType": "Sourcing Service"
@@ -30,87 +29,64 @@ const serviceSchema = {
       <div class="max-w-content page-gutter">
         <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
         <h1 class="hero-title text-display-1">
-          Fishing Net <span class="highlight-navy">Manufacturers</span> <span class="highlight-sea">India</span>.
+          Fishing Net <span class="highlight-navy">Manufacturers</span> <span class="highlight-sea">from India</span>.
         </h1>
         <div class="hero-intro">
-          <p>Fishing equipment sourcing across Europe is changing.</p>
-          <p>Rising operational costs inside Europe are pushing many buyers to explore manufacturing alternatives in India.</p>
-          <p>Fishing nets are one of the categories where India already has strong manufacturing capability.</p>
-          <p>The issue is not availability. The issue is knowing which suppliers are reliable enough to work with long term.</p>
+          <p>Polyweave helps fishing equipment buyers source custom fishing nets from India for commercial fishing, aquaculture and general marine use.</p>
+          <p>We can work with HDPE, PE and nylon fishing nets in different mesh sizes, twine thicknesses, depths, lengths, colours and knot types.</p>
+          <p>Pricing is usually calculated per kg, which is the industry standard for many fishing net orders.</p>
         </div>
+        <div class="europe-note tag">WORKING WITH BUYERS ACROSS EUROPE · ES · IT · PT · DE · NO</div>
       </div>
     </section>
 
-    <!-- Where Polyweave fits (navy block per handoff) -->
-    <section class="where-fits section-padding bg-navy">
+    <!-- What Matters -->
+    <section class="what-matters section-padding">
       <div class="max-w-content page-gutter">
-        <div class="fits-content">
-          <h2 class="fits-title text-paper">That's where <span class="text-sea-soft">Polyweave</span> comes in.</h2>
-          <p class="text-paper-op-85">Polyweave helps European buyers source fishing nets from India with more confidence and less uncertainty.</p>
-          <p class="text-paper-op-85">We work closely with manufacturers that already understand export requirements and commercial fishing applications.</p>
-          <p class="text-paper-op-85">Instead of approaching factories blindly, buyers work through a network that has already been tested through real trade.</p>
-        </div>
+        <SectionTag num="02" label="BUILT AROUND YOUR EXACT SPEC" />
+        <h2 class="text-h2">Vague details can't be quoted properly.</h2>
+        <p class="text-body-lg">
+          Mesh size, twine thickness, stretched depth, length, colour, knot type and finishing all change the price and final performance.
+        </p>
+        <p class="text-body">
+          One common issue in poor-quality nets is slipping knots. For fishing buyers, this can create serious problems because the net does not hold properly during use.
+        </p>
+        <p class="text-body">
+          Polyweave works with manufacturers who can produce both standard and custom fishing nets based on the buyer's exact requirement.
+        </p>
       </div>
     </section>
 
-    <!-- What we work with -->
-    <section class="what-work section-padding">
+    <!-- Example Spec -->
+    <section class="example-spec section-padding">
       <div class="max-w-content page-gutter">
-        <SectionTag num="02" label="WE REGULARLY WORK WITH" />
-
-        <div class="work-list bg-sea-tint">
-          <ul>
-            <li>PE fishing nets</li>
-            <li>Nylon multifilament fishing nets</li>
-            <li>Nylon monofilament fishing nets</li>
-            <li>Custom fishing net specifications</li>
-            <li>Commercial fishing net production</li>
-          </ul>
+        <SectionTag num="03" label="EXAMPLE SPECIFICATION" />
+        <div class="spec-card sketch-box-dashed">
+          <span class="stamp">SAMPLE ONLY</span>
+          <p class="spec-value">2.5 mm x 120 mm x 199.5 MD x 850 ML braided PE nets</p>
+          <p class="spec-note text-body">This is the kind of detail that helps us compare suppliers properly and avoid incorrect quotes.</p>
         </div>
       </div>
     </section>
 
-    <!-- Countries -->
-    <section class="countries section-padding">
+    <!-- What to Send -->
+    <section class="what-to-send section-padding">
       <div class="max-w-content page-gutter">
-        <div class="countries-grid">
-          <div class="country-list">
-            <span class="country-item">Spain</span>
-            <span class="country-item country-sea">Italy</span>
-            <span class="country-item">Portugal</span>
-            <span class="country-item country-sea">Germany</span>
-            <span class="country-item">France</span>
-            <span class="country-item country-sea">Norway</span>
-            <span class="country-more">— & other parts of Europe</span>
-          </div>
-          <div class="country-support">
-            <p>Many companies are now exploring India as a second sourcing option alongside existing European suppliers.</p>
-          </div>
-        </div>
+        <SectionTag num="04" label="WHAT TO SEND US" />
+        <h2 class="text-h2">Send your fishing net specification.</h2>
+        <ul class="send-list">
+          <li>Mesh size, twine thickness, stretched depth, length, colour, knot type, packing and quantity.</li>
+        </ul>
+        <p class="text-body">Add your current supplier pricing if you have it. The more specific you are, the faster we can come back with a realistic sourcing option.</p>
       </div>
     </section>
 
-    <!-- Our role -->
-    <section class="our-role section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="role-grid">
-          <div class="role-content">
-            <h2 class="text-h2">Better sourcing, fewer problems.</h2>
-            <p>Our role is to simplify sourcing.</p>
-            <p>We help align suppliers, pricing, specifications, and communication before production moves forward.</p>
-            <p>This reduces unnecessary risk and makes supplier transition easier.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA (sea-blue band per handoff) -->
+    <!-- Final CTA -->
     <section class="final-cta section-padding bg-sea-blue">
       <div class="max-w-content page-gutter">
         <div class="cta-content">
-          <h2 class="cta-title text-paper">Sourcing fishing nets?</h2>
-          <p class="text-paper-op-90">Send us your current specification or pricing.</p>
-          <p class="cta-sub text-paper-op-75">We will tell you what is possible.</p>
+          <h2 class="cta-title text-paper">Send your fishing net specification.</h2>
+          <p class="text-paper-op-90">We'll review and respond with what's realistically possible from India.</p>
           <div class="cta-button">
             <a href={`${base}/contact`} class="btn-primary btn-paper">
               SEND YOUR PRICE <span class="btn-arrow">→</span>
@@ -132,35 +108,32 @@ const serviceSchema = {
   .hero-intro { max-width: 720px; }
   .hero-intro p { font-size: 18px; line-height: 1.6; margin-bottom: 12px; color: var(--color-ink-soft); }
   .hero-intro p:last-child { margin-bottom: 0; }
+  .europe-note { margin-top: 20px; }
   .highlight-navy { background: var(--color-ink); color: var(--color-paper); padding: 1px 6px; border-radius: 3px; }
   .highlight-sea { color: var(--color-sea); }
 
-  .fits-content { max-width: 800px; }
-  .fits-title { font-family: var(--font-display); font-size: 32px; margin: 0 0 16px; }
-  .fits-content p { font-size: 17px; line-height: 1.6; margin-bottom: 12px; }
-  .fits-content p:last-child { margin-bottom: 0; }
+  /* What Matters */
+  .what-matters h2 { margin-bottom: 16px; }
+  .what-matters p { max-width: 720px; color: var(--color-ink-soft); }
+  .what-matters p.text-body-lg { margin-bottom: 12px; }
+  .what-matters p.text-body { margin-bottom: 8px; }
+  .what-matters p.text-body:last-child { margin-bottom: 0; }
 
-  .work-list { padding: 24px; border-radius: var(--radius-sketch); }
-  .work-list ul { display: grid; grid-template-columns: 1fr; gap: 8px; padding: 0; margin: 0; list-style: none; }
-  @media (min-width: 768px) { .work-list ul { grid-template-columns: repeat(2, 1fr); } }
-  .work-list li { font-size: 16px; padding: 4px 0; }
-  .work-list li::before { content: "· "; color: var(--color-sea); }
+  /* Example Spec */
+  .spec-card { display: flex; flex-direction: column; gap: 12px; max-width: 600px; }
+  .spec-value { font-family: var(--font-meta); font-size: 18px; color: var(--color-ink); margin: 0; }
+  .spec-note { color: var(--color-ink-soft); margin: 0; }
 
-  .countries-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
-  @media (min-width: 768px) { .countries-grid { grid-template-columns: 1fr 1fr; } }
-  .country-list { display: flex; flex-direction: column; gap: 4px; }
-  .country-item { font-family: var(--font-display); font-size: 24px; }
-  .country-sea { color: var(--color-sea); }
-  .country-more { font-family: var(--font-body); font-size: 16px; color: var(--color-ink-faint); margin-top: 8px; }
-  .country-support p { font-size: 17px; line-height: 1.6; color: var(--color-ink-soft); }
+  /* What to Send */
+  .what-to-send h2 { margin-bottom: 16px; }
+  .send-list { list-style: none; padding: 0; margin: 0 0 16px; max-width: 720px; }
+  .send-list li { font-size: 18px; line-height: 1.6; color: var(--color-ink-soft); padding: 10px 0; border-bottom: 1px dashed rgba(20,35,58,0.2); }
+  .what-to-send p { color: var(--color-ink-soft); }
 
-  .role-content p { font-size: 17px; line-height: 1.6; margin-bottom: 12px; max-width: 720px; }
-  .role-content p:last-child { margin-bottom: 0; }
-
+  /* Final CTA */
   .cta-content { text-align: center; max-width: 600px; margin: 0 auto; }
   .cta-title { font-family: var(--font-display); font-size: 32px; margin: 0 0 12px; }
-  .cta-content p { font-size: 18px; margin: 0 0 8px; }
-  .cta-sub { margin-bottom: 24px; }
+  .cta-content p { font-size: 18px; margin: 0 0 24px; }
   .cta-button { display: inline-block; }
   .btn-paper { background: var(--color-paper); color: var(--color-ink); }
   .btn-paper:hover { background: var(--color-paper-2); }

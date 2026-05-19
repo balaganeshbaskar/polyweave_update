@@ -5,22 +5,22 @@ import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
 
-const pageTitle = 'Nylon Fishing Net Supplier India | Monofilament & Multifilament Nets';
-const pageDescription = 'Source nylon fishing nets from Indian manufacturers for commercial fishing applications. Polyweave helps European buyers import monofilament and multifilament nylon nets.';
+const pageTitle = 'Sports Nets & Football Nets Manufacturer India | Polyweave';
+const pageDescription = 'Source sports nets, football nets, and custom netting from Indian manufacturers. Polyweave helps European buyers import sports netting with better pricing and clarity.';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Nylon Fishing Net Sourcing from India",
-  "description": "Source nylon fishing nets from Indian manufacturers for commercial fishing applications including gill nets.",
+  "name": "Sports Nets Sourcing from India",
+  "description": "Source sports nets from Indian manufacturers including football nets, cricket nets, volleyball nets, and custom sports netting.",
   "provider": { "@type": "Organization", "name": "Polyweave", "url": "https://polyweave.net" },
-  "areaServed": ["Spain", "Italy", "Portugal", "Germany", "France", "Norway", "Europe"],
+  "areaServed": ["Turkey", "Spain", "Italy", "Portugal", "Germany", "France", "Europe"],
   "serviceType": "Sourcing Service"
 };
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/nylon-net-supplier-india" schema={serviceSchema}>
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/sports-nets-manufacturer-india" schema={serviceSchema}>
   <Nav active="home" />
 
   <main id="main-content">
@@ -29,27 +29,27 @@ const serviceSchema = {
       <div class="max-w-content page-gutter">
         <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
         <h1 class="hero-title text-display-1">
-          Nylon Fishing Net <span class="highlight-navy">Supplier</span> <span class="highlight-sea">from India</span>.
+          Sports Nets & Football Nets <span class="highlight-navy">from India</span>.
         </h1>
         <div class="hero-intro">
-          <p>Polyweave helps buyers source nylon fishing nets from Indian manufacturers for commercial fishing applications, especially gill nets.</p>
-          <p>We work with nylon monofilament and multifilament fishing nets, including depthway and lengthway stretching nylon nets. Knotless nets are not our focus.</p>
-          <p>Nylon nets are used differently from HDPE or PE nets, so the application must be understood clearly before quoting.</p>
+          <p>Polyweave helps buyers source sports nets from India for football, cricket, volleyball, tennis, handball, basketball and sports facility applications.</p>
+          <p>We can also source boundary nets and custom nets for clubs, distributors and facility suppliers.</p>
+          <p>Our current focus is on buyers in Turkey and Western Europe.</p>
         </div>
-        <div class="europe-note tag">WORKING WITH BUYERS ACROSS EUROPE · ES · IT · PT · DE · NO</div>
+        <div class="europe-note tag">CURRENT FOCUS · TURKEY · WESTERN EUROPE</div>
       </div>
     </section>
 
     <!-- What Matters -->
     <section class="what-matters section-padding">
       <div class="max-w-content page-gutter">
-        <SectionTag num="02" label="STRONG NETS, CLEAR SPECS" />
-        <h2 class="text-h2">For nylon, quality is the conversation.</h2>
+        <SectionTag num="02" label="FOOTBALL & CUSTOM SPORTS NETTING" />
+        <h2 class="text-h2">Football nets are sized to the goal post.</h2>
         <p class="text-body-lg">
-          Buyers usually need to provide the exact diameter, mesh size, depth, length, colour, stretching direction and packing requirement.
+          Football nets are usually knotted and commonly made with braided material. A standard option is around 4 mm braided polyester, but the material and construction can be changed based on buyer requirements.
         </p>
         <p class="text-body">
-          We work with manufacturers who can produce strong, high-quality nylon nets for fishing buyers who need consistency and durability.
+          Overall size is one of the most important details. The common categories are large, medium and small goal nets, but custom sizes can also be developed.
         </p>
       </div>
     </section>
@@ -57,11 +57,11 @@ const serviceSchema = {
     <!-- Example Spec -->
     <section class="example-spec section-padding">
       <div class="max-w-content page-gutter">
-        <SectionTag num="03" label="EXAMPLE SPECIFICATION" />
+        <SectionTag num="03" label="STANDARD FOOTBALL NET" />
         <div class="spec-card sketch-box-dashed">
           <span class="stamp">SAMPLE ONLY</span>
-          <p class="spec-value">0.30 x 50 mm x 50 MD x 1000 ML</p>
-          <p class="spec-note text-body">This level of detail allows us to check the right supplier and avoid vague, unreliable pricing.</p>
+          <p class="spec-value">4 mm braided polyester · knotted · medium goal</p>
+          <p class="spec-note text-body">Material, construction and size can all be changed based on the buyer requirement.</p>
         </div>
       </div>
     </section>
@@ -69,12 +69,12 @@ const serviceSchema = {
     <!-- What to Send -->
     <section class="what-to-send section-padding">
       <div class="max-w-content page-gutter">
-        <SectionTag num="04" label="WHAT TO SEND US" />
-        <h2 class="text-h2">Send your nylon net spec.</h2>
+        <SectionTag num="04" label="WHAT BUYERS SHOULD SEND" />
+        <h2 class="text-h2">Tell us the net, the size, and the use case.</h2>
         <ul class="send-list">
-          <li>Diameter, mesh size, depth, length, colour, stretching direction, packing and quantity.</li>
+          <li>Net type, overall size, mesh size, twine thickness, material, colour, knot type, UV requirement, packing and order quantity.</li>
         </ul>
-        <p class="text-body">Current supplier pricing helps us benchmark quickly. If you have a sample or photo, that works too.</p>
+        <p class="text-body">Polyweave helps match the buyer's requirement with Indian manufacturers who can supply at export-ready standards.</p>
       </div>
     </section>
 
@@ -82,7 +82,7 @@ const serviceSchema = {
     <section class="final-cta section-padding bg-sea-blue">
       <div class="max-w-content page-gutter">
         <div class="cta-content">
-          <h2 class="cta-title text-paper">Send your nylon net spec.</h2>
+          <h2 class="cta-title text-paper">Send your sports net requirement.</h2>
           <p class="text-paper-op-90">We'll review and respond with what's realistically possible from India.</p>
           <div class="cta-button">
             <a href={`${base}/contact`} class="btn-primary btn-paper">
@@ -107,12 +107,11 @@ const serviceSchema = {
   .hero-intro p:last-child { margin-bottom: 0; }
   .europe-note { margin-top: 20px; }
   .highlight-navy { background: var(--color-ink); color: var(--color-paper); padding: 1px 6px; border-radius: 3px; }
-  .highlight-sea { color: var(--color-sea); }
 
   /* What Matters */
   .what-matters h2 { margin-bottom: 16px; }
   .what-matters p { max-width: 720px; color: var(--color-ink-soft); }
-  .what-matters p.text-body-lg { margin-bottom: 12px; }
+  .what-matters p:first-of-type { margin-bottom: 12px; }
 
   /* Example Spec */
   .spec-card { display: flex; flex-direction: column; gap: 12px; max-width: 600px; }

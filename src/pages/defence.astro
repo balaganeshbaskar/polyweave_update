@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import StickyForm from '../components/StickyForm.astro';
+import SectionTag from '../components/SectionTag.astro';
+
+const pageTitle = 'Defence & Dual-Use Sourcing · Polyweave';
+const pageDescription = 'Polyweave helps Indian and European companies identify, qualify, and connect with the right manufacturing partners for defence-adjacent, industrial, and dual-use components.';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="/defence">
+  <Nav active="defence" />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="hero-eyebrow tag">DEFENCE · DUAL-USE · INDUSTRIAL</div>
+        <h1 class="hero-title text-display-1">
+          Sourcing across <span class="highlight-navy">defence</span> & <span class="highlight-sea">dual-use</span> supply chains.
+        </h1>
+        <p class="hero-lede text-body-lg">
+          Polyweave helps Indian and European companies identify, qualify, and connect with the right manufacturing partners for defence-adjacent, industrial, and dual-use components.
+        </p>
+        <p class="hero-sub text-body">
+          One goal: make cross-border sourcing simpler, safer, and commercially useful.
+        </p>
+        <div class="hero-ctas">
+          <a href={`${base}/contact`} class="btn-primary">
+            EXPLORE SOURCING SUPPORT <span class="btn-arrow">→</span>
+          </a>
+          <a href={`${base}/contact`} class="btn-ghost">[ speak to us ]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why This Exists -->
+    <section class="why-exists section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="WHY THIS EXISTS" />
+        <h2 class="text-h2">Defence procurement is <span class="highlight-sea">not only about products.</span></h2>
+        <p class="text-body-lg why-exists-body">
+          It is about trust, documentation, reliability, compliance, and knowing who can actually deliver. We sit between Indian manufacturing strength and European technical demand, and help serious conversations begin.
+        </p>
+      </div>
+    </section>
+
+    <!-- Two Pillars -->
+    <section class="two-pillars section-padding bg-navy">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="WHAT WE HELP WITH" class="section-tag-light" />
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <h3 class="pillar-title text-paper">Sourcing agreements</h3>
+            <p class="text-paper-op-85">
+              International companies looking into India's defence and industrial markets often run into tendering systems, offset rules, and a relationship-driven business culture. We bridge that gap.
+            </p>
+            <ul class="pillar-list">
+              <li class="text-paper-op-85">Distribution & representation</li>
+              <li class="text-paper-op-85">Local sourcing partnerships</li>
+              <li class="text-paper-op-85">Component manufacturing tie-ups</li>
+              <li class="text-paper-op-85">Supplier identification & qualification</li>
+              <li class="text-paper-op-85">Market-entry conversations</li>
+              <li class="text-paper-op-85">Commercial negotiation support</li>
+            </ul>
+          </div>
+          <div class="pillar-card">
+            <h3 class="pillar-title text-paper">Dual-use components</h3>
+            <p class="text-paper-op-85">
+              Products that serve both defence and civilian markets move faster than traditional procurement. Aerospace, drones, ports, surveillance, emergency response, logistics.
+            </p>
+            <ul class="pillar-list">
+              <li class="text-paper-op-85">Sensors & electronic components</li>
+              <li class="text-paper-op-85">Drone parts & accessories</li>
+              <li class="text-paper-op-85">Industrial & technical textiles</li>
+              <li class="text-paper-op-85">Ropes, nets, cables, polymers</li>
+              <li class="text-paper-op-85">Protective & field-use materials</li>
+              <li class="text-paper-op-85">Custom & reverse-engineered parts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Process -->
+    <section class="process section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="OUR PROCESS" />
+        <h2 class="text-h2 process-heading">From vague interest to structured conversation.</h2>
+        <div class="process-steps">
+          <div class="process-step sketch-box">
+            <div class="numdot">01</div>
+            <h4 class="step-title">Understand</h4>
+            <p>Product, spec, target price, commercial goal.</p>
+          </div>
+          <div class="process-step sketch-box">
+            <div class="numdot">02</div>
+            <h4 class="step-title">Identify</h4>
+            <p>Manufacturers and partners that actually fit.</p>
+          </div>
+          <div class="process-step sketch-box">
+            <div class="numdot">03</div>
+            <h4 class="step-title">Open the conversation</h4>
+            <p>Calls, tech clarifications, early pricing.</p>
+          </div>
+          <div class="process-step sketch-box">
+            <div class="numdot">04</div>
+            <h4 class="step-title">Compare & qualify</h4>
+            <p>Capability, documentation, reliability — not just price.</p>
+          </div>
+          <div class="process-step sketch-box">
+            <div class="numdot">05</div>
+            <h4 class="step-title">Support the deal</h4>
+            <p>Quotes, samples, terms, negotiation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Focus Areas -->
+    <section class="focus-areas section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="FOCUS AREAS" />
+        <div class="focus-grid">
+          <div class="focus-card sketch-box">
+            <h3 class="focus-title">Components & manufacturing</h3>
+            <p>For companies sourcing from India or building supplier relationships.</p>
+            <ul class="focus-list">
+              <li>Machined components</li>
+              <li>Polymer & plastic products</li>
+              <li>Technical textiles</li>
+              <li>Ropes, nets, engineered fibres</li>
+              <li>Hardware & fittings</li>
+              <li>Custom manufacturing</li>
+            </ul>
+          </div>
+          <div class="focus-card sketch-box">
+            <h3 class="focus-title">Representation & market entry</h3>
+            <p>For international companies exploring India as a market, not just a factory.</p>
+            <ul class="focus-list">
+              <li>Identifying buyers & partners</li>
+              <li>Market-fit assessment</li>
+              <li>Outreach material</li>
+              <li>Opening first conversations</li>
+              <li>Negotiation support</li>
+              <li>Procurement culture context</li>
+            </ul>
+          </div>
+          <div class="focus-card sketch-box">
+            <h3 class="focus-title">Dual-use opportunities</h3>
+            <p>For products that move across defence and civilian use.</p>
+            <ul class="focus-list">
+              <li>Drones & UAV support</li>
+              <li>Border & perimeter security</li>
+              <li>Marine & port operations</li>
+              <li>Industrial safety</li>
+              <li>Emergency response</li>
+              <li>Surveillance-adjacent infra</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who This Is For -->
+    <section class="who-for section-padding bg-navy">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="WHO THIS IS FOR" class="section-tag-light" />
+        <div class="who-for-grid">
+          <div class="who-for-card">
+            <h3 class="who-for-title text-sea-soft">India</h3>
+            <p class="who-for-sub text-paper-op-75">Indian manufacturers ready for international work.</p>
+            <ul class="who-for-list">
+              <li class="text-paper-op-85">Components & technical materials</li>
+              <li class="text-paper-op-85">Industrial & dual-use products</li>
+              <li class="text-paper-op-85">Defence-adjacent equipment</li>
+              <li class="text-paper-op-85">Custom manufacturing solutions</li>
+            </ul>
+            <p class="who-for-note text-paper-op-65">Especially: companies that are serious, documentation-ready, and open to long-term partnerships.</p>
+          </div>
+          <div class="who-for-card">
+            <h3 class="who-for-title text-sea-soft">Europe & International</h3>
+            <p class="who-for-sub text-paper-op-75">International buyers exploring India seriously.</p>
+            <ul class="who-for-list">
+              <li class="text-paper-op-85">Source from India at better cost</li>
+              <li class="text-paper-op-85">Find Indian partners & build redundancy</li>
+              <li class="text-paper-op-85">Enter India's defence or industrial market</li>
+              <li class="text-paper-op-85">Identify dual-use sourcing opportunities</li>
+            </ul>
+            <p class="who-for-note text-paper-op-65">Understand the market before spending time and money in the wrong direction.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compliance Callout -->
+    <section class="compliance section-padding">
+      <div class="max-w-content page-gutter">
+        <div class="compliance-box sketch-box-dashed">
+          <div class="compliance-header">
+            <span class="stamp stamp-sea">COMPLIANCE</span>
+            <span class="compliance-tag tag">RESPONSIBLE TRADE</span>
+          </div>
+          <p class="compliance-body text-body">
+            Polyweave does not support illegal, restricted, sanctioned, or non-compliant transactions. Every opportunity is reviewed against export controls, end-use restrictions, and licensing requirements. For specific regulatory review, companies should obtain advice from qualified legal and compliance professionals before proceeding.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta section-padding bg-sea-blue">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="SEND YOUR REQUIREMENT" class="section-tag-light" />
+        <h2 class="cta-heading text-paper">Looking for a sourcing partner between India & Europe?</h2>
+        <p class="text-paper-op-90 cta-lede">Tell us what you are looking for. We will help you understand what is possible.</p>
+        <div class="cta-button">
+          <a href={`${base}/contact`} class="btn-primary btn-paper">
+            SEND YOUR REQUIREMENT <span class="btn-arrow">→</span>
+          </a>
+          <a href={`${base}/contact`} class="btn-ghost btn-ghost-paper">[ contact polyweave ]</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <StickyForm showBookCall={true} />
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+  .hero-eyebrow { margin-bottom: 16px; }
+  .hero-title { margin-bottom: 20px; }
+  .hero-lede { max-width: 720px; margin-bottom: 12px; color: var(--color-ink-soft); }
+  .hero-sub { max-width: 720px; margin-bottom: 32px; color: var(--color-ink-soft); }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 16px; }
+  .highlight-navy { background: var(--color-ink); color: var(--color-paper); padding: 1px 6px; border-radius: 3px; }
+  .highlight-sea { color: var(--color-sea); }
+
+  /* Why Exists */
+  .why-exists h2 { margin-bottom: 20px; }
+  .why-exists-body { max-width: 720px; color: var(--color-ink-soft); }
+
+  /* Two Pillars */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  @media (min-width: 768px) {
+    .pillars-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  .pillar-title { font-family: var(--font-display); font-size: 28px; margin: 0 0 12px; }
+  .pillar-card p { font-size: 16px; margin-bottom: 16px; line-height: 1.6; }
+  .pillar-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+  .pillar-list li { font-size: 15px; padding-left: 16px; position: relative; }
+  .pillar-list li::before { content: "—"; position: absolute; left: 0; }
+
+  /* Process */
+  .process-heading { margin-bottom: 28px; }
+  .process-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 600px) {
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 900px) {
+    .process-steps { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1100px) {
+    .process-steps { grid-template-columns: repeat(5, 1fr); }
+  }
+  .process-step { display: flex; flex-direction: column; gap: 10px; padding: 20px 22px; }
+  .step-title { font-family: var(--font-display); font-size: 22px; margin: 0; }
+
+  /* Focus Areas */
+  .focus-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 768px) {
+    .focus-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .focus-card { display: flex; flex-direction: column; gap: 10px; }
+  .focus-title { font-family: var(--font-display); font-size: 22px; margin: 0; }
+  .focus-card p { font-size: 15px; color: var(--color-ink-soft); margin: 0; }
+  .focus-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+  .focus-list li { font-size: 14px; padding-left: 14px; position: relative; }
+  .focus-list li::before { content: "·"; color: var(--color-sea); position: absolute; left: 0; }
+
+  /* Who This Is For */
+  .who-for-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  @media (min-width: 768px) {
+    .who-for-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  .who-for-title { font-family: var(--font-display); font-size: 28px; margin: 0 0 6px; }
+  .who-for-sub { font-family: var(--font-meta); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+  .who-for-list { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 6px; }
+  .who-for-list li { font-size: 15px; padding-left: 16px; position: relative; }
+  .who-for-list li::before { content: "—"; position: absolute; left: 0; }
+  .who-for-note { font-size: 14px; line-height: 1.5; margin: 0; font-style: italic; }
+
+  /* Compliance */
+  .compliance-box { display: flex; flex-direction: column; gap: 12px; }
+  .compliance-header { display: flex; align-items: center; gap: 12px; }
+  .compliance-tag { margin: 0; }
+  .stamp-sea { border-color: var(--color-sea); color: var(--color-sea); }
+  .compliance-body { max-width: 720px; color: var(--color-ink-soft); }
+
+  /* Final CTA */
+  .final-cta { text-align: center; }
+  .cta-heading { font-family: var(--font-display); font-size: clamp(34px, 5vw, 56px); margin: 0 0 12px; line-height: 1; }
+  .cta-lede { margin-bottom: 24px; font-size: 18px; }
+  .btn-paper { background: var(--color-paper); color: var(--color-ink); }
+  .btn-paper:hover { background: var(--color-paper-2); }
+  .btn-ghost-paper { border-color: var(--color-paper); color: var(--color-paper); }
+  .btn-ghost-paper:hover { background: rgba(247,244,238,0.1); }
+  .cta-button { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+</style>
