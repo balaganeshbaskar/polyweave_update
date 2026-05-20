@@ -44,11 +44,6 @@ body {
   background-color: var(--color-paper);
   color: var(--color-ink);
   line-height: 1.55;
-  background-image:
-    linear-gradient(rgba(20,35,58,0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20,35,58,0.07) 1px, transparent 1px);
-  background-size: 24px 24px;
-  background-position: 0 0;
 }
 
 /* Typography classes */
