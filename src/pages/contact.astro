@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'Contact · Send your price to Polyweave';
 const pageDescription = 'Send your current product or supplier price. We\'ll review and respond with what\'s possible from India. Response within 1–2 business days.';
@@ -28,15 +29,18 @@ const contactPageSchema = {
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="hero-eyebrow tag">CONTACT · A SIMPLE CHECK</div>
-        <h1 class="hero-title text-display-1">
-          Start with a <span class="highlight-sea">simple check</span>.
-        </h1>
-        <p class="hero-lede text-body-lg">
-          If you are currently importing a product, there is a good chance it can be done differently. Send us your product or current price. We will review and respond with what is possible.
-        </p>
+    <section class="hero section-padding" style="position:relative;overflow:hidden">
+      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
+      <div style="position:relative;z-index:1">
+        <div class="max-w-content page-gutter">
+          <div class="hero-eyebrow tag">CONTACT · A SIMPLE CHECK</div>
+          <h1 class="hero-title text-display-1">
+            Start with a <span class="highlight-sea">simple check</span>.
+          </h1>
+          <p class="hero-lede text-body-lg">
+            If you are currently importing a product, there is a good chance it can be done differently. Send us your product or current price. We will review and respond with what is possible.
+          </p>
+        </div>
       </div>
     </section>
 

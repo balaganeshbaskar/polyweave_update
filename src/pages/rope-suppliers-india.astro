@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
+import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'Rope Suppliers India | Polysteel, PP, HDPE, Polyester & Nylon Ropes';
 const pageDescription = 'Source industrial and marine ropes from Indian manufacturers. Polyweave helps European buyers import polysteel, PP, HDPE, polyester and nylon ropes.';
@@ -25,18 +26,21 @@ const serviceSchema = {
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
-        <h1 class="hero-title text-display-1">
-          Rope <span class="highlight-navy">Suppliers</span> <span class="highlight-sea">from India</span>.
-        </h1>
-        <div class="hero-intro">
-          <p>Polyweave helps buyers source ropes from Indian manufacturers for fishing, marine, aquaculture, agriculture, sports and industrial use.</p>
-          <p>We can source polysteel, PP, HDPE, polyester and nylon ropes in different constructions, including 3-strand, 4-strand, 8-strand and braided ropes.</p>
-          <p>So far, our strongest experience has been with polysteel ropes.</p>
+    <section class="hero section-padding" style="position:relative;overflow:hidden">
+      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
+      <div style="position:relative;z-index:1">
+        <div class="max-w-content page-gutter">
+          <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
+          <h1 class="hero-title text-display-1">
+            Rope <span class="highlight-navy">Suppliers</span> <span class="highlight-sea">from India</span>.
+          </h1>
+          <div class="hero-intro">
+            <p>Polyweave helps buyers source ropes from Indian manufacturers for fishing, marine, aquaculture, agriculture, sports and industrial use.</p>
+            <p>We can source polysteel, PP, HDPE, polyester and nylon ropes in different constructions, including 3-strand, 4-strand, 8-strand and braided ropes.</p>
+            <p>So far, our strongest experience has been with polysteel ropes.</p>
+          </div>
+          <div class="europe-note tag">WORKING WITH BUYERS ACROSS EUROPE · ES · IT · PT · DE · NO</div>
         </div>
-        <div class="europe-note tag">WORKING WITH BUYERS ACROSS EUROPE · ES · IT · PT · DE · NO</div>
       </div>
     </section>
 

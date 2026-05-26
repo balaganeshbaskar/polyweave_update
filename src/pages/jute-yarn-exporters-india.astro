@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
+import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'Jute Yarn Exporters India | Source Jute Yarn from India';
 const pageDescription = 'Source jute yarn from reliable exporters and manufacturers in India. Polyweave helps European buyers import jute products with better clarity and control.';
@@ -16,16 +17,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
-        <h1 class="hero-title text-display-1">
-          Jute Yarn <span class="highlight-navy">Exporters</span> <span class="highlight-sea">India</span>.
-        </h1>
-        <div class="hero-intro">
-          <p>Demand for jute products continues to increase across Europe.</p>
-          <p>India remains one of the strongest manufacturing and export bases for jute yarn and related materials.</p>
-          <p>At the same time, many buyers struggle with supplier communication, consistency, and sourcing clarity when working directly with manufacturers.</p>
+    <section class="hero section-padding" style="position:relative;overflow:hidden">
+      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
+      <div style="position:relative;z-index:1">
+        <div class="max-w-content page-gutter">
+          <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
+          <h1 class="hero-title text-display-1">
+            Jute Yarn <span class="highlight-navy">Exporters</span> <span class="highlight-sea">India</span>.
+          </h1>
+          <div class="hero-intro">
+            <p>Demand for jute products continues to increase across Europe.</p>
+            <p>India remains one of the strongest manufacturing and export bases for jute yarn and related materials.</p>
+            <p>At the same time, many buyers struggle with supplier communication, consistency, and sourcing clarity when working directly with manufacturers.</p>
+          </div>
         </div>
       </div>
     </section>

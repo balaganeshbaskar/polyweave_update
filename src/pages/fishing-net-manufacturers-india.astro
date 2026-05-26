@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
+import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'Fishing Net Manufacturers India | PE & Nylon Fishing Nets';
 const pageDescription = 'Source custom fishing nets from Indian manufacturers for commercial fishing, aquaculture and marine use. Polyweave helps European buyers find the right mesh, twine and knot configuration.';
@@ -25,18 +26,21 @@ const serviceSchema = {
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
-        <h1 class="hero-title text-display-1">
-          Fishing Net <span class="highlight-navy">Manufacturers</span> <span class="highlight-sea">from India</span>.
-        </h1>
-        <div class="hero-intro">
-          <p>Polyweave helps fishing equipment buyers source custom fishing nets from India for commercial fishing, aquaculture and general marine use.</p>
-          <p>We can work with HDPE, PE and nylon fishing nets in different mesh sizes, twine thicknesses, depths, lengths, colours and knot types.</p>
-          <p>Pricing is usually calculated per kg, which is the industry standard for many fishing net orders.</p>
+    <section class="hero section-padding" style="position:relative;overflow:hidden">
+      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
+      <div style="position:relative;z-index:1">
+        <div class="max-w-content page-gutter">
+          <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
+          <h1 class="hero-title text-display-1">
+            Fishing Net <span class="highlight-navy">Manufacturers</span> <span class="highlight-sea">from India</span>.
+          </h1>
+          <div class="hero-intro">
+            <p>Polyweave helps fishing equipment buyers source custom fishing nets from India for commercial fishing, aquaculture and general marine use.</p>
+            <p>We can work with HDPE, PE and nylon fishing nets in different mesh sizes, twine thicknesses, depths, lengths, colours and knot types.</p>
+            <p>Pricing is usually calculated per kg, which is the industry standard for many fishing net orders.</p>
+          </div>
+          <div class="europe-note tag">WORKING WITH BUYERS ACROSS EUROPE · ES · IT · PT · DE · NO</div>
         </div>
-        <div class="europe-note tag">WORKING WITH BUYERS ACROSS EUROPE · ES · IT · PT · DE · NO</div>
       </div>
     </section>
 

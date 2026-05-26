@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
+import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'Services · How Polyweave sources from India';
 const pageDescription = 'What we do, how we work, and how we\'re priced. €0 upfront for buyers — Polyweave aligns incentives with manufacturers, not buyers.';
@@ -23,15 +24,18 @@ const categories = [
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="hero-eyebrow tag">SERVICES · WHAT WE DO</div>
-        <h1 class="hero-title text-display-1">
-          What we <span class="highlight-sea">do</span>.
-        </h1>
-        <p class="hero-lede text-body-lg">
-          We help companies source from India more efficiently.
-        </p>
+    <section class="hero section-padding" style="position:relative;overflow:hidden">
+      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
+      <div style="position:relative;z-index:1">
+        <div class="max-w-content page-gutter">
+          <div class="hero-eyebrow tag">SERVICES · WHAT WE DO</div>
+          <h1 class="hero-title text-display-1">
+            What we <span class="highlight-sea">do</span>.
+          </h1>
+          <p class="hero-lede text-body-lg">
+            We help companies source from India more efficiently.
+          </p>
+        </div>
       </div>
     </section>
 

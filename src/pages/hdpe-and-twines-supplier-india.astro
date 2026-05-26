@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
+import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'HDPE, PP & Nylon Twine Supplier India | Polyweave';
 const pageDescription = 'Source HDPE, PP and nylon twines from Indian manufacturers. Polyweave helps European buyers find the right twine construction, size, packing and price.';
@@ -25,18 +26,21 @@ const serviceSchema = {
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
-        <h1 class="hero-title text-display-1">
-          HDPE, PP & Nylon Twine <span class="highlight-navy">Supplier</span> <span class="highlight-sea">from India</span>.
-        </h1>
-        <div class="hero-intro">
-          <p>Polyweave helps buyers source HDPE, PP and nylon twines from Indian manufacturers with the right construction, size, packing and price.</p>
-          <p>We work with braided, twisted, coreless and standard twines across fishing, net-making, agricultural and industrial applications.</p>
-          <p>For PP and HDPE twines, we can source sizes up to around 4 mm. For nylon braided twines, larger sizes can also be developed depending on the application and buyer requirement.</p>
+    <section class="hero section-padding" style="position:relative;overflow:hidden">
+      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
+      <div style="position:relative;z-index:1">
+        <div class="max-w-content page-gutter">
+          <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
+          <h1 class="hero-title text-display-1">
+            HDPE, PP & Nylon Twine <span class="highlight-navy">Supplier</span> <span class="highlight-sea">from India</span>.
+          </h1>
+          <div class="hero-intro">
+            <p>Polyweave helps buyers source HDPE, PP and nylon twines from Indian manufacturers with the right construction, size, packing and price.</p>
+            <p>We work with braided, twisted, coreless and standard twines across fishing, net-making, agricultural and industrial applications.</p>
+            <p>For PP and HDPE twines, we can source sizes up to around 4 mm. For nylon braided twines, larger sizes can also be developed depending on the application and buyer requirement.</p>
+          </div>
+          <div class="europe-note tag">WORKING WITH BUYERS ACROSS EUROPE · ES · IT · PT · DE · NO</div>
         </div>
-        <div class="europe-note tag">WORKING WITH BUYERS ACROSS EUROPE · ES · IT · PT · DE · NO</div>
       </div>
     </section>
 

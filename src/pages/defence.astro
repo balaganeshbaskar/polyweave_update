@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
+import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'Defence & Dual-Use Sourcing · Polyweave';
 const pageDescription = 'Polyweave helps Indian and European companies identify, qualify, and connect with the right manufacturing partners for defence-adjacent, industrial, and dual-use components.';
@@ -15,23 +16,26 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="hero-eyebrow tag">DEFENCE · DUAL-USE · INDUSTRIAL</div>
-        <h1 class="hero-title text-display-1">
-          Sourcing across <span class="highlight-navy">defence</span> & <span class="highlight-sea">dual-use</span> supply chains.
-        </h1>
-        <p class="hero-lede text-body-lg">
-          Polyweave helps Indian and European companies identify, qualify, and connect with the right manufacturing partners for defence-adjacent, industrial, and dual-use components.
-        </p>
-        <p class="hero-sub text-body">
-          One goal: make cross-border sourcing simpler, safer, and commercially useful.
-        </p>
-        <div class="hero-ctas">
-          <a href={`${base}/contact`} class="btn-primary">
-            EXPLORE SOURCING SUPPORT <span class="btn-arrow">→</span>
-          </a>
-          <a href={`${base}/contact`} class="btn-ghost">[ speak to us ]</a>
+    <section class="hero section-padding" style="position:relative;overflow:hidden">
+      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
+      <div style="position:relative;z-index:1">
+        <div class="max-w-content page-gutter">
+          <div class="hero-eyebrow tag">DEFENCE · DUAL-USE · INDUSTRIAL</div>
+          <h1 class="hero-title text-display-1">
+            Sourcing across <span class="highlight-navy">defence</span> & <span class="highlight-sea">dual-use</span> supply chains.
+          </h1>
+          <p class="hero-lede text-body-lg">
+            Polyweave helps Indian and European companies identify, qualify, and connect with the right manufacturing partners for defence-adjacent, industrial, and dual-use components.
+          </p>
+          <p class="hero-sub text-body">
+            One goal: make cross-border sourcing simpler, safer, and commercially useful.
+          </p>
+          <div class="hero-ctas">
+            <a href={`${base}/contact`} class="btn-primary">
+              EXPLORE SOURCING SUPPORT <span class="btn-arrow">→</span>
+            </a>
+            <a href={`${base}/contact`} class="btn-ghost">[ speak to us ]</a>
+          </div>
         </div>
       </div>
     </section>

@@ -1,0 +1,160 @@
+---
+interface Props {
+  opacity?: number;
+  color?: string;
+  gridSize?: number;
+  strokeWidth?: number;
+  hoverEffect?: boolean;
+  hoverOpacity?: number;
+  hoverRadius?: number;
+}
+
+const {
+  opacity = 0.05,
+  color = 'var(--color-sea)',
+  gridSize = 40,
+  strokeWidth = 1,
+  hoverEffect = false,
+  hoverOpacity = 0.6,
+  hoverRadius = 300
+} = Astro.props;
+
+const uid = Math.random().toString(36).slice(2, 9);
+const patId = `ig-pat-${uid}`;
+const revId = `ig-rev-${uid}`;
+---
+
+<div
+  class="infinite-grid"
+  data-hover-effect={hoverEffect}
+  data-hover-radius={hoverRadius}
+  data-uid={uid}
+>
+  <!-- Base layer -->
+  <div class="grid-base" aria-hidden="true" style={{ opacity, color }}>
+    <svg class="grid-svg">
+      <defs>
+        <pattern id={patId} width={gridSize} height={gridSize} patternUnits="userSpaceOnUse">
+          <path d={`M ${gridSize} 0 L 0 0 0 ${gridSize}`} fill="none" stroke="currentColor" stroke-width={strokeWidth} />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill={`url(#${patId})`} />
+    </svg>
+  </div>
+
+  <!-- Reveal layer with mouse-following mask -->
+  <div class="grid-reveal" aria-hidden="true" style="opacity:0.6;color:var(--color-sea);mask-image:radial-gradient(250px circle at 50% 50%, black, rgba(0,0,0,0.95));-webkit-mask-image:radial-gradient(250px circle at 50% 50%, black, rgba(0,0,0,0.95));mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat">
+    <svg class="grid-svg">
+      <defs>
+        <pattern id={revId} width={gridSize} height={gridSize} patternUnits="userSpaceOnUse">
+          <path d={`M ${gridSize} 0 L 0 0 0 ${gridSize}`} fill="none" stroke="currentColor" stroke-width={strokeWidth} />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill={`url(#${revId})`} />
+    </svg>
+  </div>
+</div>
+
+<style>
+  .infinite-grid {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .grid-base svg,
+  .grid-reveal svg {
+    pointer-events: none;
+  }
+
+  .grid-base,
+  .grid-reveal {
+    position: absolute;
+    inset: 0;
+  }
+
+  .grid-svg {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    var gridEl = document.querySelector('.infinite-grid');
+    if (!gridEl) return;
+
+    var uid = gridEl.getAttribute('data-uid');
+    var hasReveal = gridEl.getAttribute('data-hover-effect') === 'true';
+    var hoverRadius = parseInt(gridEl.getAttribute('data-hover-radius')) || 300;
+
+    var basePattern = document.getElementById('ig-pat-' + uid);
+    var revealEl = gridEl.querySelector('.grid-reveal');
+    var revealPattern = document.getElementById('ig-rev-' + uid);
+
+    var offsetX = 0, offsetY = 0;
+    var rafId = null;
+    var isReducedMotion = false;
+    var maskX, maskY, targetX, targetY, maskAnimFrame = null;
+
+    var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    isReducedMotion = motionQuery.matches;
+
+    motionQuery.addEventListener('change', function() {
+      isReducedMotion = motionQuery.matches;
+      if (isReducedMotion && rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      else if (!isReducedMotion) tick();
+    });
+
+    function tick() {
+      if (isReducedMotion) return;
+      offsetX = (offsetX + 0.3) % 40;
+      offsetY = (offsetY + 0.3) % 40;
+      if (basePattern) { basePattern.setAttribute('x', offsetX); basePattern.setAttribute('y', offsetY); }
+      if (revealPattern) { revealPattern.setAttribute('x', offsetX); revealPattern.setAttribute('y', offsetY); }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function setMaskTarget(cx, cy) {
+      var rect = gridEl.getBoundingClientRect();
+      var x = cx - rect.left;
+      var y = cy - rect.top;
+      if (maskX === undefined) { maskX = rect.width / 2; maskY = rect.height / 2; }
+      targetX = x;
+      targetY = y;
+      if (!maskAnimFrame) animateMask();
+    }
+
+    function animateMask() {
+      maskX += (targetX - maskX) * 0.1;
+      maskY += (targetY - maskY) * 0.1;
+      var mask = 'radial-gradient(' + hoverRadius + 'px circle at ' + maskX + 'px ' + maskY + 'px, black, rgba(0,0,0,0.95))';
+      revealEl.style.maskImage = mask;
+      revealEl.style.webkitMaskImage = mask;
+      if (Math.abs(targetX - maskX) > 0.5 || Math.abs(targetY - maskY) > 0.5) {
+        maskAnimFrame = requestAnimationFrame(animateMask);
+      } else {
+        maskAnimFrame = null;
+      }
+    }
+
+    if (hasReveal && revealEl) {
+      gridEl.addEventListener('mousemove', function(e) { setMaskTarget(e.clientX, e.clientY); });
+      gridEl.addEventListener('mouseleave', function() {
+        var r = gridEl.getBoundingClientRect();
+        setMaskTarget(r.left + r.width / 2, r.top + r.height / 2);
+      });
+      gridEl.addEventListener('touchmove', function(e) {
+        var t = e.touches[0];
+        setMaskTarget(t.clientX, t.clientY);
+      }, { passive: true });
+      gridEl.addEventListener('touchend', function() {
+        var r = gridEl.getBoundingClientRect();
+        setMaskTarget(r.left + r.width / 2, r.top + r.height / 2);
+      });
+    }
+
+    if (!isReducedMotion) tick();
+  })();
+</script>

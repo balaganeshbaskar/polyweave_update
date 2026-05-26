@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
+import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'About Polyweave · India ↔ Europe sourcing partner';
 const pageDescription = 'Polyweave is built between India and Europe. We help buyers source with fewer problems, starting from a network rooted in fishing equipment and now expanded across categories.';
@@ -15,15 +16,18 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="hero-eyebrow tag">ABOUT · BUILT BETWEEN INDIA AND EUROPE</div>
-        <h1 class="hero-title text-display-1">
-          Built between <span class="highlight-sea">India</span> and <span class="highlight-navy">Europe</span>.
-        </h1>
-        <p class="hero-lede text-body-lg">
-          Polyweave works between two markets.
-        </p>
+    <section class="hero section-padding" style="position:relative;overflow:hidden">
+      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
+      <div style="position:relative;z-index:1">
+        <div class="max-w-content page-gutter">
+          <div class="hero-eyebrow tag">ABOUT · BUILT BETWEEN INDIA AND EUROPE</div>
+          <h1 class="hero-title text-display-1">
+            Built between <span class="highlight-sea">India</span> and <span class="highlight-navy">Europe</span>.
+          </h1>
+          <p class="hero-lede text-body-lg">
+            Polyweave works between two markets.
+          </p>
+        </div>
       </div>
     </section>
 

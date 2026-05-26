@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
+import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'Sports Nets & Football Nets Manufacturer India | Polyweave';
 const pageDescription = 'Source sports nets, football nets, and custom netting from Indian manufacturers. Polyweave helps European buyers import sports netting with better pricing and clarity.';
@@ -25,18 +26,21 @@ const serviceSchema = {
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding">
-      <div class="max-w-content page-gutter">
-        <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
-        <h1 class="hero-title text-display-1">
-          Sports Nets & Football Nets <span class="highlight-navy">from India</span>.
-        </h1>
-        <div class="hero-intro">
-          <p>Polyweave helps buyers source sports nets from India for football, cricket, volleyball, tennis, handball, basketball and sports facility applications.</p>
-          <p>We can also source boundary nets and custom nets for clubs, distributors and facility suppliers.</p>
-          <p>Our current focus is on buyers in Turkey and Western Europe.</p>
+    <section class="hero section-padding" style="position:relative;overflow:hidden">
+      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
+      <div style="position:relative;z-index:1">
+        <div class="max-w-content page-gutter">
+          <div class="hero-eyebrow tag">SOURCING · INDIA → EUROPE</div>
+          <h1 class="hero-title text-display-1">
+            Sports Nets & Football Nets <span class="highlight-navy">from India</span>.
+          </h1>
+          <div class="hero-intro">
+            <p>Polyweave helps buyers source sports nets from India for football, cricket, volleyball, tennis, handball, basketball and sports facility applications.</p>
+            <p>We can also source boundary nets and custom nets for clubs, distributors and facility suppliers.</p>
+            <p>Our current focus is on buyers in Turkey and Western Europe.</p>
+          </div>
+          <div class="europe-note tag">CURRENT FOCUS · TURKEY · WESTERN EUROPE</div>
         </div>
-        <div class="europe-note tag">CURRENT FOCUS · TURKEY · WESTERN EUROPE</div>
       </div>
     </section>
 
