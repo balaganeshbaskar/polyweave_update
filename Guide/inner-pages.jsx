@@ -251,7 +251,7 @@ const ContactPage = ({ showSticky = false }) =>
       <div style={{ padding: 30, background: '#14233a', color: '#f7f4ee', margin: '30px 0' }}>
         <div className="hwhead" style={{ fontSize: 32, marginBottom: 16, color: '#f7f4ee' }}>Or, just write to us.</div>
         <div className="wf-body" style={{ fontSize: 18, color: 'rgba(247,244,238,0.85)', lineHeight: 1.6 }}>
-          ajay@polyweave.net<br />
+          sourcing@polyweave.net<br />
           (response within 1–2 business days)
         </div>
         <div style={{ borderTop: '1px dashed rgba(247,244,238,0.4)', margin: '24px 0' }} />

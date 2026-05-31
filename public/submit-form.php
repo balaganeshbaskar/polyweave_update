@@ -1,9 +1,9 @@
 <?php
 // Polyweave Form Handler
-// Send form submissions to ajay@polyweave.net
+// Send form submissions to sourcing@polyweave.net
 
 // Configuration - update these for Hostinger
-$to = 'ajay@polyweave.net';
+$to = 'sourcing@polyweave.net';
 $subject = 'New inquiry from Polyweave website';
 
 // Honeypot check - if website field is filled, it's a bot

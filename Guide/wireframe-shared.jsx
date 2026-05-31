@@ -105,7 +105,7 @@ const WFFoot = () =>
     <div>
       <h5>CONTACT</h5>
       <ul>
-        <li>ajay@polyweave.net</li>
+        <li>sourcing@polyweave.net</li>
         <li>India · Europe</li>
         <li style={{ marginTop: 12, fontFamily: 'Caveat, cursive', fontSize: 16, color: 'var(--ink)' }}>send your price →</li>
       </ul>
