@@ -42,21 +42,30 @@ const products = [
 
       <!-- Content -->
       <div class="hero-content max-w-content page-gutter">
-        <h1 class="hero-title text-display-1">
-          You're probably <span class="highlight-navy">overpaying</span> for your <span class="highlight-sea">imports</span>.
-        </h1>
-        <p class="hero-lede text-body-lg">
-          We help companies source from India at better prices, with less risk.
-        </p>
-        <p class="hero-sub text-body">
-          If you already have a supplier, send us your price. We'll tell you if it can be done better.
-        </p>
+        <div class="hero-grid">
+          <div class="hero-left">
+            <h1 class="hero-title text-display-1">
+              You're probably <span class="highlight-navy">overpaying</span> for your <span class="highlight-sea">imports</span>.
+            </h1>
+            <p class="hero-lede text-body-lg">
+              We help companies source from India at better prices, with less risk.
+            </p>
+            <p class="hero-sub text-body">
+              If you already have a supplier, send us your price. We'll tell you if it can be done better.
+            </p>
 
-        <div class="hero-ctas">
-          <a href={`${base}/contact`} class="btn-primary">
-            SEND YOUR PRICE <span class="btn-arrow">→</span>
-          </a>
-          <a href="#" class="btn-ghost">[ book a call ]</a>
+            <div class="hero-ctas">
+              <a href={`${base}/contact`} class="btn-primary">
+                SEND YOUR PRICE <span class="btn-arrow">→</span>
+              </a>
+              <a href="#" class="btn-ghost">[ book a call ]</a>
+            </div>
+          </div>
+          <div class="hero-right">
+            <div class="hero-image-wrapper">
+              <img src={`${base}/images/trade_bridge.png`} alt="India-Europe trade bridge" class="hero-image" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -218,6 +227,48 @@ const products = [
     position: relative;
     z-index: 1;
     width: 100%;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-image-wrapper {
+    background: transparent;
+    padding: 14px;
+    border-radius: var(--radius-sketch);
+  }
+
+  .hero-image {
+    width: 100%;
+    max-width: 520px;
+    scale:1.2;
+    height: auto;
+    opacity: 0.88;
+    display: block;
+  }
+
+  @media (max-width: 767px) {
+    .hero-image {
+      max-width: 300px;
+      margin: 0 auto;
+    }
   }
 
   /* Grid layers */
