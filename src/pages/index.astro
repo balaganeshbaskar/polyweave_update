@@ -296,6 +296,12 @@ const products = [
     flex-direction: column;
   }
 
+  @media (max-width: 767px) {
+    .market-reality-card:not(:last-child) {
+      margin-bottom: 32px;
+    }
+  }
+
   .reality-bar {
     width: 28px;
     height: 4px;
@@ -335,7 +341,7 @@ const products = [
   }
 
   .reality-body {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.4;
     color: var(--color-ink-soft);
     margin: 0;
