@@ -108,18 +108,22 @@ const products = [
           <div class="step-card sketch-box">
             <div class="numdot">01</div>
             <p>You share your product or current pricing.</p>
+            <img src={`${base}/images/how_1.png`} alt="Share your product" class="step-image" />
           </div>
           <div class="step-card sketch-box">
             <div class="numdot">02</div>
             <p>We find the right manufacturer in India.</p>
+            <img src={`${base}/images/how_2.png`} alt="Find manufacturer" class="step-image" />
           </div>
           <div class="step-card sketch-box">
             <div class="numdot">03</div>
             <p>We handle negotiation and alignment.</p>
+            <img src={`${base}/images/how_3.png`} alt="Negotiation" class="step-image" />
           </div>
           <div class="step-card sketch-box">
             <div class="numdot">04</div>
             <p>You get a better option.</p>
+            <img src={`${base}/images/how_4.png`} alt="Better option" class="step-image" />
           </div>
         </div>
       </div>
@@ -427,7 +431,14 @@ const products = [
 
   .step-card p {
     margin: 0;
-    font-size: 16px;
+    font-size: 20px;
+  }
+
+  .step-image {
+    width: 100%;
+    height: auto;
+    margin-top: 4px;
+    border-radius: var(--radius-sketch);
   }
 
   /* Product Index */

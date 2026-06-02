@@ -60,6 +60,7 @@ const { showBookCall = true } = Astro.props;
 <script>
   const stickyForm = document.getElementById('sticky-form');
   const mobileBtn = document.getElementById('mobile-sticky-btn');
+  const mobileBar = document.querySelector('.mobile-sticky-bar');
   const formElement = document.getElementById('sticky-form-element');
 
   // Fade in sticky form when scrolling past hero
@@ -87,6 +88,17 @@ const { showBookCall = true } = Astro.props;
         stickyForm?.classList.add('fading-out');
       } else {
         stickyForm?.classList.remove('fading-out');
+      }
+    }
+
+    // Mobile: hide sticky bar when hero CTA is visible on screen
+    const heroCta = document.querySelector('.hero .hero-ctas');
+    if (heroCta && mobileBar) {
+      const rect = heroCta.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        mobileBar.classList.add('hidden');
+      } else {
+        mobileBar.classList.remove('hidden');
       }
     }
   }
@@ -283,6 +295,9 @@ const { showBookCall = true } = Astro.props;
   @media (max-width: 1199px) {
     .mobile-sticky-bar {
       display: block;
+    }
+    .mobile-sticky-bar.hidden {
+      display: none;
     }
   }
 
