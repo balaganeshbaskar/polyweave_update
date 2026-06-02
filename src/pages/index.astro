@@ -24,22 +24,6 @@ const products = [
   <main id="main-content">
     <!-- Hero -->
     <section class="hero section-padding" id="hero-section">
-      <!-- Reveal grid layer with mouse-following mask -->
-      <div class="hero-grid-reveal" aria-hidden="true" id="hero-grid-reveal">
-        <svg class="hero-grid-svg">
-          <defs>
-            <pattern id="hero-grid-reveal-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="3" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hero-grid-reveal-pattern)" />
-        </svg>
-      </div>
-
-      <!-- Ambient glow blobs -->
-      <div class="hero-glow hero-glow-sea" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-accent" aria-hidden="true"></div>
-
       <!-- Content -->
       <div class="hero-content max-w-content page-gutter">
         <div class="hero-grid">
@@ -221,6 +205,7 @@ const products = [
     align-items: center;
     position: relative;
     overflow: hidden;
+    background-color: #f6ecdc;
   }
 
   .hero-content {
@@ -271,55 +256,6 @@ const products = [
     }
   }
 
-  /* Grid layers */
-  .hero-grid-reveal {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .hero-grid-svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .hero-grid-reveal {
-    opacity: 0.6;
-    color: var(--color-sea);
-    mask-image: radial-gradient(250px circle at 50% 50%, black, transparent);
-    -webkit-mask-image: radial-gradient(250px circle at 50% 50%, black, transparent);
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
-  }
-
-  /* Ambient glow blobs */
-  .hero-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .hero-glow-sea {
-    width: 45%;
-    height: 45%;
-    right: -8%;
-    top: -12%;
-    background: var(--color-sea);
-    opacity: 0.12;
-  }
-
-  .hero-glow-accent {
-    width: 40%;
-    height: 40%;
-    left: -10%;
-    bottom: -18%;
-    background: var(--color-accent);
-    opacity: 0.08;
-  }
-
   .hero-title {
     margin-bottom: 20px;
   }
@@ -327,11 +263,13 @@ const products = [
   .hero-lede {
     max-width: 720px;
     margin-bottom: 12px;
+    font-size: 22px;
   }
 
   .hero-sub {
     max-width: 720px;
     margin-bottom: 32px;
+    font-size: 22px;
   }
 
   .hero-ctas {
@@ -375,7 +313,7 @@ const products = [
 
   .reality-title {
     font-family: var(--font-display);
-    font-size: 24px;
+    font-size: 30px;
     margin: 0 0 10px;
     line-height: 1.2;
   }
@@ -615,80 +553,3 @@ const products = [
     display: inline-block;
   }
 </style>
-
-<script>
-  const heroSection = document.getElementById('hero-section');
-  const revealGrid = document.getElementById('hero-grid-reveal');
-  const revealPattern = document.getElementById('hero-grid-reveal-pattern');
-
-  if (heroSection && revealGrid && revealPattern) {
-    let offsetX = 0;
-    let offsetY = 0;
-    let rafId = null;
-    let isReducedMotion = false;
-
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    isReducedMotion = motionQuery.matches;
-
-    motionQuery.addEventListener('change', () => {
-      isReducedMotion = motionQuery.matches;
-      if (isReducedMotion && rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      } else if (!isReducedMotion) {
-        animateGrid();
-      }
-    });
-
-    function animateGrid() {
-      if (isReducedMotion) return;
-      offsetX = (offsetX + 0.3) % 40;
-      offsetY = (offsetY + 0.3) % 40;
-      revealPattern.setAttribute('x', offsetX);
-      revealPattern.setAttribute('y', offsetY);
-      rafId = requestAnimationFrame(animateGrid);
-    }
-
-    function updateMask(e) {
-      const rect = heroSection.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const mask = `radial-gradient(300px circle at ${x}px ${y}px, black, rgba(0,0,0,0.08))`;
-      revealGrid.style.maskImage = mask;
-      revealGrid.style.webkitMaskImage = mask;
-    }
-
-    function resetMask(e) {
-      const rect = heroSection.getBoundingClientRect();
-      // const x = e.clientX - rect.left;
-      // const y = e.clientY - rect.top;
-      const x = rect.width / 2;
-      const y = rect.height / 2;
-      const mask = `radial-gradient(300px circle at ${x}px ${y}px, black, rgba(0,0,0,0.08))`;
-      revealGrid.style.maskImage = mask;
-      revealGrid.style.webkitMaskImage = mask;
-    }
-
-
-
-   heroSection.addEventListener('mousemove', updateMask);
-   heroSection.addEventListener('mouseleave', resetMask);
-
-    heroSection.addEventListener('touchmove', (e) => {
-    const touch = e.touches[0];
-    const rect = heroSection.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-    const mask = `radial-gradient(200px circle at ${x}px ${y}px, black, rgba(0,0,0,0.08))`;
-    revealGrid.style.maskImage = mask;
-    revealGrid.style.webkitMaskImage = mask;
-
-    }, { passive: true });
-
-    heroSection.addEventListener('touchend', resetMask);
-
-    if (!isReducedMotion) {
-      animateGrid();
-    }
-  }
-</script>
