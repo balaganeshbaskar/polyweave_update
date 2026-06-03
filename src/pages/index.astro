@@ -60,20 +60,25 @@ const products = [
         <SectionTag label="MARKET REALITY" />
 
         <div class="market-reality-grid">
-          <div class="market-reality-card">
-            <div class="reality-bar reality-bar-navy"></div>
-            <h3 class="reality-title">Europe is getting expensive.</h3>
-            <p class="reality-body">Labour costs up. Operations up. Margins thinner each year.</p>
+          <div class="market-reality-left">
+            <img src={`${base}/images/market_reality.png`} alt="Market reality" class="market-reality-image" />
           </div>
-          <div class="market-reality-card">
-            <div class="reality-bar reality-bar-navy"></div>
-            <h3 class="reality-title">China is less predictable.</h3>
-            <p class="reality-body">Quality wobbles, lead-time slips, and policy noise have buyers actively looking for a second base.</p>
-          </div>
-          <div class="market-reality-card">
-            <div class="reality-bar reality-bar-sea"></div>
-            <h3 class="reality-title">India is the natural shift.</h3>
-            <p class="reality-body">Manufacturing capacity is mature. The hard part is finding suppliers who actually deliver to export standards.</p>
+          <div class="market-reality-right">
+            <div class="market-reality-card">
+              <div class="reality-bar reality-bar-navy"></div>
+              <h3 class="reality-title">Europe is getting expensive.</h3>
+              <p class="reality-body">Labour costs up. Operations up. Margins thinner each year.</p>
+            </div>
+            <div class="market-reality-card">
+              <div class="reality-bar reality-bar-navy"></div>
+              <h3 class="reality-title">China is less predictable.</h3>
+              <p class="reality-body">Quality wobbles, lead-time slips, and policy noise have buyers actively looking for a second base.</p>
+            </div>
+            <div class="market-reality-card">
+              <div class="reality-bar reality-bar-sea"></div>
+              <h3 class="reality-title">India is the natural shift.</h3>
+              <p class="reality-body">Manufacturing capacity is mature. The hard part is finding suppliers who actually deliver to export standards.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -286,24 +291,41 @@ const products = [
   .market-reality-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 32px;
+    align-items: center;
   }
 
   @media (min-width: 768px) {
     .market-reality-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+  }
+
+  .market-reality-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .market-reality-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: var(--radius-sketch);
+  }
+
+  @media (max-width: 767px) {
+    .market-reality-image {
+      max-width: 350px;
+      margin: 0 auto;
+      display: block;
     }
   }
 
   .market-reality-card {
     display: flex;
     flex-direction: column;
-  }
-
-  @media (max-width: 767px) {
-    .market-reality-card:not(:last-child) {
-      margin-bottom: 32px;
-    }
   }
 
   .reality-bar {
