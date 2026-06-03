@@ -10,8 +10,7 @@ const { showBookCall = true } = Astro.props;
 <div class="sticky-rail" id="sticky-form">
   <div class="sticky-form sketch-box">
     <button class="sticky-close" id="sticky-close" aria-label="Close">×</button>
-    <div class="sticky-tag">STICKY · ALWAYS VISIBLE</div>
-    <h3 class="sticky-heading">Send your<br />current price.</h3>
+    <h3 class="sticky-heading">Share your<br />current price.</h3>
 
     <form class="sticky-form-fields" id="sticky-form-element">
       <input
@@ -213,7 +212,7 @@ const { showBookCall = true } = Astro.props;
 
   .sticky-form {
     width: 100%;
-    height: 298px;
+    min-height: 298px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -237,14 +236,6 @@ const { showBookCall = true } = Astro.props;
 
   .sticky-close:hover {
     color: var(--color-ink);
-  }
-
-  .sticky-tag {
-    font-family: var(--font-meta);
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: var(--color-ink-faint);
-    margin-bottom: 8px;
   }
 
   .sticky-heading {
