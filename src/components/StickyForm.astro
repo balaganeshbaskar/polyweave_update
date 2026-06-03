@@ -50,6 +50,13 @@ const { showBookCall = true } = Astro.props;
   </div>
 </div>
 
+<!-- Reopen button - shown after form is dismissed -->
+<button class="sticky-reopen" id="sticky-reopen" aria-label="Open form">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+  </svg>
+</button>
+
 <!-- Mobile sticky bottom bar -->
 <div class="mobile-sticky-bar">
   <button class="btn-primary mobile-sticky-btn" id="mobile-sticky-btn">
@@ -120,6 +127,14 @@ const { showBookCall = true } = Astro.props;
   // Close button
   document.getElementById('sticky-close')?.addEventListener('click', () => {
     stickyForm?.classList.add('dismissed');
+    document.getElementById('sticky-reopen')?.classList.add('show');
+  });
+
+  // Reopen button
+  document.getElementById('sticky-reopen')?.addEventListener('click', () => {
+    stickyForm?.classList.remove('dismissed');
+    stickyForm?.classList.add('visible');
+    document.getElementById('sticky-reopen')?.classList.remove('show');
   });
 
   // Form submission
@@ -216,6 +231,7 @@ const { showBookCall = true } = Astro.props;
     display: flex;
     flex-direction: column;
     position: relative;
+    background: #ffffff;
   }
 
   .sticky-close {
@@ -236,6 +252,42 @@ const { showBookCall = true } = Astro.props;
 
   .sticky-close:hover {
     color: var(--color-ink);
+  }
+
+  /* Reopen button */
+  .sticky-reopen {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-sea);
+    color: var(--color-paper);
+    border: 1.5px solid var(--color-ink);
+    cursor: pointer;
+    z-index: 40;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(20,35,58,0.15);
+    transition: transform 180ms ease, background 180ms ease;
+    padding: 0;
+  }
+
+  .sticky-reopen:hover {
+    background: #23566F;
+    transform: scale(1.08);
+  }
+
+  .sticky-reopen.show {
+    display: flex;
+  }
+
+  @media (max-width: 1199px) {
+    .sticky-reopen {
+      display: none !important;
+    }
   }
 
   .sticky-heading {
