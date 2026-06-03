@@ -106,7 +106,7 @@ const products = [
     </section>
 
     <!-- How It Works -->
-    <section class="how-it-works section-padding">
+    <section class="how-it-works section-padding bg-sea-tint">
       <div class="max-w-content page-gutter">
         <SectionTag label="HOW IT WORKS" />
         <div class="grid-4">
@@ -247,6 +247,15 @@ const products = [
     background: transparent;
     padding: 14px;
     border-radius: var(--radius-sketch);
+
+    mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-composite: source-in;
   }
 
   .hero-image {
@@ -313,6 +322,17 @@ const products = [
     max-width: 500px;
     height: auto;
     border-radius: var(--radius-sketch);
+     /* mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%); */
+
+    mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-composite: source-in;
   }
 
   @media (max-width: 767px) {
@@ -449,6 +469,8 @@ const products = [
     display: flex;
     flex-direction: column;
     gap: 12px;
+    background: #f6ecdc;
+    /* background-color: rgba(46,111,142,0.08); */
   }
 
   .step-card p {
@@ -461,6 +483,15 @@ const products = [
     height: auto;
     margin-top: auto;
     border-radius: var(--radius-sketch);
+
+    mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-composite: source-in;
   }
 
   /* Product Index */
