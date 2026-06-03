@@ -27,34 +27,49 @@ const sourcingLinks = [
 
     <!-- Site -->
     <div class="footer-col">
-      <h5 class="footer-heading">SITE</h5>
-      <ul class="footer-links">
-        {siteLinks.map(link => (
-          <li><a href={link.href}>{link.label}</a></li>
-        ))}
-      </ul>
+      <button class="footer-accordion-trigger" aria-expanded="false">
+        <h5 class="footer-heading">SITE</h5>
+        <span class="footer-accordion-arrow" aria-hidden="true">▾</span>
+      </button>
+      <div class="footer-accordion-content">
+        <ul class="footer-links">
+          {siteLinks.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
     </div>
 
     <!-- Sourcing -->
     <div class="footer-col">
-      <h5 class="footer-heading">SOURCING</h5>
-      <ul class="footer-links">
-        {sourcingLinks.map(link => (
-          <li><a href={link.href}>{link.label}</a></li>
-        ))}
-      </ul>
+      <button class="footer-accordion-trigger" aria-expanded="false">
+        <h5 class="footer-heading">SOURCING</h5>
+        <span class="footer-accordion-arrow" aria-hidden="true">▾</span>
+      </button>
+      <div class="footer-accordion-content">
+        <ul class="footer-links">
+          {sourcingLinks.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
     </div>
 
     <!-- Contact -->
     <div class="footer-col">
-      <h5 class="footer-heading">CONTACT</h5>
-      <ul class="footer-links">
-        <li><a href="mailto:sourcing@polyweave.net">sourcing@polyweave.net</a></li>
-        <li>India · Europe</li>
-        <li class="footer-cta">
-          <a href={`${base}/contact`} class="link-cta">send your price →</a>
-        </li>
-      </ul>
+      <button class="footer-accordion-trigger" aria-expanded="false">
+        <h5 class="footer-heading">CONTACT</h5>
+        <span class="footer-accordion-arrow" aria-hidden="true">▾</span>
+      </button>
+      <div class="footer-accordion-content">
+        <ul class="footer-links">
+          <li><a href="mailto:sourcing@polyweave.net">sourcing@polyweave.net</a></li>
+          <li>India · Europe</li>
+          <li class="footer-cta">
+            <a href={`${base}/contact`} class="link-cta">send your price →</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -66,6 +81,15 @@ const sourcingLinks = [
     </div>
   </div>
 </footer>
+
+<script>
+  document.querySelectorAll('.footer-accordion-trigger').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+    });
+  });
+</script>
 
 <style>
   .footer {
@@ -104,7 +128,7 @@ const sourcingLinks = [
 
   .footer-tagline {
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: 28px;
     line-height: 1.1;
     color: var(--color-ink);
     margin: 0;
@@ -112,7 +136,7 @@ const sourcingLinks = [
 
   .footer-heading {
     font-family: var(--font-meta);
-    font-size: 10px;
+    font-size: 20px;
     letter-spacing: 1.5px;
     color: var(--color-sea);
     margin: 0 0 14px;
@@ -154,6 +178,73 @@ const sourcingLinks = [
     font-family: var(--font-display);
     font-size: 16px;
     color: var(--color-ink);
+  }
+
+  /* Accordion */
+  .footer-accordion-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+  }
+
+  .footer-accordion-trigger .footer-heading {
+    margin: 0 0 14px;
+  }
+
+  .footer-accordion-arrow {
+    display: none;
+    font-size: 24px;
+    color: var(--color-sea);
+    transition: transform 200ms ease;
+  }
+
+  .footer-accordion-trigger[aria-expanded="true"] .footer-accordion-arrow {
+    transform: rotate(180deg);
+  }
+
+  .footer-accordion-content {
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-accordion-trigger {
+      cursor: default;
+      pointer-events: none;
+    }
+    .footer-accordion-content {
+      max-height: none !important;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .footer-logo {
+      font-size: 20px;
+    }
+    .footer-accordion-trigger {
+      cursor: pointer;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--color-ink-soft);
+    }
+    .footer-accordion-trigger .footer-heading {
+      margin: 0;
+    }
+    .footer-accordion-arrow {
+      display: block;
+    }
+    .footer-accordion-content {
+      max-height: 0;
+      transition: max-height 250ms ease;
+    }
+    .footer-accordion-trigger[aria-expanded="true"] + .footer-accordion-content {
+      max-height: 400px;
+      padding-bottom: 12px;
+    }
   }
 
   .footer-bottom {
