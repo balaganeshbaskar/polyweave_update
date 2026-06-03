@@ -41,6 +41,7 @@ const navLinks = [
 </nav>
 
 <div class="mobile-menu" aria-hidden="true">
+  <button class="mobile-close" aria-label="Close menu">×</button>
   <div class="mobile-menu-content">
     {navLinks.map(link => (
       <a href={link.href} class="mobile-nav-link">
@@ -179,6 +180,26 @@ const navLinks = [
   .mobile-cta {
     margin-top: 24px;
   }
+
+  .mobile-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--color-ink);
+    cursor: pointer;
+    padding: 8px 12px;
+    line-height: 1;
+    z-index: 110;
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+
+  .mobile-menu.open .mobile-close {
+    opacity: 1;
+  }
 </style>
 
 <script>
@@ -194,5 +215,6 @@ const navLinks = [
   }
 
   menuBtn?.addEventListener('click', toggleMenu);
+  document.querySelector('.mobile-close')?.addEventListener('click', toggleMenu);
   mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 </script>
