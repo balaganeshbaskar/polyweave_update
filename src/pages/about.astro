@@ -57,14 +57,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           <div class="friction-card sketch-box">
             <div class="friction-num">01</div>
             <p>Suppliers don't always communicate clearly.</p>
+            <img src={`${base}/images/friction_1.png`} alt="" class="friction-image" />
           </div>
           <div class="friction-card sketch-box">
             <div class="friction-num">02</div>
             <p>Buyers don't always see the full picture.</p>
+            <img src={`${base}/images/friction_2.png`} alt="" class="friction-image" />
           </div>
           <div class="friction-card sketch-box">
             <div class="friction-num">03</div>
             <p>Small mistakes in sourcing become expensive problems.</p>
+            <img src={`${base}/images/friction_3.png`} alt="" class="friction-image" />
           </div>
         </div>
       </div>
@@ -235,19 +238,23 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .friction-card {
     position: relative;
     padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    background: #f5eee1;
   }
 
   .friction-num {
     position: absolute;
-    top: -12px;
-    left: 20px;
-    width: 24px;
-    height: 24px;
+    top: -20px;
+    left: 10px;
+    width: 44px;
+    height: 44px;
     background: var(--color-ink);
+    /* background: var(--color-paper); */
     color: var(--color-paper);
     border-radius: 50%;
     font-family: var(--font-display);
-    font-size: 14px;
+    font-size: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -255,7 +262,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   .friction-card p {
     margin: 0;
-    font-size: 16px;
+    font-size: 20px;
+    color: var(--color-ink);
+  }
+
+  .friction-image {
+    width: 100%;
+    height: auto;
+    margin-top: auto;
+    border-radius: var(--radius-sketch);
   }
 
   /* Our Role */
