@@ -68,7 +68,7 @@ const categories = [
     <!-- How we work (navy band per handoff) -->
     <section class="how-we-work section-padding bg-navy">
       <div class="max-w-content page-gutter">
-        <SectionTag label="HOW WE WORK" />
+        <SectionTag label="HOW WE WORK" class="section-tag-light" />
 
         <div class="work-cards-grid">
           <div class="work-card">
@@ -119,13 +119,13 @@ const categories = [
           {categories.map(cat => (
             <a href={cat.href} class="category-chip">{cat.label}</a>
           ))}
-          <span class="category-chip category-adjacent">+ adjacent categories</span>
+          <!-- <span class="category-chip category-adjacent">+ adjacent categories</span> -->
         </div>
       </div>
     </section>
 
     <!-- Final CTA -->
-    <section class="final-cta section-padding">
+    <section class="final-cta section-padding bg-sea-tint">
       <div class="max-w-content page-gutter">
         <h2 class="text-h2">Send your current price.</h2>
         <p class="text-body-lg">We'll tell you what's possible.</p>
@@ -182,14 +182,14 @@ const categories = [
 
   .list-num {
     font-family: var(--font-meta);
-    font-size: 12px;
+    font-size: 22px;
     color: var(--color-sea);
     min-width: 24px;
   }
 
   .list-item p {
     margin: 0;
-    font-size: 18px;
+    font-size: 20px;
   }
 
   /* How we work */
@@ -219,20 +219,20 @@ const categories = [
 
   .work-num {
     font-family: var(--font-meta);
-    font-size: 10px;
+    font-size: 22px;
     letter-spacing: 1.5px;
     color: rgba(247,244,238,0.65);
   }
 
   .work-title {
     font-family: var(--font-display);
-    font-size: 24px;
+    font-size: 30px;
     margin: 0;
     color: var(--color-paper);
   }
 
   .work-desc {
-    font-size: 15px;
+    font-size: 20px;
     color: rgba(247,244,238,0.85);
     margin: 0;
   }
@@ -251,7 +251,7 @@ const categories = [
   }
 
   .pricing-desc {
-    font-size: 18px;
+    font-size: 20px;
     color: var(--color-paper);
     margin: 0 0 8px;
     max-width: 600px;
@@ -260,7 +260,7 @@ const categories = [
   }
 
   .pricing-sub {
-    font-size: 16px;
+    font-size: 20px;
     color: var(--color-sea-soft);
     margin: 0;
   }
@@ -274,7 +274,7 @@ const categories = [
 
   .category-chip {
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: 20px;
     padding: 8px 16px;
     border: 1.5px solid var(--color-ink);
     border-radius: var(--radius-sketch);
