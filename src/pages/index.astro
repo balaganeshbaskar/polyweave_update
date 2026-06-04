@@ -85,20 +85,20 @@ const products = [
     </section>
 
     <!-- What Polyweave Does (navy block per handoff) -->
-    <section class="what-we-do section-padding bg-navy">
+    <section class="what-we-do section-padding" style="background-color: #f6ecdc;">
       <div class="max-w-content page-gutter">
+        <SectionTag label="WHAT WE DO" />
         <div class="what-we-do-grid">
           <div class="what-we-do-left">
-            <SectionTag label="WHAT WE DO" class="section-tag-light" />
             <img src={`${base}/images/what_we_do.png`} alt="That's where Polyweave comes in" class="what-we-do-image" />
           </div>
-          <div class="what-we-do-right text-paper-op-85">
+          <div class="what-we-do-right">
             <p class="what-we-do-body">We help companies import from India without the usual issues.</p>
             <ul class="what-we-do-list">
-              <li class="text-paper-op-85">— No guesswork.</li>
-              <li class="text-paper-op-85">— No random suppliers.</li>
-              <li class="text-paper-op-85">— No surprises after the order.</li>
-              <li class="text-paper-op-85">— Just clear sourcing and better decisions.</li>
+              <li>— No guesswork.</li>
+              <li>— No random suppliers.</li>
+              <li>— No surprises after the order.</li>
+              <li>— Just clear sourcing and better decisions.</li>
             </ul>
           </div>
         </div>
@@ -442,7 +442,7 @@ const products = [
     font-size: clamp(18px, 2vw, 24px);
     line-height: 1.5;
     margin: 0 0 20px;
-    color: rgba(247,244,238,0.85);
+    color: var(--color-ink-soft);
   }
 
   .what-we-do-list {
@@ -455,10 +455,10 @@ const products = [
   }
 
   .what-we-do-list li {
-    font-size: 18px;
+    font-size: 24px;
     padding: 10px 0;
-    border-top: 1px dashed rgba(247,244,238,0.35);
-    color: rgba(247,244,238,0.85);
+    border-top: 1px dashed rgba(20,35,58,0.2);
+    color: var(--color-ink-soft);
   }
 
   /* How It Works */
