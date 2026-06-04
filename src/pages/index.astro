@@ -105,6 +105,24 @@ const products = [
       </div>
     </section>
 
+    <!-- Case Study -->
+    <section class="case-study section-padding">
+      <div class="max-w-content page-gutter">
+        <SectionTag label="A SIMPLE EXAMPLE" />
+        <div class="case-study-grid">
+          <div class="case-study-visual">
+            <img src={`${base}/images/before_after.png`} alt="Before and after comparison" class="case-study-image" />
+          </div>
+          <div class="case-study-content">
+            <h2 class="text-h2">One quiet switch.</h2>
+            <p class="text-body-lg">
+              A company we worked with was sourcing HDPE twine from Europe. We rebuilt the same product through India. The result was lower cost and stable supply, without compromising on performance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- How It Works -->
     <section class="how-it-works section-padding bg-sea-tint">
       <div class="max-w-content page-gutter">
@@ -146,24 +164,6 @@ const products = [
               <span class="product-read">READ <span class="product-read-arrow">→</span></span>
             </a>
           ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Case Study -->
-    <section class="case-study section-padding">
-      <div class="max-w-content page-gutter">
-        <SectionTag label="A SIMPLE EXAMPLE" />
-        <div class="case-study-grid">
-          <div class="case-study-content">
-            <h2 class="text-h2">One quiet switch.</h2>
-            <p class="text-body-lg">
-              A company we worked with was sourcing HDPE twine from Europe. We rebuilt the same product through India. The result was lower cost and stable supply, without compromising on performance.
-            </p>
-          </div>
-          <div class="case-study-visual">
-            <img src={`${base}/images/before_after.png`} alt="Before and after comparison" class="case-study-image" />
-          </div>
         </div>
       </div>
     </section>
@@ -570,7 +570,7 @@ const products = [
 
   @media (min-width: 768px) {
     .case-study-grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.4fr 1fr;
     }
   }
 
