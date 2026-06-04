@@ -90,7 +90,7 @@ const products = [
         <div class="what-we-do-grid">
           <div class="what-we-do-left">
             <SectionTag label="WHAT WE DO" class="section-tag-light" />
-            <h2 class="what-we-do-heading text-paper">That's where<br /><span class="text-sea-soft">Polyweave</span><br />comes in.</h2>
+            <img src={`${base}/images/what_we_do.png`} alt="That's where Polyweave comes in" class="what-we-do-image" />
           </div>
           <div class="what-we-do-right text-paper-op-85">
             <p class="what-we-do-body">We help companies import from India without the usual issues.</p>
@@ -412,11 +412,20 @@ const products = [
     flex-direction: column;
   }
 
-  .what-we-do-heading {
-    font-size: clamp(36px, 5vw, 56px);
-    line-height: 1.05;
-    margin: 0;
-    color: var(--color-paper);
+  .what-we-do-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin-top: 12px;
+
+    mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-composite: source-in;
   }
 
   .what-we-do-right {
