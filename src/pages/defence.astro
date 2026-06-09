@@ -4,7 +4,6 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyForm from '../components/StickyForm.astro';
 import SectionTag from '../components/SectionTag.astro';
-import InfiniteGrid from '../components/InfiniteGrid.astro';
 
 const pageTitle = 'Defence & Dual-Use Sourcing · Polyweave';
 const pageDescription = 'Polyweave helps Indian and European companies identify, qualify, and connect with the right manufacturing partners for defence-adjacent, industrial, and dual-use components.';
@@ -16,25 +15,29 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <main id="main-content">
     <!-- Hero -->
-    <section class="hero section-padding" style="position:relative;overflow:hidden">
-      <InfiniteGrid hoverEffect={true} opacity={0.03} hoverOpacity={0.6} hoverRadius={300} />
-      <div style="position:relative;z-index:1">
-        <div class="max-w-content page-gutter">
-          <div class="hero-eyebrow tag">DEFENCE · DUAL-USE · INDUSTRIAL</div>
-          <h1 class="hero-title text-display-1">
-            Sourcing across <span class="highlight-navy">defence</span> & <span class="highlight-sea">dual-use</span> supply chains.
-          </h1>
-          <p class="hero-lede text-body-lg">
-            Polyweave helps Indian and European companies identify, qualify, and connect with the right manufacturing partners for defence-adjacent, industrial, and dual-use components.
-          </p>
-          <p class="hero-sub text-body">
-            One goal: make cross-border sourcing simpler, safer, and commercially useful.
-          </p>
-          <div class="hero-ctas">
-            <a href={`${base}/contact`} class="btn-primary">
-              EXPLORE SOURCING SUPPORT <span class="btn-arrow">→</span>
-            </a>
-            <a href={`${base}/contact`} class="btn-ghost">[ speak to us ]</a>
+    <section class="hero section-padding" style="background-color:#ffffff">
+      <div class="hero-content max-w-content page-gutter">
+        <div class="hero-grid">
+          <div class="hero-left">
+            <div class="hero-eyebrow tag">DEFENCE · DUAL-USE · INDUSTRIAL</div>
+            <h1 class="hero-title text-display-1">
+              Sourcing across <span class="highlight-navy">defence</span> & <span class="highlight-sea">dual-use</span> supply chains.
+            </h1>
+            <p class="hero-lede text-body-lg">
+              Polyweave helps Indian and European companies identify, qualify, and connect with the right manufacturing partners for defence-adjacent, industrial, and dual-use components.
+            </p>
+            <p class="hero-sub text-body">
+              One goal: make cross-border sourcing simpler, safer, and commercially useful.
+            </p>
+            <div class="hero-ctas">
+              <a href={`${base}/contact`} class="btn-primary">
+                EXPLORE SOURCING SUPPORT <span class="btn-arrow">→</span>
+              </a>
+              <a href={`${base}/contact`} class="btn-ghost">[ speak to us ]</a>
+            </div>
+          </div>
+          <div class="hero-right">
+            <img src={`${base}/images/defence_hero.png`} alt="Defence sourcing" class="hero-image" />
           </div>
         </div>
       </div>
@@ -238,11 +241,51 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .hero {
     min-height: 60vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+    align-items: center;
   }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .text-display-1
+  {
+    font-size: clamp(62px, 0vw, 62px);
+  }
+
+  @media (min-width: 768px) {
+    .hero-grid {
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+    }
+  }
+
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-image {
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+  }
+
+  @media (max-width: 767px) {
+    .hero-image { max-width: 500px; margin: 0 auto; }
+    .hero-right { order: -1; }
+  }
+
   .hero-eyebrow { margin-bottom: 16px; }
   .hero-title { margin-bottom: 20px; }
   .hero-lede { max-width: 720px; margin-bottom: 12px; color: var(--color-ink-soft); }
