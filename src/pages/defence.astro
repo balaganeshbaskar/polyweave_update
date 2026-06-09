@@ -55,36 +55,37 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </section>
 
     <!-- Two Pillars -->
-    <section class="two-pillars section-padding bg-navy">
+    <section class="two-pillars section-padding" style="background-color:#ffffff">
       <div class="max-w-content page-gutter">
-        <SectionTag label="WHAT WE HELP WITH" class="section-tag-light" />
+        <SectionTag label="WHAT WE HELP WITH" class="section-tag-dark" />
+        <img src={`${base}/images/WHAT WE HELP WITH.png`} alt="What we help with" class="pillars-image" />
         <div class="pillars-grid">
           <div class="pillar-card">
-            <h3 class="pillar-title text-paper">Sourcing agreements</h3>
-            <p class="text-paper-op-85">
+            <h3 class="pillar-title text-ink">Sourcing agreements</h3>
+            <p class="text-ink-op-85">
               International companies looking into India's defence and industrial markets often run into tendering systems, offset rules, and a relationship-driven business culture. We bridge that gap.
             </p>
             <ul class="pillar-list">
-              <li class="text-paper-op-85">Distribution & representation</li>
-              <li class="text-paper-op-85">Local sourcing partnerships</li>
-              <li class="text-paper-op-85">Component manufacturing tie-ups</li>
-              <li class="text-paper-op-85">Supplier identification & qualification</li>
-              <li class="text-paper-op-85">Market-entry conversations</li>
-              <li class="text-paper-op-85">Commercial negotiation support</li>
+              <li class="text-ink-op-85">Distribution & representation</li>
+              <li class="text-ink-op-85">Local sourcing partnerships</li>
+              <li class="text-ink-op-85">Component manufacturing tie-ups</li>
+              <li class="text-ink-op-85">Supplier identification & qualification</li>
+              <li class="text-ink-op-85">Market-entry conversations</li>
+              <li class="text-ink-op-85">Commercial negotiation support</li>
             </ul>
           </div>
           <div class="pillar-card">
-            <h3 class="pillar-title text-paper">Dual-use components</h3>
-            <p class="text-paper-op-85">
+            <h3 class="pillar-title text-ink">Dual-use components</h3>
+            <p class="text-ink-op-85">
               Products that serve both defence and civilian markets move faster than traditional procurement. Aerospace, drones, ports, surveillance, emergency response, logistics.
             </p>
             <ul class="pillar-list">
-              <li class="text-paper-op-85">Sensors & electronic components</li>
-              <li class="text-paper-op-85">Drone parts & accessories</li>
-              <li class="text-paper-op-85">Industrial & technical textiles</li>
-              <li class="text-paper-op-85">Ropes, nets, cables, polymers</li>
-              <li class="text-paper-op-85">Protective & field-use materials</li>
-              <li class="text-paper-op-85">Custom & reverse-engineered parts</li>
+              <li class="text-ink-op-85">Sensors & electronic components</li>
+              <li class="text-ink-op-85">Drone parts & accessories</li>
+              <li class="text-ink-op-85">Industrial & technical textiles</li>
+              <li class="text-ink-op-85">Ropes, nets, cables, polymers</li>
+              <li class="text-ink-op-85">Protective & field-use materials</li>
+              <li class="text-ink-op-85">Custom & reverse-engineered parts</li>
             </ul>
           </div>
         </div>
@@ -305,6 +306,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   @media (min-width: 768px) {
     .pillars-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   }
+  .pillars-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 32px auto;
+  }
+
+  @media (min-width: 768px) {
+    .pillars-image {
+      width: 60%;
+    }
+  }
+
   .pillar-title { font-family: var(--font-display); font-size: 30px; margin: 0 0 12px; }
   .pillar-card p { font-size: 20px; margin-bottom: 16px; line-height: 1.6; }
   .pillar-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
